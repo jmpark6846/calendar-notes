@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import moment from 'moment'
 import {Editor, EditorState, convertToRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
@@ -17,7 +17,9 @@ class Note extends React.Component{
 
   onChange(editorState){
     const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
-    this.props.save(this.props.selectedDate, html)
+    const date = moment(this.props.selectedDate).format('YYYY-MM-DD')
+    console.log(this.props.selectedDate)
+    this.props.save(date, html)
     this.setState({editorState});
 
   }
@@ -37,4 +39,4 @@ const mapDispatchToProps = (dispatch) => ({
   save: (date, content) => dispatch({ type: NOTE_SAVE, payload: {date, content} }),
 })
 
-export default connect(undefined, mapDispatchToProps)(Note)
+export default connect(mapStateToProps, mapDispatchToProps)(Note)
