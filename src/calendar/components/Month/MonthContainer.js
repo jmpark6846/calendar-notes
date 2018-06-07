@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Month from './Month';
+import { getYMDFromString } from '../../../utils/date';
 
 class MonthContainer extends React.Component{
   constructor(props){
@@ -34,7 +35,7 @@ const mapStateToProps = ({calendar, notes}) => ({
   year: calendar.year,
   month: calendar.month,
   isSundayFirst: calendar.isSundayFirst,
-  notes: Object.keys(notes).map(k => Number(k.split('-')[2]))
+  notes: Object.keys(notes).map(k => getYMDFromString(k, 2))
 })
 
 export default connect(mapStateToProps)(MonthContainer)
