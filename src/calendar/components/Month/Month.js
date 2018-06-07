@@ -1,7 +1,7 @@
 import React from 'react'
 import './Month.css'
 import { getDaysOfWeek, endDates } from "../../../constants";
-import Day from '../Day';
+import Day from '../Day/DayContainer';
 
 const Month = ({year, month, firstDay, notes, isSundayFirst}) =>
   <div className="month-view">
