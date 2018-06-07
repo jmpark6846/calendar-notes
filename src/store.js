@@ -8,6 +8,6 @@ const root = combineReducers({
 })
 
 const logger = createLogger()
-const store = createStore(root, undefined, applyMiddleware(logger, saga))
+const store = createStore(root, undefined, applyMiddleware(logger))
 
 export default store

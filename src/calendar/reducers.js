@@ -1,7 +1,7 @@
 import {
   MONTH_DOWN,
   MONTH_UP,
-} from '../../constants'
+} from '../constants'
 
 const INITIAL_STATE = {
   year:new Date().getFullYear(),

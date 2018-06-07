@@ -1,7 +1,7 @@
 import {
   MONTH_DOWN,
   MONTH_UP,
-} from '../../constants'
+} from '../constants'
 
 export const doMonthDown = (year, month) => {
   const payload = {
