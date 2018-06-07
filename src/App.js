@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import { Calendar } from './calendar';
+import { Note } from './note';
 
 class App extends Component {
   render() {
     return (
-      <Calendar />
-      <Note />
+      <div className='container'>
+        <div className='row'>
+          <div className='col-xl-6'>
+            <Calendar /> 
+          </div>
+          <div className='col-xl-6'>
+            <Note />
+          </div>
+        </div>
+        
+        
+      </div>
     );
   }
 }
