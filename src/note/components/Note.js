@@ -1,6 +1,11 @@
 import React from 'react'
-import {Editor, EditorState} from 'draft-js';
+import { connect } from 'react-redux'
 
+import {Editor, EditorState, convertToRaw} from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
+import { doNoteSave } from '../actions';
+import { NOTE_SAVE } from '../../constants';
 
 class Note extends React.Component{
   constructor(props){
@@ -11,7 +16,10 @@ class Note extends React.Component{
   }
 
   onChange(editorState){
+    const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    this.props.save(this.props.selectedDate, html)
     this.setState({editorState});
+
   }
 
   render(){
@@ -21,4 +29,12 @@ class Note extends React.Component{
   }
 } 
 
-export default Note
+const mapStateToProps = ({calendar}) => ({
+  selectedDate: calendar.selectedDate,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  save: (date, content) => dispatch({ type: NOTE_SAVE, payload: {date, content} }),
+})
+
+export default connect(undefined, mapDispatchToProps)(Note)
