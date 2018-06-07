@@ -6,6 +6,7 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import { doNoteSave } from '../actions';
 import { NOTE_SAVE } from '../../constants';
+import { dateToString } from '../../utils/date';
 
 class Note extends React.Component{
   constructor(props){
@@ -17,9 +18,7 @@ class Note extends React.Component{
 
   onChange(editorState){
     const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
-    const date = moment(this.props.selectedDate).format('YYYY-MM-DD')
-    console.log(this.props.selectedDate)
-    this.props.save(date, html)
+    this.props.save(dateToString(this.props.selectedDate), html)
     this.setState({editorState});
 
   }
