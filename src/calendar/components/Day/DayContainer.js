@@ -8,7 +8,7 @@ const mapStateToProps = ({calendar}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handleClick: (selectedDate) => dispatch({ type: DATE_SELECT, payload: { selectedDate } })
+  handleClick: (selectedDate) => () => dispatch({ type: DATE_SELECT, payload: { selectedDate } })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Day)
