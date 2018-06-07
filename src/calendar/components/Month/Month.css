@@ -18,3 +18,7 @@
 .selected{
 	color:red;
 }
+
+.has-note{
+	font-weight: 700;
+}

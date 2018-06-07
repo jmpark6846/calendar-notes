@@ -5,10 +5,6 @@ import Month from './Month';
 class MonthContainer extends React.Component{
   constructor(props){
     super(props)
-
-    this.state={
-      notes:[],
-    }
     
     this.getWeekDayInMondayFirst = this.getWeekDayInMondayFirst.bind(this)
     this.getFirstDayOfMonth = this.getFirstDayOfMonth.bind(this)
@@ -26,16 +22,19 @@ class MonthContainer extends React.Component{
 
   render(){
     const firstDay = this.getFirstDayOfMonth()
+    console.log(this.props.notes)
     return(
-      <Month firstDay={firstDay} {...this.props} {...this.state} />
+      
+      <Month firstDay={firstDay} {...this.props}/>
     )
   }
 }
 
-const mapStateToProps = ({calendar}) => ({
+const mapStateToProps = ({calendar, notes}) => ({
   year: calendar.year,
   month: calendar.month,
   isSundayFirst: calendar.isSundayFirst,
+  notes: Object.keys(notes).map(k => Number(k.split('-')[2]))
 })
 
 export default connect(mapStateToProps)(MonthContainer)
