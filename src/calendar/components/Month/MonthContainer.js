@@ -23,7 +23,6 @@ class MonthContainer extends React.Component{
 
   render(){
     const firstDay = this.getFirstDayOfMonth()
-    console.log(this.props.notes)
     return(
       
       <Month firstDay={firstDay} {...this.props}/>

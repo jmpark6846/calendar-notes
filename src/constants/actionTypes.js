@@ -5,3 +5,4 @@ export const DATE_SELECT = "DATE_SELECT"
 
 
 export const NOTE_SAVE = 'NOTE_SAVE'
+export const NOTE_DELETE = 'NOTE_DELETE'
