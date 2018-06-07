@@ -1,0 +1,20 @@
+.day{
+	width:14.27%;
+	display: inline-block;
+	text-align: center;
+}
+
+.month-body .day{
+	cursor: pointer;
+}
+.month-body .day:hover{
+	background: #f4f4f4;
+}
+
+.today{
+	color:blue;
+}
+
+.selected{
+	color:red;
+}
