@@ -1,12 +1,10 @@
 import {
   MONTH_DOWN,
   MONTH_UP,
-  DATE_SELECT,
-  DATE_SET
 } from '../../constants'
 
 export const doMonthDown = (year, month) => {
-  let payload = {
+  const payload = {
     month: month <= 0 ? 11 : month-1,
     year: month <= 0 ? year-1 : year,
   }
@@ -17,7 +15,7 @@ export const doMonthDown = (year, month) => {
 }
 
 export const doMonthUp = (year, month) => {
-  let payload = {
+  const payload = {
     month: month >= 11 ? 0 : month+1,
     year: month >= 11 ? year+1 : year
   }
@@ -26,8 +24,3 @@ export const doMonthUp = (year, month) => {
     payload
   }
 }
-
-export const doDateSet = (date) => ({
-  type: DATE_SET,
-  payload: { date }
-})
