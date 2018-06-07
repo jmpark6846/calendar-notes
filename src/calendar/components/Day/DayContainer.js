@@ -1,10 +1,14 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import Day from './Day'
+import { DATE_SELECT } from '../../../constants';
 
-
-const mapDispatchToProps = (dispatch) => ({
-  
+const mapStateToProps = ({calendar}) => ({
+  today: calendar.today,
+  selectedDate: calendar.selectedDate
 })
 
-export default connect(undefined, mapDispatchToProps)(Day)
+const mapDispatchToProps = (dispatch) => ({
+  handleClick: (selectedDate) => dispatch({ type: DATE_SELECT, payload: { selectedDate } })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Day)

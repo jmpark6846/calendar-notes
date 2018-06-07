@@ -14,7 +14,12 @@ const Month = ({year, month, firstDay, notes, isSundayFirst}) =>
     <hr />
     <div className="month-body">
       { new Array(firstDay).fill(null).map((e,idx) => <Day key={idx} />)}
-      { new Array(endDates[month]).fill(null).map((e,idx) => <Day key={idx} date={new Date(year,month,idx+1)} hasNote={ notes.includes(idx+1) } />)}
+      { new Array(endDates[month]).fill(null).map((e,idx) => 
+        <Day 
+          key={idx} 
+          date={new Date(year,month,idx+1)} 
+          hasNote={ notes.includes(idx+1) } 
+        />)}
       
     </div>
   </div>

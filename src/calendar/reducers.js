@@ -1,28 +1,32 @@
 import {
   MONTH_DOWN,
   MONTH_UP,
+  DATE_SELECT,
 } from '../constants'
 
+const date = new Date()
+const year = date.getFullYear()
+const month = date.getMonth()
+const day = date.getDate()
+
+const today = new Date(year,month,day)
+
 const INITIAL_STATE = {
-  year:new Date().getFullYear(),
-  month:new Date().getMonth(),
+  year,
+  month,
+  today,
   isSundayFirst:false,
-  date: new Date()
+  selectedDate: today,
 }
 
 export const calendarReducer = (state=INITIAL_STATE, action) => {
   switch(action.type){
     case MONTH_UP:
-      return {
-        ...state,
-        year: action.payload.year,
-        month: action.payload.month,
-      }
     case MONTH_DOWN:
+    case DATE_SELECT:
       return {
         ...state,
-        year: action.payload.year,
-        month: action.payload.month,
+        ...action.payload
       }
     default: return state
   }  
