@@ -27,6 +27,4 @@ export function* fetchNote(action){
     console.log(error)
     yield put(doNoteRequestFail())
   }
-  
-  
 }

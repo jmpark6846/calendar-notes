@@ -4,7 +4,7 @@ import {Editor, EditorState, convertToRaw, convertFromRaw, ContentState} from 'd
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import 'draft-js/dist/Draft.css';
-
+import _ from 'lodash'
 import { NOTE_SAVE, NOTE_DELETE } from '../../constants';
 import { dateToString } from '../../utils/date';
 import { htmlToDraftEditorState } from '../../utils/note';
@@ -16,26 +16,12 @@ class Note extends React.Component{
     super(props)
     this.state = {
       editorState: EditorState.createEmpty(),
-      updated:false,
     };
 
     this.onChange = this.onChange.bind(this)  
     this.loadContent = this.loadContent.bind(this)
     this.isEmpty = this.isEmpty.bind(this)
     this.isDeletedAndEmpty = this.isDeletedAndEmpty.bind(this)
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState){
-    const date = dateToString(nextProps.selectedDate)
-
-    if(date in nextProps.notes){
-      return { editorState: htmlToDraftEditorState(nextProps.notes[date].content) }
-    }
-    else{
-      return { editorState: EditorState.createEmpty() }
-    } 
-
-    return null
   }
 
   componentDidMount = () => {
@@ -54,6 +40,7 @@ class Note extends React.Component{
     if(date in this.props.notes){
       this.setState({ editorState: htmlToDraftEditorState(this.props.notes[date].content) })
     }else{
+      this.setState({ editorState: EditorState.createEmpty() })
       this.props.fetch(this.props.selectedDate)  
     }
   }
@@ -64,7 +51,7 @@ class Note extends React.Component{
     
     if(!this.isEmpty(editorState)){
       this.props.save(dateToString(this.props.selectedDate), html)
-      this.props.saveNoteOnServer(dateToString(this.props.selectedDate), html)
+      // this.props.saveNoteOnServer(dateToString(this.props.selectedDate), html)
     }
   
     if(this.isDeletedAndEmpty(editorState)){
