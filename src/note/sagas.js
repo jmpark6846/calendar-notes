@@ -10,9 +10,9 @@ import { dateToString } from "../utils/date";
 //   takeEvery(NOTE_SAVE_ON_SERVER, saveNoteOnServer)
 // }
 
-export function* saveNoteOnServer(action){
+export function* save(action){
   const {data, error} = yield call(postData, API_URL+'/notes/', action.payload)
-  console.log(data)
+  console.log(error)
 } 
 
 export function* fetchNote(action){

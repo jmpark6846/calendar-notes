@@ -1,4 +1,4 @@
-import { NOTE_SAVE, NOTE_DELETE, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL } from "../constants";
+import { NOTE_SAVE_SUCCESS, NOTE_DELETE, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL } from "../constants";
 
 const initialState = {
   loading: false,
@@ -8,7 +8,7 @@ const initialState = {
 
 export const noteReducer = (state=initialState, action) => {
   switch(action.type){
-    case NOTE_SAVE:
+    case NOTE_SAVE_SUCCESS:
       return {
         ...state,
         notes: { 

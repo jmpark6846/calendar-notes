@@ -133,6 +133,7 @@ CORS_ORIGIN_WHITELIST = (
 
 CORS_ALLOW_HEADERS = default_headers + (
     'X-XSRF-TOKEN',
+    # 'X-CSRFToken',
 )
 
 REST_FRAMEWORK = {
