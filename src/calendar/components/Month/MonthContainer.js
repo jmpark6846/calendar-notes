@@ -34,7 +34,7 @@ const mapStateToProps = ({calendar, notes}) => ({
   year: calendar.year,
   month: calendar.month,
   isSundayFirst: calendar.isSundayFirst,
-  notes: Object.keys(notes.note).map(k => getYMDFromString(k, 2))
+  notes: Object.keys(notes.notes).map(k => getYMDFromString(k, 2))
 })
 
 export default connect(mapStateToProps)(MonthContainer)

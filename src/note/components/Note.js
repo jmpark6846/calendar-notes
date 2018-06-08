@@ -16,7 +16,7 @@ class Note extends React.Component{
     super(props)
     this.state = {
       editorState: EditorState.createEmpty(),
-      isBlank: true,
+      updated:false,
     };
 
     this.onChange = this.onChange.bind(this)  
@@ -25,6 +25,21 @@ class Note extends React.Component{
     this.isDeletedAndEmpty = this.isDeletedAndEmpty.bind(this)
   }
 
+  static getDerivedStateFromProps(nextProps, prevState){
+    const date = dateToString(nextProps.selectedDate)
+
+    if(date in nextProps.notes){
+      return { editorState: htmlToDraftEditorState(nextProps.notes[date].content) }
+    }
+    else{
+      return null
+    } 
+  }
+
+  componentDidMount = () => {
+    this.loadContent(this.props.selectedDate)
+  }
+  
   componentDidUpdate = (prevProps, prevState) => {
     if(+prevProps.selectedDate !== +this.props.selectedDate){
       this.loadContent(this.props.selectedDate)
@@ -37,12 +52,8 @@ class Note extends React.Component{
     if(date in this.props.notes){
       this.setState({ editorState: htmlToDraftEditorState(this.props.notes[date].content) })
     }else{
-      this.props.fetch(selectedDate)
-      
-      // 서버로부터 불러오기
-      //   YES? 스토어에 저장
-      //   NO? 빈 화면 보여주기
       this.setState({ editorState: EditorState.createEmpty() })
+      this.props.fetch(this.props.selectedDate)  
     }
   }
 
@@ -60,6 +71,10 @@ class Note extends React.Component{
     }
   }
 
+  isNoteLoaded(prevLoading){
+    console.log(prevLoading + ' -> ' + this.props.loading)
+    return prevLoading === true && this.props.loading === false
+  }
   isEmpty(editorState){
     return editorState.getCurrentContent().getPlainText() === ''
   }
@@ -70,14 +85,18 @@ class Note extends React.Component{
 
   render(){
     return (
-      <Editor placeholder='오늘 하루를 적어볼까요?' editorState={this.state.editorState} onChange={this.onChange} />
+      <div>
+        <Editor placeholder='오늘 하루를 적어볼까요?' editorState={this.state.editorState} onChange={this.onChange} />
+        { this.props.loading && <div>loading..</div>}
+      </div>
+      
     )
   }
 } 
 
 const mapStateToProps = ({calendar, notes}) => ({
   selectedDate: calendar.selectedDate,
-  notes: notes.note,
+  ...notes  
 })
 
 const mapDispatchToProps = (dispatch) => ({

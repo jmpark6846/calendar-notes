@@ -3,7 +3,7 @@ import { NOTE_SAVE, NOTE_DELETE, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUES
 const initialState = {
   loading: false,
   error: false,
-  note: {}
+  notes: {}
 }
 
 export const noteReducer = (state=initialState, action) => {
@@ -11,14 +11,14 @@ export const noteReducer = (state=initialState, action) => {
     case NOTE_SAVE:
       return {
         ...state,
-        note: { 
-          ...state.note, 
+        notes: { 
+          ...state.notes, 
           [action.payload.date] : { content: action.payload.content } 
         }
       }
     case NOTE_DELETE:
-      const { [action.payload.date]: value, ...rest} = state.note
-      return { ...state, note: {...rest } }
+      const { [action.payload.date]: value, ...rest} = state.notes
+      return { ...state, notes: {...rest } }
     
     case NOTE_REQUEST:
       return {
@@ -26,12 +26,13 @@ export const noteReducer = (state=initialState, action) => {
         loading:true,
       }
     case NOTE_REQUEST_SUCCESS:
+      
       return {
         ...state,
-        loading:true,
+        loading:false,
         error:false,
-        note: { 
-          ...state.note, 
+        notes: { 
+          ...state.notes, 
           [action.payload.date] : { content: action.payload.content } 
         }
       }

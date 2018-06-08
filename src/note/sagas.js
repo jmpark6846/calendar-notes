@@ -3,6 +3,7 @@ import { put, call } from "redux-saga/effects";
 import { NOTE_SAVE_ON_SERVER, API_URL } from "../constants";
 import { postData, fetchData, getNoteRequestUrl } from "../utils/fetch";
 import { doNoteFetch, doNoteRequest, doNoteRequestFail, doNoteRequestSuccess } from "./actions";
+import { dateToString } from "../utils/date";
 
 // export function* noteSagas(action){
 //   console.log(action)
@@ -21,7 +22,7 @@ export function* fetchNote(action){
   
   if(!error){
     console.log(data)
-    yield put(doNoteRequestSuccess(action.payload.data, data.content))
+    yield put(doNoteRequestSuccess(dateToString(action.payload.date), data.content))
   }else{
     console.log(error)
     yield put(doNoteRequestFail())
