@@ -8,7 +8,7 @@ import 'draft-js/dist/Draft.css';
 import { NOTE_SAVE, NOTE_DELETE } from '../../constants';
 import { dateToString } from '../../utils/date';
 import { htmlToDraftEditorState } from '../../utils/note';
-import { doNoteSave, doNoteDelete, doNoteSaveOnServer } from '../actions';
+import { doNoteSave, doNoteDelete, doNoteSaveOnServer, doNoteFetch } from '../actions';
 
 
 class Note extends React.Component{
@@ -27,7 +27,6 @@ class Note extends React.Component{
 
   componentDidUpdate = (prevProps, prevState) => {
     if(+prevProps.selectedDate !== +this.props.selectedDate){
-      
       this.loadContent(this.props.selectedDate)
     }
   }
@@ -38,6 +37,11 @@ class Note extends React.Component{
     if(date in this.props.notes){
       this.setState({ editorState: htmlToDraftEditorState(this.props.notes[date].content) })
     }else{
+      this.props.fetch(selectedDate)
+      
+      // 서버로부터 불러오기
+      //   YES? 스토어에 저장
+      //   NO? 빈 화면 보여주기
       this.setState({ editorState: EditorState.createEmpty() })
     }
   }
@@ -79,7 +83,8 @@ const mapStateToProps = ({calendar, notes}) => ({
 const mapDispatchToProps = (dispatch) => ({
   save: (date, content) => dispatch(doNoteSave(date, content)),
   saveNoteOnServer : (date, content) => dispatch(doNoteSaveOnServer(date, content)),
-  delete: (date) => dispatch(doNoteDelete(date))
+  delete: (date) => dispatch(doNoteDelete(date)),
+  fetch: (date) => dispatch(doNoteFetch(date)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Note)

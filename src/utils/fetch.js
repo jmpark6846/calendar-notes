@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_URL } from "../constants";
 
 export function postData(url, data){
   return axios({
@@ -28,4 +29,8 @@ export const updateData = (url, data) => {
     withCredentials: true,
   })
   .then(response=>response, error=>({ error: error.response.data }))
+}
+
+export const getNoteRequestUrl = (date) => {
+  return `${API_URL}/notes/${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}/`
 }

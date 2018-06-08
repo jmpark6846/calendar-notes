@@ -1,7 +1,8 @@
 import { takeEvery } from "redux-saga";
 import { put, call } from "redux-saga/effects";
 import { NOTE_SAVE_ON_SERVER, API_URL } from "../constants";
-import { postData } from "../utils/fetch";
+import { postData, fetchData, getNoteRequestUrl } from "../utils/fetch";
+import { doNoteFetch, doNoteRequest } from "./actions";
 
 // export function* noteSagas(action){
 //   console.log(action)
@@ -14,5 +15,15 @@ export function* saveNoteOnServer(action){
 } 
 
 export function* fetchNote(action){
-  console.log('fetchnote')
+  yield put(doNoteRequest())
+  const url = getNoteRequestUrl(action.payload.date)
+  const {data, error} = yield call(fetchData, url)
+  
+  if(!error){
+    yield put(doNoteRequestSuccess())
+  }else{
+    yield put(doNoteRequestFail())
+  }
+  console.log(data)
+  console.log(error)
 }
