@@ -8,6 +8,7 @@ import 'draft-js/dist/Draft.css';
 import { NOTE_SAVE, NOTE_DELETE } from '../../constants';
 import { dateToString } from '../../utils/date';
 import { htmlToDraftEditorState } from '../../utils/note';
+import { doNoteSave, doNoteDelete } from '../actions';
 
 
 class Note extends React.Component{
@@ -26,12 +27,12 @@ class Note extends React.Component{
 
   componentDidUpdate = (prevProps, prevState) => {
     if(+prevProps.selectedDate !== +this.props.selectedDate){
-      this.loadContent()
+      this.loadContent(this.props.selectedDate)
     }
   }
 
-  loadContent(){
-    const date = dateToString(this.props.selectedDate)
+  loadContent(selectedDate){
+    const date = dateToString(selectedDate)
     
     if(date in this.props.notes){
       this.setState({ editorState: htmlToDraftEditorState(this.props.notes[date].content) })
@@ -41,7 +42,6 @@ class Note extends React.Component{
   }
 
   onChange(editorState){
-    
     const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
     this.setState({editorState});  
     
@@ -75,8 +75,8 @@ const mapStateToProps = ({calendar, notes}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  save: (date, content) => dispatch({ type: NOTE_SAVE, payload: { date, content } }),
-  delete: (date) => dispatch({ type: NOTE_DELETE, payload: { date } })
+  save: (date, content) => dispatch(doNoteSave(date, content)),
+  delete: (date) => dispatch(doNoteDelete(date))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Note)

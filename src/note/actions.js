@@ -1,4 +1,4 @@
-import { NOTE_SAVE } from "../constants";
+import { NOTE_SAVE, NOTE_DELETE } from "../constants";
 
 export const doNoteSave = (date, content) => ({
   type: NOTE_SAVE,
@@ -8,3 +8,9 @@ export const doNoteSave = (date, content) => ({
   }
 })
 
+export const doNoteDelete = (date, content) => ({
+  type: NOTE_DELETE,
+  payload: {
+    date,
+  }
+})
