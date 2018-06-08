@@ -1,9 +1,10 @@
-import { NOTE_SAVE_SUCCESS, NOTE_DELETE, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL, NOTE_SAVE, NOTE_SAVE_FAIL, NOTE_SAVE_REQUEST } from "../constants";
+import { NOTE_SAVE_SUCCESS, NOTE_DELETE, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL, NOTE_SAVE, NOTE_SAVE_FAIL, NOTE_SAVE_REQUEST, NOTE_SET } from "../constants";
 
 const initialState = {
   loading: false,
   saving: false,
   error: false,
+  updated: false,
   notes: {}
 }
 
@@ -46,6 +47,7 @@ export const noteReducer = (state=initialState, action) => {
         ...state,
         loading:false,
         error:false,
+        updated:true,
         notes: { 
           ...state.notes, 
           [action.payload.date] : { content: action.payload.content } 
@@ -56,6 +58,11 @@ export const noteReducer = (state=initialState, action) => {
         ...state,
         loading:false,
         error:true,
+      }
+    case NOTE_SET:
+      return {
+        ...state,
+        updated:false
       }
     default: return state
   }

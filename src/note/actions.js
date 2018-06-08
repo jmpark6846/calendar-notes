@@ -1,4 +1,4 @@
-import { NOTE_SAVE, NOTE_DELETE, NOTE_FETCH, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL, NOTE_SAVE_FAIL, NOTE_SAVE_SUCCESS, NOTE_SAVE_REQUEST } from "../constants";
+import { NOTE_SAVE, NOTE_DELETE, NOTE_FETCH, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL, NOTE_SAVE_FAIL, NOTE_SAVE_SUCCESS, NOTE_SAVE_REQUEST, NOTE_SET } from "../constants";
 
 export const doNoteSave = (date, content, method) => ({
   type: NOTE_SAVE,
@@ -56,4 +56,9 @@ export const doNoteRequestSuccess = (date, content) => ({
 
 export const doNoteRequestFail = () => ({
   type: NOTE_REQUEST_FAIL,
+})
+
+
+export const doNoteSet = () => ({
+  type: NOTE_SET,
 })

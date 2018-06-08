@@ -24,3 +24,4 @@ export const doMonthUp = (year, month) => {
     payload
   }
 }
+

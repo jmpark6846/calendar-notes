@@ -8,7 +8,7 @@ import _ from 'lodash'
 import { NOTE_SAVE, NOTE_DELETE } from '../../constants';
 import { dateToString } from '../../utils/date';
 import { htmlToDraftEditorState } from '../../utils/note';
-import { doNoteSave, doNoteDelete, doNoteSaveOnServer, doNoteFetch } from '../actions';
+import { doNoteSave, doNoteDelete, doNoteSaveOnServer, doNoteFetch, doNoteSet } from '../actions';
 
 
 class Note extends React.Component{
@@ -31,6 +31,11 @@ class Note extends React.Component{
   componentDidUpdate = (prevProps, prevState) => {
     if(+prevProps.selectedDate !== +this.props.selectedDate){
       this.loadContent(this.props.selectedDate)
+    }
+
+    if(this.props.updated){
+      this.loadContent(this.props.selectedDate)
+      this.props.setNote()
     }
   }
 
@@ -60,7 +65,7 @@ class Note extends React.Component{
       this.props.delete(dateToString(this.props.selectedDate))
     }
   }
-
+  
   isEmpty(editorState){
     return editorState.getCurrentContent().getPlainText() === ''
   }
@@ -89,6 +94,7 @@ const mapDispatchToProps = (dispatch) => ({
   save: _.debounce((date, content, method) => dispatch(doNoteSave(date, content, method)), 1000),
   delete: (date) => dispatch(doNoteDelete(date)),
   fetch: (date) => dispatch(doNoteFetch(date)),
+  setNote: () => dispatch(doNoteSet()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Note)

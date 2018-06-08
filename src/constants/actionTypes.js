@@ -15,3 +15,5 @@ export const NOTE_FETCH = 'NOTE_FETCH'
 export const NOTE_REQUEST = 'NOTE_REQUEST'
 export const NOTE_REQUEST_SUCCESS = 'NOTE_REQUEST_SUCCESS'
 export const NOTE_REQUEST_FAIL  = 'NOTE_REQUEST_FAIL'
+
+export const NOTE_SET = 'NOTE_SET'
