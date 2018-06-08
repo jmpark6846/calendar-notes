@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
 import datetime
+import pytz
 
 from .serializers import NoteSerializer, UserSerializer
 from .permissions import IsOwnerOrReadOnly
@@ -30,7 +31,6 @@ class NoteList(ListCreateAPIView):
     return user.notes.all()
 
   def perform_create(self, serializer):
-    print(self.request.user)
     serializer.save(author=self.request.user)
 
 
@@ -56,7 +56,7 @@ class NoteDetailByDate(RetrieveUpdateDestroyAPIView):
     queryset = self.get_queryset()
     
     date = datetime.datetime(self.kwargs['year'], self.kwargs['month'], self.kwargs['day'])
-
+    print(date)
     obj = get_object_or_404(queryset, date=date)
     self.check_object_permissions(self.request, obj)
     return obj

@@ -1,6 +1,9 @@
 import axios from "axios";
 import { API_URL } from "../constants";
 
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = 'csrftoken'
+
 export function postData(url, data){
   return axios({
     method:'post',
@@ -23,7 +26,7 @@ export const fetchData = (url) => {
 
 export const updateData = (url, data) => {
   return axios({
-    method:'update',
+    method:'put',
     url,
     data,
     withCredentials: true,
