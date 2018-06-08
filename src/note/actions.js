@@ -1,10 +1,11 @@
 import { NOTE_SAVE, NOTE_DELETE, NOTE_FETCH, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL, NOTE_SAVE_FAIL, NOTE_SAVE_SUCCESS, NOTE_SAVE_REQUEST } from "../constants";
 
-export const doNoteSave = (date, content) => ({
+export const doNoteSave = (date, content, method) => ({
   type: NOTE_SAVE,
   payload: {
     date,
     content,
+    method
   }
 })
 

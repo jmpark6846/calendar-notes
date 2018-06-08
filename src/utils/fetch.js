@@ -26,7 +26,7 @@ export const fetchData = (url) => {
 
 export const updateData = (url, data) => {
   return axios({
-    method:'update',
+    method:'put',
     url,
     data,
     withCredentials: true,

@@ -47,10 +47,13 @@ class Note extends React.Component{
 
   onChange(editorState){
     const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    const date = dateToString(this.props.selectedDate)
+    const method = (date in this.props.notes) ? 'update' : 'post'
+
     this.setState({editorState});  
-    
+
     if(!this.isEmpty(editorState)){
-      this.props.save(this.props.selectedDate, html)
+      this.props.save(this.props.selectedDate, html, method)
     }
   
     if(this.isDeletedAndEmpty(editorState)){
@@ -83,7 +86,7 @@ const mapStateToProps = ({calendar, notes}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  save: _.debounce((date, content) => dispatch(doNoteSave(date, content)), 1000),
+  save: _.debounce((date, content, method) => dispatch(doNoteSave(date, content, method)), 1000),
   delete: (date) => dispatch(doNoteDelete(date)),
   fetch: (date) => dispatch(doNoteFetch(date)),
 })
