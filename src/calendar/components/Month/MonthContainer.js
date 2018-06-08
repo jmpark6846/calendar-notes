@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Month from './Month';
 import { getYMDFromString } from '../../../utils/date';
+import { doNoteMonthFetch } from '../../actions';
 
 class MonthContainer extends React.Component{
   constructor(props){
@@ -11,8 +12,17 @@ class MonthContainer extends React.Component{
     this.getFirstDayOfMonth = this.getFirstDayOfMonth.bind(this)
   }
 
+  componentDidMount = () => {
+    this.props.fetchMonth(this.props.year, this.props.month)
+  }
+  
+  componentDidUpdate = (prevProps, prevState) => {
+    
+  }
+  
+  
   getFirstDayOfMonth(){
-    const { year, month, isSundayFirst } = this.props
+    const { year, month, isSundayFirst } = this.props 
     const day = new Date(year, month, 1).getDay()
     return isSundayFirst ? day : this.getWeekDayInMondayFirst(day)
   }
@@ -24,17 +34,21 @@ class MonthContainer extends React.Component{
   render(){
     const firstDay = this.getFirstDayOfMonth()
     return(
-      
       <Month firstDay={firstDay} {...this.props}/>
     )
   }
 }
 
-const mapStateToProps = ({calendar, notes}) => ({
+const mapStateToProps = ({calendar}) => ({
   year: calendar.year,
   month: calendar.month,
   isSundayFirst: calendar.isSundayFirst,
-  notes: Object.keys(notes.notes).map(k => getYMDFromString(k, 2))
+  updated: calendar.updated,
+  notes: calendar.notes
 })
 
-export default connect(mapStateToProps)(MonthContainer)
+const mapDispatchToProps = (dispatch) => ({
+  fetchMonth: (year, month) => dispatch(doNoteMonthFetch(year, month))
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(MonthContainer)

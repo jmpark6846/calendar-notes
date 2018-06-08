@@ -2,6 +2,8 @@ import {
   MONTH_DOWN,
   MONTH_UP,
   DATE_SELECT,
+  NOTE_MONTH_FETCH,
+  NOTE_MONTH_REQUEST_SUCCESS
 } from '../constants'
 
 const date = new Date()
@@ -17,6 +19,8 @@ const INITIAL_STATE = {
   today,
   isSundayFirst:false,
   selectedDate: today,
+  updated:false,
+  notes:[]
 }
 
 export const calendarReducer = (state=INITIAL_STATE, action) => {
@@ -27,6 +31,12 @@ export const calendarReducer = (state=INITIAL_STATE, action) => {
       return {
         ...state,
         ...action.payload
+      }
+    case NOTE_MONTH_REQUEST_SUCCESS:
+      return {
+        ...state,
+        notes:action.payload.notes,
+        updated:true,
       }
     default: return state
   }  

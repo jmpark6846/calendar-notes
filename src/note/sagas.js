@@ -27,7 +27,6 @@ export function* save(action){
   const { data, error } = yield call(api, url, action.payload)
 
   if(!error){
-    console.log(data)
     yield put(doNoteSaveSuccess(date, data.content))
   }else{
     console.log(error)

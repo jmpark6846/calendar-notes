@@ -7,7 +7,8 @@ import { calendarReducer } from "./calendar/reducers";
 import { noteReducer } from './note/reducers';
 import { noteSagas, fetchNote, save } from './note/sagas';
 import { all, takeEvery } from 'redux-saga/effects';
-import { NOTE_SAVE, NOTE_FETCH } from './constants';
+import { NOTE_SAVE, NOTE_FETCH, NOTE_MONTH_FETCH } from './constants';
+import { fetchNoteMonth } from './calendar/sagas';
 
 
 const root = combineReducers({
@@ -24,7 +25,8 @@ function* rootSaga(){
   yield all([
     // ...noteSagas
     takeEvery(NOTE_SAVE, save),
-    takeEvery(NOTE_FETCH, fetchNote)
+    takeEvery(NOTE_FETCH, fetchNote),
+    takeEvery(NOTE_MONTH_FETCH, fetchNoteMonth)
   ])
 }
 

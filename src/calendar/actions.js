@@ -1,6 +1,9 @@
 import {
   MONTH_DOWN,
   MONTH_UP,
+  NOTE_MONTH_FETCH,
+  NOTE_MONTH_REQUEST,
+  NOTE_MONTH_REQUEST_SUCCESS,
 } from '../constants'
 
 export const doMonthDown = (year, month) => {
@@ -25,3 +28,28 @@ export const doMonthUp = (year, month) => {
   }
 }
 
+export const  doNoteMonthFetch = (year, month) => ({
+  type:NOTE_MONTH_FETCH,
+  payload:{
+    year, month
+  }
+})
+
+
+export const doNoteMonthRequest = () => ({
+  type:NOTE_MONTH_REQUEST,
+})
+
+export const doNoteMonthRequestSuccess = (notes) => ({
+  type:NOTE_MONTH_REQUEST_SUCCESS,
+  payload:{
+    notes
+  }
+})
+
+export const doNoteMonthRequestFail = (error) => ({
+  type:NOTE_MONTH_REQUEST,
+  payload:{
+    error
+  }
+})
