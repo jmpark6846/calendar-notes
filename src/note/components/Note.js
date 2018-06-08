@@ -72,10 +72,6 @@ class Note extends React.Component{
     }
   }
 
-  isNoteLoaded(prevLoading){
-    console.log(prevLoading + ' -> ' + this.props.loading)
-    return prevLoading === true && this.props.loading === false
-  }
   isEmpty(editorState){
     return editorState.getCurrentContent().getPlainText() === ''
   }
