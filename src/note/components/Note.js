@@ -32,8 +32,10 @@ class Note extends React.Component{
       return { editorState: htmlToDraftEditorState(nextProps.notes[date].content) }
     }
     else{
-      return null
+      return { editorState: EditorState.createEmpty() }
     } 
+
+    return null
   }
 
   componentDidMount = () => {
@@ -52,7 +54,6 @@ class Note extends React.Component{
     if(date in this.props.notes){
       this.setState({ editorState: htmlToDraftEditorState(this.props.notes[date].content) })
     }else{
-      this.setState({ editorState: EditorState.createEmpty() })
       this.props.fetch(this.props.selectedDate)  
     }
   }
