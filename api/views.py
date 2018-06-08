@@ -30,7 +30,6 @@ class NoteList(ListCreateAPIView):
     return user.notes.all()
 
   def perform_create(self, serializer):
-    print(self.request.user)
     serializer.save(author=self.request.user)
 
 

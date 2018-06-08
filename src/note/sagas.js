@@ -2,7 +2,7 @@ import { takeEvery } from "redux-saga";
 import { put, call } from "redux-saga/effects";
 import { NOTE_SAVE_ON_SERVER, API_URL } from "../constants";
 import { postData, fetchData, getNoteRequestUrl } from "../utils/fetch";
-import { doNoteFetch, doNoteRequest, doNoteRequestFail, doNoteRequestSuccess } from "./actions";
+import { doNoteFetch, doNoteRequest, doNoteRequestFail, doNoteRequestSuccess, doNoteSaveRequest, doNoteSaveSuccess, doNoteSaveFail } from "./actions";
 import { dateToString } from "../utils/date";
 
 // export function* noteSagas(action){
@@ -11,8 +11,16 @@ import { dateToString } from "../utils/date";
 // }
 
 export function* save(action){
+  yield put(doNoteSaveRequest())
   const {data, error} = yield call(postData, API_URL+'/notes/', action.payload)
-  console.log(error)
+
+  if(!error){
+    console.log(data)
+    yield put(doNoteSaveSuccess(dateToString(action.payload.date), data.content))
+  }else{
+    console.log(error)
+    yield put(doNoteSaveFail(error))
+  }
 } 
 
 export function* fetchNote(action){

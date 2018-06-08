@@ -5,6 +5,7 @@ export const DATE_SELECT = "DATE_SELECT"
 
 
 export const NOTE_SAVE = 'NOTE_SAVE'
+export const NOTE_SAVE_REQUEST = 'NOTE_SAVE_REQUEST'
 export const NOTE_SAVE_SUCCESS = 'NOTE_SAVE_SUCCESS'
 export const NOTE_SAVE_FAIL = 'NOTE_SAVE_FAIL'
 
