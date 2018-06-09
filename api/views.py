@@ -28,7 +28,9 @@ class NoteList(ListAPIView):
   permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
   def get_queryset(self):
-    return Note.objects.filter(date__year=self.kwargs['year'], date__month=self.kwargs['month']+1)
+    notes = self.request.user.notes.all()
+    
+    return notes.filter(date__year=self.kwargs['year'], date__month=self.kwargs['month']+1)
 
 
 class NoteCreate(CreateAPIView):
@@ -58,12 +60,13 @@ class NoteDetailByDate(RetrieveUpdateDestroyAPIView):
     return user.notes.all()
 
   def get_object(self):
+    notes = self.get_queryset()
     date = datetime.datetime(self.kwargs['year'], self.kwargs['month'], self.kwargs['day'])
     try:
-      obj = Note.objects.get(date=date)
+      obj = notes.get(date=date)
     except Note.DoesNotExist:
       obj = None
-  
+
     self.check_object_permissions(self.request, obj)
     return obj
 

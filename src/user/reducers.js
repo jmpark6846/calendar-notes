@@ -21,10 +21,7 @@ export const userReducer = (state=INITIAL_STATE, action) => {
         error:action.payload.error
       }
     case USER_LOGOUT:
-      return {
-        username:'',
-        isAuthenticated:false,
-      }
+      return INITIAL_STATE
     case REGISTER_FAIL:
       return {
         ...state,

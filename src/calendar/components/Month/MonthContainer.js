@@ -22,7 +22,6 @@ class MonthContainer extends React.Component{
     }
   }
   
-  
   getFirstDayOfMonth(){
     const { year, month, isSundayFirst } = this.props 
     const day = new Date(year, month, 1).getDay()

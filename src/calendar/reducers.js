@@ -2,8 +2,9 @@ import {
   MONTH_DOWN,
   MONTH_UP,
   DATE_SELECT,
-  NOTE_MONTH_REQUEST_SUCCESS
-} from '../constants'
+  NOTE_MONTH_REQUEST_SUCCESS,
+  USER_LOGOUT
+} from '../constants/actionTypes'
 
 const date = new Date()
 const year = date.getFullYear()
@@ -42,6 +43,8 @@ export const calendarReducer = (state=INITIAL_STATE, action) => {
         notes:action.payload.notes,
         updated:true,
       }
+    case USER_LOGOUT:
+      return INITIAL_STATE
     default: return state
   }  
 }
