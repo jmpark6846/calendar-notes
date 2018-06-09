@@ -58,10 +58,12 @@ class NoteDetailByDate(RetrieveUpdateDestroyAPIView):
     return user.notes.all()
 
   def get_object(self):
-    queryset = self.get_queryset()
-    
     date = datetime.datetime(self.kwargs['year'], self.kwargs['month'], self.kwargs['day'])
-    obj = get_object_or_404(queryset, date=date)
+    try:
+      obj = Note.objects.get(date=date)
+    except Note.DoesNotExist:
+      obj = None
+  
     self.check_object_permissions(self.request, obj)
     return obj
 
