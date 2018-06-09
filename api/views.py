@@ -21,14 +21,19 @@ def api_root(request, format=None):
     'users' : reverse('user-list', request=request, format=format),
     'notes': reverse('note-list', request=request, format=format)
   })
-  
-class NoteList(ListCreateAPIView):
+
+
+class NoteList(ListAPIView):
   serializer_class = NoteSerializer
   permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
   def get_queryset(self):
-    user = self.request.user
-    return user.notes.all()
+    return Note.objects.filter(date__year=self.kwargs['year'], date__month=self.kwargs['month']+1)
+
+
+class NoteCreate(CreateAPIView):
+  serializer_class = NoteSerializer
+  permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
   def perform_create(self, serializer):
     serializer.save(author=self.request.user)
@@ -56,7 +61,6 @@ class NoteDetailByDate(RetrieveUpdateDestroyAPIView):
     queryset = self.get_queryset()
     
     date = datetime.datetime(self.kwargs['year'], self.kwargs['month'], self.kwargs['day'])
-    print(date)
     obj = get_object_or_404(queryset, date=date)
     self.check_object_permissions(self.request, obj)
     return obj

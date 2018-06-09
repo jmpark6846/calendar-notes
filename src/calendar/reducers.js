@@ -27,6 +27,11 @@ export const calendarReducer = (state=INITIAL_STATE, action) => {
   switch(action.type){
     case MONTH_UP:
     case MONTH_DOWN:
+      return {
+        ...state,
+        ...action.payload,
+        notes:[]
+      }
     case DATE_SELECT:
       return {
         ...state,

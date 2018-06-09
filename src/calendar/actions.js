@@ -31,7 +31,8 @@ export const doMonthUp = (year, month) => {
 export const  doNoteMonthFetch = (year, month) => ({
   type:NOTE_MONTH_FETCH,
   payload:{
-    year, month
+    year, 
+    month
   }
 })
 

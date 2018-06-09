@@ -17,7 +17,10 @@ class MonthContainer extends React.Component{
   }
   
   componentDidUpdate = (prevProps, prevState) => {
-    
+    if(prevProps.year !== this.props.year || prevProps.month !== this.props.month){
+      console.log('called')
+      this.props.fetchMonth(this.props.year, this.props.month)
+    }
   }
   
   
