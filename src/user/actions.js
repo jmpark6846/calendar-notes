@@ -1,4 +1,4 @@
-import { USER_LOGIN, LOGIN_REQUEST, LOGIN_REQUEST_SUCCESS, LOGIN_REQUEST_FAIL } from "../constants";
+import { USER_LOGIN, USER_LOGOUT, LOGIN_REQUEST, LOGIN_REQUEST_SUCCESS, LOGIN_REQUEST_FAIL } from "../constants";
 
 export const doUserLogin = (username, password) => ({
   type: USER_LOGIN,
@@ -25,7 +25,6 @@ export const doLoginRequestFail = (error) => ({
     error
   }
 })
-
 
 export const doUserLogout = () => ({
   type: USER_LOGOUT,

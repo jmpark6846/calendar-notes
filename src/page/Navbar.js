@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { doUserLogout } from '../auth';
+import { doUserLogout } from '../user/actions';
 
 const activePage = {}
 
@@ -40,10 +40,7 @@ const Navbar = ({username, isAuthenticated, logout}) =>
     </nav>  
   </header>
 
-const mapStateToProps = ({auth}) => ({
-  username: auth.username,
-  isAuthenticated: auth.isAuthenticated,
-})
+const mapStateToProps = ({user}) => user
 
 const mapDispatchToProps = (dispatch) => ({
   logout: ()=>dispatch(doUserLogout())

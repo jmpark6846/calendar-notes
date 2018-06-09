@@ -10,11 +10,13 @@ import { all, takeEvery } from 'redux-saga/effects';
 import { NOTE_SAVE, NOTE_FETCH, NOTE_MONTH_FETCH, USER_LOGIN } from './constants';
 import { fetchNoteMonth } from './calendar/sagas';
 import { login } from './user/sagas';
+import { userReducer } from './user/reducers';
 
 
 const root = combineReducers({
   calendar: calendarReducer,
-  notes: noteReducer
+  notes: noteReducer,
+  user: userReducer,
 })
 
 const saga = createSagaMiddleware()

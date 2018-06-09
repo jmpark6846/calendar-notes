@@ -1,4 +1,4 @@
-import { USER_LOGIN, LOGIN_REQUEST, LOGIN_REQUEST_FAIL, LOGIN_REQUEST_SUCCESS } from "../constants";
+import { USER_LOGIN, USER_LOGOUT, LOGIN_REQUEST, LOGIN_REQUEST_FAIL, LOGIN_REQUEST_SUCCESS } from "../constants";
 
 const INITIAL_STATE = {
   username:'',
@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   error:undefined,
 }
 
-export default (state=INITIAL_STATE, action) => {
+export const userReducer = (state=INITIAL_STATE, action) => {
   switch(action.type){
     case LOGIN_REQUEST_SUCCESS:
       return {
