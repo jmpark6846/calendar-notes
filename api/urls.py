@@ -22,7 +22,7 @@ urlpatterns = [
     path('', views.api_root, name='api'),
 
     # rest api
-    path('notes/', views.NoteCreate.as_view()),
+    path('notes/create/', views.NoteCreate.as_view()),
     path('notes/<int:year>/<int:month>/', views.NoteList.as_view(), name='note-list'),
     path('notes/<int:year>/<int:month>/<int:day>/', views.NoteDetailByDate.as_view()),
     path('notes/<pk>/', views.NoteDetail.as_view()),

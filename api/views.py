@@ -29,7 +29,6 @@ class NoteList(ListAPIView):
 
   def get_queryset(self):
     notes = self.request.user.notes.all()
-    
     return notes.filter(date__year=self.kwargs['year'], date__month=self.kwargs['month']+1)
 
 
@@ -61,6 +60,7 @@ class NoteDetailByDate(RetrieveUpdateDestroyAPIView):
 
   def get_object(self):
     notes = self.get_queryset()
+    print(notes)
     date = datetime.datetime(self.kwargs['year'], self.kwargs['month'], self.kwargs['day'])
     try:
       obj = notes.get(date=date)
@@ -84,5 +84,3 @@ class UserList(ListAPIView):
 class UserDetail(RetrieveAPIView):
   queryset = User.objects.all()
   serializer_class = UserSerializer
-
-

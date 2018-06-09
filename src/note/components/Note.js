@@ -44,7 +44,7 @@ class Note extends React.Component{
       this.setState({ editorState: htmlToDraftEditorState(this.props.notes[date].content) })
     }else{
       this.setState({ editorState: EditorState.createEmpty() })
-      this.props.fetch(this.props.selectedDate)  
+      this.props.fetch(dateToString(this.props.selectedDate)) 
     }
   }
 
@@ -56,7 +56,7 @@ class Note extends React.Component{
     this.setState({editorState});  
 
     if(!this.isEmpty(editorState)){
-      this.props.save(this.props.selectedDate, html, method)
+      this.props.save(date, html, method)
     }
   
     if(this.isDeletedAndEmpty(editorState)){

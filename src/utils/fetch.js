@@ -35,5 +35,7 @@ export const updateData = (url, data) => {
 }
 
 export const getNoteRequestUrl = (date) => {
-  return `${API_URL}/notes/${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}/`
+  
+  const str = date.split('-')
+  return `${API_URL}/notes/${str[0]}/${str[1]}/${str[2]}/`
 }

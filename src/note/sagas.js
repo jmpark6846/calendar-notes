@@ -13,6 +13,7 @@ export function* save(action){
   let url = ''
   let api = null
   const date = dateToString(action.payload.date)
+  
   yield put(doNoteSaveRequest())
   
   if(action.payload.method === 'update'){
@@ -20,7 +21,7 @@ export function* save(action){
     api = updateData
   }
   else{
-    url = API_URL+'/notes/'
+    url = API_URL+'/notes/create/'
     api = postData
   }
   
@@ -49,5 +50,5 @@ export function* fetchNote(action){
 }
 
 function noteDoesNotExist(note){
-  return !('id' in note)
+  return !Object.keys(note).includes('id')
 }
