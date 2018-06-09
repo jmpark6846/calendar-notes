@@ -84,3 +84,33 @@ class UserList(ListAPIView):
 class UserDetail(RetrieveAPIView):
   queryset = User.objects.all()
   serializer_class = UserSerializer
+
+  
+def me(request):
+  if 'token' in request.COOKIES:
+    token = request.COOKIES['token']
+    payload = jwt_decode(token)
+    return JsonResponse({'isAuthenticated':True, 'username':payload['username']})
+  else:
+    return JsonResponse({'isAuthenticated':False})
+
+
+def check_exp(request):
+  if 'token' in request.COOKIES:
+    token = request.COOKIES['token']
+
+    payload = jwt_decode(token)
+    exp = datetime.utcfromtimestamp(payload['exp']) 
+    now = datetime.utcnow()
+
+    if exp - now < settings.TOKEN_REFRESH_DELTA :
+      return JsonResponse({'isAuthenticated':True, 'username':payload['username'], 'msg':'need to refresh', 'token':token})
+    else:
+      return JsonResponse({'isAuthenticated':True, 'username':payload['username'], 'msg':'not expired'})
+  else:
+    return JsonResponse({'isAuthenticated':False, 'msg':'not authenticated; token expired'})
+
+
+def jwt_decode(token):
+  payload = jwt.decode(token, settings.JWT_AUTH['JWT_SECRET_KEY'], settings.JWT_AUTH['JWT_ALGORITHM'])
+  return payload
