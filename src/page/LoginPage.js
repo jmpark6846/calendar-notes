@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+
 import Page from './Page';
 import { doUserLogin } from '../user/actions'
 import store from '../store'
@@ -19,6 +21,12 @@ class LoginPage extends Component {
     this.onChange = this.onChange.bind(this)
   }
 
+  componentDidUpdate = (prevProps, prevState) => {
+    if(this.props.isAuthenticated){
+      this.props.history.push('/calendar/')  
+    }
+  }
+  
   onChange(e){
     const { name, value } = e.target
     this.setState({ [name] : value })
@@ -33,7 +41,6 @@ class LoginPage extends Component {
       this.setState({ error: true, errorMsg: 'ID 혹은 비밀번호가 올바르지 않습니다.' }) 
       return null
     }
-
     this.props.login(username, password)
   }
 
@@ -62,8 +69,10 @@ class LoginPage extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapState = ({user}) => (user)
+
+const mapDispatch = (dispatch) => ({
   login: (username, password) => dispatch(doUserLogin(username, password))
 })
 
-export default connect(undefined, mapDispatchToProps)(LoginPage)
+export default withRouter(connect(mapState, mapDispatch)(LoginPage))

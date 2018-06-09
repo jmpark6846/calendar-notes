@@ -3,7 +3,7 @@ import { Calendar } from "../calendar";
 import { Note } from '../note';
 import Page from './Page';
 
-export const CalendarPage = () =>
+const CalendarPage = () =>
   <Page>
     <div className="container">
       <div className="row">
@@ -17,5 +17,4 @@ export const CalendarPage = () =>
     </div>
   </Page>
     
-  
-
+export default CalendarPage

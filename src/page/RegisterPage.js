@@ -20,7 +20,12 @@ class RegisterPage extends Component {
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
   }
-
+  componentDidUpdate = (prevProps, prevState) => {
+    if(this.props.isAuthenticated){
+      this.props.history.push('/calendar/')  
+    }
+  }
+  
   onChange(e){
     const { name, value } = e.target
     this.setState({ [name] : value })
@@ -75,8 +80,8 @@ class RegisterPage extends Component {
     )
   }
 }
-
+const mapState = ({user}) => (user)
 const mapDispatch = (dispatch) => ({
   register : (username, password) => dispatch(doUserRegister(username, password))
 })
-export default connect(undefined, mapDispatch)(RegisterPage)
+export default connect(mapState, mapDispatch)(RegisterPage)

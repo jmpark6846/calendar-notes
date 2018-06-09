@@ -1,4 +1,4 @@
-import { NOTE_SAVE_SUCCESS, NOTE_DELETE, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL, NOTE_SAVE_FAIL, NOTE_SAVE_REQUEST, NOTE_SET } from "../constants";
+import { NOTE_SAVE_SUCCESS, NOTE_DELETE, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL, NOTE_SAVE_FAIL, NOTE_SAVE_REQUEST, NOTE_SET, USER_LOGOUT } from "../constants";
 
 const initialState = {
   loading: false,
@@ -64,6 +64,8 @@ export const noteReducer = (state=initialState, action) => {
         ...state,
         updated:false
       }
+    case USER_LOGOUT:
+      return initialState
     default: return state
   }
 }
