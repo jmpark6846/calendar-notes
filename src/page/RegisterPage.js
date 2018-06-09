@@ -33,7 +33,7 @@ class RegisterPage extends Component {
     const { name, value } = e.target
     this.setState({ [name] : value })
   }
-
+  // TODO: VALIDATION을 서버 단에서 하기
   onSubmit(e){
     e.preventDefault()
     const { username, password, password2 } = this.state

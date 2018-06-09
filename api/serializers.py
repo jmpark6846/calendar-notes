@@ -11,6 +11,7 @@ class NoteSerializer(serializers.ModelSerializer):
     fields = '__all__'
 
 
+# TODO: 유저 가입을 가입 폼을 활용해서 서버단 에서 VALIDATION하는 걸로 수정 (현재는 LoginPage 에서 validation)
 class UserSerializer(serializers.ModelSerializer):
   notes = serializers.PrimaryKeyRelatedField(many=True, allow_null=True, queryset=Note.objects.all())
 
