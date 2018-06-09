@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import Month from './Month';
 import { getYMDFromString } from '../../../utils/date';
 import { doNoteMonthFetch } from '../../actions';
@@ -18,7 +19,6 @@ class MonthContainer extends React.Component{
   
   componentDidUpdate = (prevProps, prevState) => {
     if(prevProps.year !== this.props.year || prevProps.month !== this.props.month){
-      console.log('called')
       this.props.fetchMonth(this.props.year, this.props.month)
     }
   }
@@ -51,7 +51,7 @@ const mapStateToProps = ({calendar}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchMonth: (year, month) => dispatch(doNoteMonthFetch(year, month))
+  fetchMonth: _.debounce((year, month) => dispatch(doNoteMonthFetch(year, month)), 500)
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(MonthContainer)
