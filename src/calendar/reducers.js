@@ -2,7 +2,6 @@ import {
   MONTH_DOWN,
   MONTH_UP,
   DATE_SELECT,
-  NOTE_MONTH_FETCH,
   NOTE_MONTH_REQUEST_SUCCESS
 } from '../constants'
 

@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import Month from './Month';
-import { getYMDFromString } from '../../../utils/date';
 import { doNoteMonthFetch } from '../../actions';
 
 class MonthContainer extends React.Component{

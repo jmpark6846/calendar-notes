@@ -1,8 +1,7 @@
-import { put, call, select } from "redux-saga/effects";
-import { doNoteMonthFetch, doNoteMonthRequest, doNoteMonthRequestSuccess, doNoteMonthRequestFail } from "./actions";
+import { put, call } from "redux-saga/effects";
+import { doNoteMonthRequest, doNoteMonthRequestSuccess, doNoteMonthRequestFail } from "./actions";
 import { API_URL } from "../constants";
 import { fetchData } from "../utils/fetch";
-import { getYMDFromString } from "../utils/date";
 
 export function* fetchNoteMonth(action){
   const { year, month } = action.payload

@@ -1,8 +1,8 @@
 import { takeEvery } from "redux-saga";
-import { put, call, select } from "redux-saga/effects";
-import { NOTE_SAVE_ON_SERVER, API_URL } from "../constants";
+import { put, call } from "redux-saga/effects";
+import { API_URL } from "../constants";
 import { postData, fetchData, getNoteRequestUrl, updateData } from "../utils/fetch";
-import { doNoteFetch, doNoteRequest, doNoteRequestFail, doNoteRequestSuccess, doNoteSaveRequest, doNoteSaveSuccess, doNoteSaveFail } from "./actions";
+import { doNoteRequest, doNoteRequestFail, doNoteRequestSuccess, doNoteSaveRequest, doNoteSaveSuccess, doNoteSaveFail } from "./actions";
 import { dateToString } from "../utils/date";
 
 // export function* noteSagas(action){

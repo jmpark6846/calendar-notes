@@ -1,11 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {Editor, EditorState, convertToRaw, convertFromRaw, ContentState} from 'draft-js';
+import {Editor, EditorState, convertToRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
 import 'draft-js/dist/Draft.css';
 import _ from 'lodash'
-import { NOTE_SAVE, NOTE_DELETE } from '../../constants';
 import { dateToString } from '../../utils/date';
 import { htmlToDraftEditorState } from '../../utils/note';
 import { doNoteSave, doNoteDelete, doNoteSaveOnServer, doNoteFetch, doNoteSet } from '../actions';
