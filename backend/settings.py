@@ -146,3 +146,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
+
+JWT_AUTH = {
+    'JWT_AUTH_COOKIE': 'token',
+}
