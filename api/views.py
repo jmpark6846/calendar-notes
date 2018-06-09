@@ -25,7 +25,7 @@ def api_root(request, format=None):
 
 class NoteList(ListAPIView):
   serializer_class = NoteSerializer
-  permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+  permission_classes = (permissions.IsAuthenticated, )
 
   def get_queryset(self):
     notes = self.request.user.notes.all()
@@ -34,7 +34,7 @@ class NoteList(ListAPIView):
 
 class NoteCreate(CreateAPIView):
   serializer_class = NoteSerializer
-  permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+  permission_classes = (permissions.IsAuthenticated, )
 
   def perform_create(self, serializer):
     serializer.save(author=self.request.user)
@@ -42,7 +42,7 @@ class NoteCreate(CreateAPIView):
 
 class NoteDetail(RetrieveUpdateDestroyAPIView):
   serializer_class = NoteSerializer
-  permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
+  permission_classes = (permissions.IsAuthenticated, IsOwnerOrReadOnly)
 
   def get_queryset(self):
     user = self.request.user
@@ -52,7 +52,7 @@ class NoteDetail(RetrieveUpdateDestroyAPIView):
 class NoteDetailByDate(RetrieveUpdateDestroyAPIView):
   
   serializer_class = NoteSerializer
-  permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
+  permission_classes = (permissions.IsAuthenticated, IsOwnerOrReadOnly)
   
   def get_queryset(self):
     user = self.request.user
@@ -60,8 +60,8 @@ class NoteDetailByDate(RetrieveUpdateDestroyAPIView):
 
   def get_object(self):
     notes = self.get_queryset()
-    print(notes)
     date = datetime.datetime(self.kwargs['year'], self.kwargs['month'], self.kwargs['day'])
+
     try:
       obj = notes.get(date=date)
     except Note.DoesNotExist:

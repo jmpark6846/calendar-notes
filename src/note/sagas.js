@@ -40,10 +40,10 @@ export function* fetchNote(action){
   const url = getNoteRequestUrl(action.payload.date)
   const {data, error} = yield call(fetchData, url)
   
-  if(noteDoesNotExist(data)){
-    yield put(doNoteRequestFail('노트가 존재하지 않습니다.'))
-  }else if(error){
+  if(error){
     yield put(doNoteRequestFail(error))
+  }else if(noteDoesNotExist(data)){
+    yield put(doNoteRequestFail('노트가 존재하지 않습니다.'))
   }else{
     yield put(doNoteRequestSuccess(dateToString(action.payload.date), data.content))
   }
