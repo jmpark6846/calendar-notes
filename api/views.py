@@ -69,9 +69,9 @@ class NoteDetailByDate(RetrieveUpdateDestroyAPIView):
 
 
 class UserCreate(CreateAPIView):
-  queryset = User.objects.all()
   serializer_class = UserSerializer
   permission_classes = (permissions.AllowAny,  )
+
 
 class UserList(ListAPIView):
   queryset = User.objects.all()

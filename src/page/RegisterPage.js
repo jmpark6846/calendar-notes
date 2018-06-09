@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Page from './Page';
 import { PASSWORD_MIN_LENGTH } from '../constants'
 import store from '../store';
-// import { doUserRegister } from '../user/actions';
+import { doUserRegister } from '../user/actions';
 
-export default class RegisterPage extends Component {
+class RegisterPage extends Component {
 
   constructor(props){
     super(props)
@@ -43,8 +44,9 @@ export default class RegisterPage extends Component {
       this.setState({error:true, errorMsg:'ID 혹은 비밀번호가 올바르지 않습니다.'})
       return null
     }
-
-    // store.dispatch(doUserRegister(username, password))
+    
+    this.props.register(username, password)
+    
   }
   
   render() {
@@ -73,3 +75,8 @@ export default class RegisterPage extends Component {
     )
   }
 }
+
+const mapDispatch = (dispatch) => ({
+  register : (username, password) => dispatch(doUserRegister(username, password))
+})
+export default connect(undefined, mapDispatch)(RegisterPage)
