@@ -1,13 +1,19 @@
-import { USER_LOGIN, USER_LOGOUT, LOGIN_REQUEST, LOGIN_REQUEST_FAIL, LOGIN_REQUEST_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS } from "../constants";
+import { USER_LOGIN, USER_LOGOUT, LOGIN_REQUEST, LOGIN_REQUEST_FAIL, LOGIN_REQUEST_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS, USER_REGISTER } from "../constants";
 
 const INITIAL_STATE = {
   username:'',
   isAuthenticated:false,
+  registered:false,
   error:undefined,
 }
 
 export const userReducer = (state=INITIAL_STATE, action) => {
   switch(action.type){
+    case LOGIN_REQUEST:
+      return {
+        ...state,
+        error:undefined,
+      }
     case LOGIN_REQUEST_SUCCESS:
       return {
         username: action.payload.username,
@@ -22,6 +28,11 @@ export const userReducer = (state=INITIAL_STATE, action) => {
       }
     case USER_LOGOUT:
       return INITIAL_STATE
+    case USER_REGISTER:
+      return {
+        ...state,
+        error:undefined,
+      }
     case REGISTER_FAIL:
       return {
         ...state,
@@ -29,9 +40,8 @@ export const userReducer = (state=INITIAL_STATE, action) => {
       }
     case REGISTER_SUCCESS:
       return {
-        username: action.payload.username,
-        isAuthenticated:true,
-        error:undefined,
+        ...state,
+        registered:true,
       }
     default: return state
   }

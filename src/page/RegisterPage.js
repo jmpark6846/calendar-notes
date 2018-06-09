@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+
 import Page from './Page';
 import { PASSWORD_MIN_LENGTH } from '../constants'
 import store from '../store';
@@ -20,6 +22,7 @@ class RegisterPage extends Component {
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
   }
+
   componentDidUpdate = (prevProps, prevState) => {
     if(this.props.isAuthenticated){
       this.props.history.push('/calendar/')  
@@ -73,6 +76,7 @@ class RegisterPage extends Component {
               <input name="password2" value={password2} onChange={this.onChange} autoComplete="current-password" type="password" className="form-control" placeholder="비밀번호 확인"/>
             </div>
             { error && <div className="error">{errorMsg}</div> }
+            { this.props.error && Object.values(this.props.error).map((v,i)=><div key={i} className="error">{v}</div>)}
             <button className="btn btn-primary" type="submit">가입</button>
           </form>
         </div>
@@ -84,4 +88,4 @@ const mapState = ({user}) => (user)
 const mapDispatch = (dispatch) => ({
   register : (username, password) => dispatch(doUserRegister(username, password))
 })
-export default connect(mapState, mapDispatch)(RegisterPage)
+export default withRouter(connect(mapState, mapDispatch)(RegisterPage))
