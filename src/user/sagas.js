@@ -1,5 +1,5 @@
 import { put, call, take } from "redux-saga/effects";
-import { doLoginFail, doLoginSuccess, doRegisterFail, doRegisterSuccess, doNotAuthenticated } from "./actions";
+import { doLoginFail, doLoginSuccess, doRegisterFail, doRegisterSuccess, doNotAuthenticated, doLogoutSuccess } from "./actions";
 import { API_URL, LOGIN_SUCCESS } from "../constants";
 import { postData, fetchData } from "../utils/fetch";
 
@@ -16,6 +16,15 @@ export function* login(action){
   }
 }
 
+
+export function* logout(action){
+  const url = API_URL + '/logout/'
+  yield call(fetchData, url) 
+  yield put(doLogoutSuccess())
+  yield action.payload.history.push('/')
+}
+
+
 export function* register(action){
   const url = API_URL + '/users/create/'
   const {username, password} = action.payload
@@ -29,6 +38,7 @@ export function* register(action){
   }
 }
 
+
 export function* checkAuth(action){
   const url = API_URL + '/me/'
   const { data } = yield call(fetchData, url)
@@ -37,12 +47,5 @@ export function* checkAuth(action){
     yield put(doLoginSuccess(data.username))
   }else{
     yield put(doNotAuthenticated())
-  }
-}
-
-export function* authPageSaga(){
-  while(true){
-    yield take(LOGIN_SUCCESS)
-    
   }
 }

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from rest_framework import serializers, permissions, status
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.decorators import api_view
@@ -87,7 +87,13 @@ class UserDetail(RetrieveAPIView):
   queryset = User.objects.all()
   serializer_class = UserSerializer
 
-  
+
+def logout(request):
+  response = JsonResponse({})
+  response.delete_cookie('token')
+  return response
+
+
 def me(request):
   if 'token' in request.COOKIES:
     token = request.COOKIES['token']

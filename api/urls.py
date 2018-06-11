@@ -35,5 +35,6 @@ urlpatterns = [
     path('token/refresh/', refresh_jwt_token, name='refresh_jwt_token'),
 
     path('me/', views.me),
+    path('logout/', views.logout)
     
 ]

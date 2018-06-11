@@ -1,11 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { withRouter } from 'react-router'
+
 import { doUserLogout } from '../user/actions';
 
 const activePage = {}
 
-const Navbar = ({username, isAuthenticated, logout}) =>
+const Navbar = ({username, isAuthenticated, logout, history}) =>
   <header>
     <nav className="navbar navbar-expand-lg">
       
@@ -22,7 +24,7 @@ const Navbar = ({username, isAuthenticated, logout}) =>
               <NavLink to="/calendar" className="nav-link" activeStyle={activePage}>{username}</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/" className="nav-link" activeStyle={activePage} onClick={logout} >Logout</NavLink>
+              <div href='' className="nav-link" onClick={()=>logout(history)} >Logout</div>
             </li>
           </React.Fragment>
           :
@@ -43,6 +45,6 @@ const Navbar = ({username, isAuthenticated, logout}) =>
 const mapStateToProps = ({user}) => user
 
 const mapDispatchToProps = (dispatch) => ({
-  logout: ()=>dispatch(doUserLogout())
-})
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+  logout: (history)=>dispatch(doUserLogout(history))
+}) 
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar))
