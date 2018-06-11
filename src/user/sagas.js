@@ -1,5 +1,5 @@
 import { put, call, take } from "redux-saga/effects";
-import { doLoginFail, doLoginSuccess, doRegisterFail, doRegisterSuccess } from "./actions";
+import { doLoginFail, doLoginSuccess, doRegisterFail, doRegisterSuccess, doNotAuthenticated } from "./actions";
 import { API_URL, LOGIN_SUCCESS } from "../constants";
 import { postData, fetchData } from "../utils/fetch";
 
@@ -27,12 +27,12 @@ export function* register(action){
 
 export function* checkAuth(action){
   const url = API_URL + '/me/'
-  const {data, error} = yield call(fetchData, url)
+  const { data } = yield call(fetchData, url)
   
-  if(error){
-    yield put(doLoginFail(error))
-  }else{
+  if(data.isAuthenticated){
     yield put(doLoginSuccess(data.username))
+  }else{
+    yield put(doNotAuthenticated())
   }
 }
 

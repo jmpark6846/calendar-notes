@@ -1,9 +1,8 @@
-import { USER_LOGIN, USER_LOGOUT, LOGIN_REQUEST, LOGIN_FAIL, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS, USER_REGISTER } from "../constants";
+import { USER_LOGIN, USER_LOGOUT, LOGIN_REQUEST, LOGIN_FAIL, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS, USER_REGISTER, NOT_AUTHENTICATED } from "../constants";
 
 const INITIAL_STATE = {
   username:'',
-  isAuthenticated:false,
-  registered:false,
+  isAuthenticated:undefined,
   error:undefined,
 }
 
@@ -23,7 +22,7 @@ export const userReducer = (state=INITIAL_STATE, action) => {
     case LOGIN_FAIL:
       return {
         username:'',
-        isAuthenticated:false,
+        isAuthenticated: false,
         error:action.payload.error
       }
     case USER_LOGOUT:
@@ -31,8 +30,7 @@ export const userReducer = (state=INITIAL_STATE, action) => {
     case USER_REGISTER:
       return {
         ...state,
-        registered:false,
-        error:undefined,
+        error: undefined,
       }
     case REGISTER_FAIL:
       return {
@@ -42,7 +40,11 @@ export const userReducer = (state=INITIAL_STATE, action) => {
     case REGISTER_SUCCESS:
       return {
         ...state,
-        registered:true,
+      }
+    case NOT_AUTHENTICATED:
+      return {
+        ...state,
+        isAuthenticated: false,
       }
     default: return state
   }

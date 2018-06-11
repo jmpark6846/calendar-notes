@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import routes from './routes'
 import { CHECK_AUTH } from './constants';
+import ProtectedRoute from './ProtectedRoute';
+import store from './store';
 
 
 class App extends Component {
@@ -15,7 +17,7 @@ class App extends Component {
       <div className='App'>
         <BrowserRouter>
           <Switch>
-            { routes.map((route,i)=><Route {...route} key={i} />) }
+            { routes.map((route,i)=>route.protected ? <ProtectedRoute route={route} key={i}/> : <Route {...route} key={i} />) }
           </Switch>
         </BrowserRouter>
       </div>
@@ -23,7 +25,8 @@ class App extends Component {
   }
 }
 
+const mapState = ({user}) => ({ isAuthenticated: user.isAuthenticated })
 const mapDispatch = (dispatch) => ({
   checkAuth: () => dispatch({type: CHECK_AUTH})
 })
-export default connect(undefined, mapDispatch)(App);
+export default connect(mapState, mapDispatch)(App);

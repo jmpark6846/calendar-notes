@@ -36,3 +36,5 @@ export const REGISTER_FAIL = 'REGISTER_FAIL'
 export const USER_LOGOUT = 'USER_LOGOUT'
 
 export const CHECK_AUTH = ' CHECK_AUTH'
+
+export const NOT_AUTHENTICATED = 'NOT_AUTHENTICATED'
