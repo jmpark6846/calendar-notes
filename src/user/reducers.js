@@ -31,6 +31,7 @@ export const userReducer = (state=INITIAL_STATE, action) => {
     case USER_REGISTER:
       return {
         ...state,
+        registered:false,
         error:undefined,
       }
     case REGISTER_FAIL:

@@ -27,12 +27,13 @@ urlpatterns = [
     path('notes/<int:year>/<int:month>/<int:day>/', views.NoteDetailByDate.as_view()),
     path('notes/<pk>/', views.NoteDetail.as_view()),
     
-
     path('users/create/', views.UserCreate.as_view()),
     path('users/', views.UserList.as_view(), name='user-list'),
     path('users/<pk>/', views.UserDetail.as_view()),
     
-
     path('token/', obtain_jwt_token, name='obtain_jwt_token'),
     path('token/refresh/', refresh_jwt_token, name='refresh_jwt_token'),
+
+    path('me/', views.me),
+    
 ]

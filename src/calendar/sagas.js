@@ -18,5 +18,5 @@ export function* fetchNoteMonth(action){
     console.log(error)
     yield put(doNoteMonthRequestFail(error))
   }
-
 }
+

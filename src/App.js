@@ -3,6 +3,10 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import routes from './routes'
 
 class App extends Component {
+  componentDidMount = () => {
+    
+  }
+  
   render() {
     return (
       <div className='App'>
