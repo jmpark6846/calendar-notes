@@ -20,12 +20,6 @@ class LoginPage extends Component {
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
   }
-
-  componentDidUpdate = (prevProps, prevState) => {
-    if(this.props.isAuthenticated){
-      this.props.history.push('/calendar/')  
-    }
-  }
   
   onChange(e){
     const { name, value } = e.target

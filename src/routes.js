@@ -6,20 +6,20 @@ const routes = [
   {
     path:'/',
     exact:true,
-    component:()=><IndexPage />
+    component: IndexPage
   },
   {
     path:'/calendar',
     protected:true,
-    component:()=><CalendarPage />
+    component:CalendarPage
   },
   {
     path:'/login',
-    component:()=><LoginPage />
+    component:LoginPage
   },
   {
     path:'/register',
-    component:()=><RegisterPage />
+    component:RegisterPage
   },
 ]
 
