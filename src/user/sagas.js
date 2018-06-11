@@ -5,23 +5,27 @@ import { postData, fetchData } from "../utils/fetch";
 
 export function* login(action){
   const url = API_URL + '/token/'
-  const {data, error} = yield call(postData, url, action.payload)
+  const {username, password} = action.payload
+  const {data, error} = yield call(postData, url, { username, password })
 
   if(error){
     yield put(doLoginFail(error))
   }else{
     yield put(doLoginSuccess(action.payload.username))
+    yield action.payload.history.push('/calendar')
   }
 }
 
 export function* register(action){
   const url = API_URL + '/users/create/'
-  const {data, error} = yield call(postData, url, { ...action.payload, notes: [] })
+  const {username, password} = action.payload
+  const {data, error} = yield call(postData, url, { username, password, notes: [] })
 
   if(error){
     yield put(doRegisterFail(error))
   }else{
     yield put(doRegisterSuccess(action.payload.username))
+    yield action.payload.history.push('/login')
   }
 }
 
@@ -39,6 +43,6 @@ export function* checkAuth(action){
 export function* authPageSaga(){
   while(true){
     yield take(LOGIN_SUCCESS)
-  
+    
   }
 }

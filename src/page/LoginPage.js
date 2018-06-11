@@ -35,7 +35,7 @@ class LoginPage extends Component {
       this.setState({ error: true, errorMsg: 'ID 혹은 비밀번호가 올바르지 않습니다.' }) 
       return null
     }
-    this.props.login(username, password)
+    this.props.login(username, password, this.props.history)
   }
 
   render(){
@@ -67,7 +67,7 @@ class LoginPage extends Component {
 const mapState = ({user}) => (user)
 
 const mapDispatch = (dispatch) => ({
-  login: (username, password) => dispatch(doUserLogin(username, password))
+  login: (username, password, history) => dispatch(doUserLogin(username, password, history))
 })
 
 export default withRouter(connect(mapState, mapDispatch)(LoginPage))

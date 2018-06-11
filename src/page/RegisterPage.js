@@ -53,7 +53,7 @@ class RegisterPage extends Component {
       return null
     }
     
-    this.props.register(username, password)
+    this.props.register(username, password, this.props.history)
     
   }
   
@@ -86,6 +86,6 @@ class RegisterPage extends Component {
 }
 const mapState = ({user}) => (user)
 const mapDispatch = (dispatch) => ({
-  register : (username, password) => dispatch(doUserRegister(username, password))
+  register : (username, password, history) => dispatch(doUserRegister(username, password, history))
 })
 export default withRouter(connect(mapState, mapDispatch)(RegisterPage))
