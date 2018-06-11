@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
-
+from django.http import JsonResponse
 from rest_framework import serializers, permissions, status
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.decorators import api_view
@@ -9,6 +9,8 @@ from rest_framework.reverse import reverse
 
 import datetime
 import pytz
+import jwt
+from backend import settings
 
 from .serializers import NoteSerializer, UserSerializer
 from .permissions import IsOwnerOrReadOnly

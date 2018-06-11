@@ -1,16 +1,16 @@
 import { put, call, take } from "redux-saga/effects";
-import { doLoginRequestFail, doLoginRequestSuccess, doRegisterFail, doRegisterSuccess } from "./actions";
-import { API_URL, LOGIN_REQUEST_SUCCESS } from "../constants";
-import { postData } from "../utils/fetch";
+import { doLoginFail, doLoginSuccess, doRegisterFail, doRegisterSuccess } from "./actions";
+import { API_URL, LOGIN_SUCCESS } from "../constants";
+import { postData, fetchData } from "../utils/fetch";
 
 export function* login(action){
   const url = API_URL + '/token/'
   const {data, error} = yield call(postData, url, action.payload)
 
   if(error){
-    yield put(doLoginRequestFail(error))
+    yield put(doLoginFail(error))
   }else{
-    yield put(doLoginRequestSuccess(action.payload.username))
+    yield put(doLoginSuccess(action.payload.username))
   }
 }
 
@@ -25,9 +25,20 @@ export function* register(action){
   }
 }
 
+export function* checkAuth(action){
+  const url = API_URL + '/me/'
+  const {data, error} = yield call(fetchData, url)
+  
+  if(error){
+    yield put(doLoginFail(error))
+  }else{
+    yield put(doLoginSuccess(data.username))
+  }
+}
+
 export function* authPageSaga(){
   while(true){
-    yield take(LOGIN_REQUEST_SUCCESS)
+    yield take(LOGIN_SUCCESS)
   
   }
 }

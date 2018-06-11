@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_LOGOUT, LOGIN_REQUEST, LOGIN_REQUEST_SUCCESS, LOGIN_REQUEST_FAIL, REGISTER_FAIL, REGISTER_SUCCESS, USER_REGISTER } from "../constants";
+import { USER_LOGIN, USER_LOGOUT, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_FAIL, REGISTER_SUCCESS, USER_REGISTER } from "../constants";
 
 export const doUserLogin = (username, password) => ({
   type: USER_LOGIN,
@@ -8,15 +8,15 @@ export const doUserLogin = (username, password) => ({
   }
 })
 
-export const doLoginRequestSuccess = (username) => ({
-  type: LOGIN_REQUEST_SUCCESS,
+export const doLoginSuccess = (username) => ({
+  type: LOGIN_SUCCESS,
   payload: {
     username
   }
 })
 
-export const doLoginRequestFail = (error) => ({
-  type: LOGIN_REQUEST_FAIL,
+export const doLoginFail = (error) => ({
+  type: LOGIN_FAIL,
   payload: {
     error
   }

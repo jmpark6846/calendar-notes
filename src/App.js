@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import routes from './routes'
+import { CHECK_AUTH } from './constants';
+
 
 class App extends Component {
   componentDidMount = () => {
-    
+    this.props.checkAuth()
   }
   
   render() {
@@ -20,4 +23,7 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatch = (dispatch) => ({
+  checkAuth: () => dispatch({type: CHECK_AUTH})
+})
+export default connect(undefined, mapDispatch)(App);

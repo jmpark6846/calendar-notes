@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_LOGOUT, LOGIN_REQUEST, LOGIN_REQUEST_FAIL, LOGIN_REQUEST_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS, USER_REGISTER } from "../constants";
+import { USER_LOGIN, USER_LOGOUT, LOGIN_REQUEST, LOGIN_FAIL, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS, USER_REGISTER } from "../constants";
 
 const INITIAL_STATE = {
   username:'',
@@ -14,13 +14,13 @@ export const userReducer = (state=INITIAL_STATE, action) => {
         ...state,
         error:undefined,
       }
-    case LOGIN_REQUEST_SUCCESS:
+    case LOGIN_SUCCESS:
       return {
         username: action.payload.username,
         isAuthenticated:true,
         error:undefined,
       }
-    case LOGIN_REQUEST_FAIL:
+    case LOGIN_FAIL:
       return {
         username:'',
         isAuthenticated:false,
