@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-
+import PropTypes from 'prop-types'
 import Page from './Page';
 import { PASSWORD_MIN_LENGTH } from '../constants'
 import store from '../store';
 import { doUserRegister } from '../user/actions';
 
 class RegisterPage extends Component {
-
+  static propTypes = {
+    register: PropTypes.func.isRequired,
+    username: PropTypes.string,
+    isAuthenticated: PropTypes.bool,
+    error: PropTypes.string,
+  }
   constructor(props){
     super(props)
 

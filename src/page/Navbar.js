@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
-
+import PropTypes from "prop-types";
 import { doUserLogout } from '../user/actions';
 
 const activePage = {}
@@ -41,6 +41,13 @@ const Navbar = ({username, isAuthenticated, logout, history}) =>
       </div>
     </nav>  
   </header>
+
+Navbar.propTypes={
+  username: PropTypes.string,
+  isAuthenticated: PropTypes.bool,
+  logout: PropTypes.func.isRequired,
+  history: PropTypes.object,
+}
 
 const mapStateToProps = ({user}) => user
 

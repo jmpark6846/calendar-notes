@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-
+import PropTypes from "prop-types";
 import Page from './Page';
 import { doUserLogin } from '../user/actions'
 import store from '../store'
 
 class LoginPage extends Component {
+  static propTypes = {
+    login: PropTypes.func.isRequired,
+    username: PropTypes.string,
+    isAuthenticated: PropTypes.bool,
+    error: PropTypes.string,
+  }
   constructor(props){
     super(props)
 

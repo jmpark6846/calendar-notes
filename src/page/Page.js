@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from "prop-types";
 import Navbar from './Navbar'
 
 const Page = ({children}) => 
@@ -8,5 +9,9 @@ const Page = ({children}) =>
       {children}
     </div>
   </div>
+
+Page.propTypes = {
+  children: PropTypes.element.isRequired
+}
 
 export default Page
