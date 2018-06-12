@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import routes from './route/routes'
 import ProtectedRoute from './route/ProtectedRoute';
 import { CHECK_AUTH } from './constants';
@@ -8,6 +9,10 @@ import store from './store';
 
 
 class App extends Component {
+  static propTypes = {
+    checkAuth: PropTypes.func.isRequired,
+  }
+
   componentDidMount = () => {
     this.props.checkAuth()
   }
@@ -27,8 +32,7 @@ class App extends Component {
   }
 }
 
-const mapState = ({user}) => ({ isAuthenticated: user.isAuthenticated })
 const mapDispatch = (dispatch) => ({
   checkAuth: () => dispatch({type: CHECK_AUTH})
 })
-export default connect(mapState, mapDispatch)(App);
+export default connect(undefined, mapDispatch)(App);
