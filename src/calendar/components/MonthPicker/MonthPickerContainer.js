@@ -11,6 +11,7 @@ class MonthPickerContainer extends Component {
     onMonthDown: PropTypes.func,
     onMonthUp: PropTypes.func,
   }
+  
   constructor(props){
     super(props)
 
@@ -26,6 +27,7 @@ class MonthPickerContainer extends Component {
     )
   }
 }
+
 const mapStateToProps = ({calendar}) => ({
   year: calendar.year,
   month: calendar.month,
