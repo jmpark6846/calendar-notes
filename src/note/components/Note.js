@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from "prop-types";
 import {Editor, EditorState, convertToRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import 'draft-js/dist/Draft.css';
@@ -10,6 +11,19 @@ import { doNoteSave, doNoteDelete, doNoteSaveOnServer, doNoteFetch, doNoteSet } 
 
 
 class Note extends React.Component{
+  static propTypes = {
+    selectedDate: PropTypes.object.isRequired,
+    loading: PropTypes.bool,
+    saving: PropTypes.bool,
+    error: PropTypes.bool,
+    updated: PropTypes.bool.isRequired,
+    notes: PropTypes.array.isRequired,
+    save: PropTypes.func,
+    delete: PropTypes.func,
+    fetch: PropTypes.func,
+    setNote: PropTypes.func,
+  }
+
   constructor(props){
     super(props)
     this.state = {
