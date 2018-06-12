@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
-import routes from './routes'
+import routes from './route/routes'
+import ProtectedRoute from './route/ProtectedRoute';
 import { CHECK_AUTH } from './constants';
-import ProtectedRoute from './ProtectedRoute';
 import store from './store';
 
 

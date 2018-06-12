@@ -1,6 +1,6 @@
 import React from 'react'
-import { CalendarPage, LoginPage, RegisterPage, IndexPage } from './page';
-import store from './store';
+import { CalendarPage, LoginPage, RegisterPage, IndexPage } from '../page';
+import store from '../store';
 
 const routes = [
   {
