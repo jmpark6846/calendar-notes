@@ -9,13 +9,12 @@ export function* fetchNoteMonth(action){
   yield put(doNoteMonthRequest())
 
   const {data, error} = yield call(fetchData, url)
-
+  
   if(!error){
     const notes = data.map(n => new Date(n.date).getDate())
-    // console.log(notes)
+    
     yield put(doNoteMonthRequestSuccess(notes))
   }else{
-    console.log(error)
     yield put(doNoteMonthRequestFail(error))
   }
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Day = ({date, hasNote, selectedDate, today, handleClick}) => 
-  <div className={"day" + (+selectedDate === +date ? " selected" : "") + (+today === +date ? " today" : "") + (hasNote ? " has-note" : "")} onClick={handleClick(date)}>
+  <div className={"day" + (+selectedDate === +date ? " selected" : "") + (+today === +date ? " today" : "") + (hasNote ? " has-note" : "") + (date ? " date" : "")} onClick={handleClick(date)}>
     {date && date.getDate()}
   </div>
 
