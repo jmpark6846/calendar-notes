@@ -7,6 +7,11 @@
 .month-body .day{
 	cursor: pointer;
 }
+
+.month-body .date{
+	font-size:14px;
+}
+
 .month-body .day:hover{
 	background: #f4f4f4;
 }
@@ -22,3 +27,4 @@
 .has-note{
 	font-weight: 400;
 }
+

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import PropTypes from "prop-types";
 import { doUserLogout } from '../user/actions';
-
+import './Navbar.css'
 const activePage = {}
 
 const Navbar = ({username, isAuthenticated, logout, history}) =>
@@ -24,7 +24,7 @@ const Navbar = ({username, isAuthenticated, logout, history}) =>
               <NavLink to="/calendar" className="nav-link" activeStyle={activePage}>{username}</NavLink>
             </li>
             <li className="nav-item">
-              <div href='' className="nav-link" onClick={()=>logout(history)} >Logout</div>
+              <a href='#' className="nav-link logout" onClick={()=>logout(history)} >Logout</a>
             </li>
           </React.Fragment>
           :
