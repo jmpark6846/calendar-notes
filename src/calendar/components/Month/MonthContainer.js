@@ -7,9 +7,8 @@ import { doNoteMonthFetch } from '../../actions';
 
 class MonthContainer extends React.Component{
   static propTypes = {
-    year: PropTypes.number,
-    month: PropTypes.number,
-    firstDay: PropTypes.number,
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
     notes: PropTypes.array,
     isSundayFirst: PropTypes.bool,
     fetchMonth: PropTypes.func.isRequired

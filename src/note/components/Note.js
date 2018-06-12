@@ -17,7 +17,7 @@ class Note extends React.Component{
     saving: PropTypes.bool,
     error: PropTypes.bool,
     updated: PropTypes.bool.isRequired,
-    notes: PropTypes.array.isRequired,
+    notes: PropTypes.object,
     save: PropTypes.func,
     delete: PropTypes.func,
     fetch: PropTypes.func,
