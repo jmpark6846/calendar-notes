@@ -4,13 +4,15 @@ import { Note } from '../note';
 import Page from './Page';
 
 const CalendarPage = () =>
-  <Page>
-    <div className="container">
-      <div className="row">
-        <div className="col-xl-6">
+  <Page>    
+    <div className="row">
+      <div className="col-xl-4">
+        <div className="row">
           <Calendar />
         </div>
-        <div className="col-xl-6">
+      </div>
+      <div className="col-xl-8">
+        <div className="row">
           <Note />
         </div>
       </div>

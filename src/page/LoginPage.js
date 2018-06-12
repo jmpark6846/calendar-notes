@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import Page from './Page';
 import { doUserLogin } from '../user/actions'
 import store from '../store'
-
+import './LoginPage.css'
 class LoginPage extends Component {
   static propTypes = {
     login: PropTypes.func.isRequired,
@@ -62,7 +62,9 @@ class LoginPage extends Component {
             </div>
             { error && <div className="error">{errorMsg}</div> }
             { this.props.error && <div className="error">로그인에 실패하였습니다. 아이디와 비밀번호를 확인해주세요.</div> }
-            <button className="btn btn-primary" type="submit">로그인</button>
+            <div className="button-div">
+              <button className="btn btn-primary" type="submit">로그인</button>
+            </div>
           </form>
         </div>
       </Page>

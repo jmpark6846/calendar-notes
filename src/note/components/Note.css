@@ -1,0 +1,11 @@
+.note{
+  padding:0px 15px;
+  width: 100%;
+}
+
+@media (min-width: 992px) { 
+  .note{
+    padding: 0px 40px;
+  }
+}
+

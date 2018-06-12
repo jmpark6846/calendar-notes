@@ -8,7 +8,7 @@ import _ from 'lodash'
 import { dateToString } from '../../utils/date';
 import { htmlToDraftEditorState } from '../../utils/note';
 import { doNoteSave, doNoteDelete, doNoteSaveOnServer, doNoteFetch, doNoteSet } from '../actions';
-
+import './Note.css'
 
 class Note extends React.Component{
   static propTypes = {
@@ -88,7 +88,7 @@ class Note extends React.Component{
 
   render(){
     return (
-      <div>
+      <div className='note'>
         <Editor placeholder='오늘 하루를 적어볼까요?' editorState={this.state.editorState} onChange={this.onChange} />
         { this.props.loading && <div>loading..</div>}
       </div>

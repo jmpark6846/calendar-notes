@@ -9,7 +9,7 @@ const activePage = {}
 
 const Navbar = ({username, isAuthenticated, logout, history}) =>
   <header>
-    <nav className="navbar navbar-expand-lg">
+    <nav className="navbar navbar-expand-lg container">
       
       <NavLink to="/" className="navbar-brand" activeStyle={activePage}>CalendarNote</NavLink>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-menu" aria-controls="navbar-collapse-menu" aria-expanded="false" aria-label="Toggle navigation">

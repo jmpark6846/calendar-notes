@@ -1,0 +1,15 @@
+.login-page{
+  text-align: center ;
+}
+.login-page h2{
+  margin-bottom: 15px;
+}
+.login-page form{
+  text-align: left;
+  width:350px;
+  margin: auto;
+}
+
+.button-div{
+  text-align: right;
+}

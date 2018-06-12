@@ -6,6 +6,7 @@ import Page from './Page';
 import { PASSWORD_MIN_LENGTH } from '../constants'
 import store from '../store';
 import { doUserRegister } from '../user/actions';
+import './RegisterPage.css'
 
 class RegisterPage extends Component {
   static propTypes = {
@@ -82,7 +83,10 @@ class RegisterPage extends Component {
             </div>
             { error && <div className="error">{errorMsg}</div> }
             { this.props.error && Object.values(this.props.error).map((v,i)=><div key={i} className="error">{v}</div>)}
-            <button className="btn btn-primary" type="submit">가입</button>
+            <div className='button-div'>
+              <button className="btn btn-primary" type="submit">가입</button>
+            </div>
+            
           </form>
         </div>
       </Page>

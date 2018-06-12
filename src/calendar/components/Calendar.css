@@ -1,0 +1,11 @@
+.calendar{
+  padding: 0px 15px;
+  margin-bottom: 25px;
+}
+
+@media (min-width: 992px) { 
+  .calendar{
+    padding: 0px 40px;
+  }
+}
+
