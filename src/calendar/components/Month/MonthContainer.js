@@ -1,10 +1,20 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import Month from './Month';
 import { doNoteMonthFetch } from '../../actions';
 
 class MonthContainer extends React.Component{
+  static propTypes = {
+    year: PropTypes.number,
+    month: PropTypes.number,
+    firstDay: PropTypes.number,
+    notes: PropTypes.array,
+    isSundayFirst: PropTypes.bool,
+    fetchMonth: PropTypes.func.isRequired
+  }
+
   constructor(props){
     super(props)
     
@@ -53,3 +63,5 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(MonthContainer)
+
+

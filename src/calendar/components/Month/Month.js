@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Month.css'
 import { getDaysOfWeek, endDates } from "../../../constants";
 import Day from '../Day/DayContainer';
@@ -23,5 +24,14 @@ const Month = ({year, month, firstDay, notes, isSundayFirst}) =>
       
     </div>
   </div>
+
+Month.propTypes = {
+  // year, month, firstDay, notes, isSundayFirst
+  year: PropTypes.number,
+  month: PropTypes.number,
+  firstDay: PropTypes.number,
+  notes: PropTypes.array,
+  isSundayFirst: PropTypes.bool
+}
 
 export default Month
