@@ -7,14 +7,10 @@ const CalendarPage = () =>
   <Page>    
     <div className="row">
       <div className="col-xl-4">
-        <div className="row">
-          <Calendar />
-        </div>
+        <Calendar />
       </div>
       <div className="col-xl-8">
-        <div className="row">
-          <Note />
-        </div>
+        <Note />
       </div>
     </div>
   </Page>
