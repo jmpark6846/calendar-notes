@@ -4,3 +4,9 @@
 .month-picker label{
   margin: 0px 10px;
 }
+
+.month-picker button{
+  /* padding: 2px 5px; */
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
