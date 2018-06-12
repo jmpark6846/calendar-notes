@@ -21,7 +21,7 @@ export const fetchData = (url) => {
     url,
     withCredentials: true,
   })
-  .then(response=>response, error=>({ error: error.response.data }))
+  .then(response=>response, error=>error)
 }
 
 export const updateData = (url, data) => {

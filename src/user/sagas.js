@@ -43,7 +43,8 @@ export function* checkAuth(action){
   const url = API_URL + '/me/'
   const { data } = yield call(fetchData, url)
   
-  if(data.isAuthenticated){
+
+  if(data && data.isAuthenticated){
     yield put(doLoginSuccess(data.username))
   }else{
     yield put(doNotAuthenticated())
