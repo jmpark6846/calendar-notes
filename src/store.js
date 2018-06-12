@@ -22,7 +22,7 @@ const root = combineReducers({
 const saga = createSagaMiddleware()
 
 const logger = createLogger()
-const store = createStore(root, undefined, applyMiddleware(logger, saga))
+const store = createStore(root, undefined, applyMiddleware(saga))
 
 function* rootSaga(){
   yield all([

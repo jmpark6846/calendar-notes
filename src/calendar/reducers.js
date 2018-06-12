@@ -13,7 +13,7 @@ const day = date.getDate()
 
 const today = new Date(year,month,day)
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   year,
   month,
   today,
