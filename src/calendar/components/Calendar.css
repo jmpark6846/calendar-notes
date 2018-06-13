@@ -2,8 +2,21 @@
   margin-bottom: 25px;
 }
 
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+
+}
+
+/* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
-  .calendar{
+  .container{
+    width: 800px
   }
 }
 
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+  .container{
+    /* width: 800px */
+  }
+}
