@@ -26,7 +26,7 @@ SECRET_KEY = 'v(ay(8cc+5xw@ixq=fmckg)x)bl!6kyby-fetqn!w4pv+a!)#d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['calendar-note.herokuapp.com']
 
 
 # Application definition
@@ -124,11 +124,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000'
-    # 'calendar-note.herokuapp.com',
+    'calendar-note.herokuapp.com',
 )
 
 CORS_ALLOW_HEADERS = default_headers + (
@@ -153,3 +155,4 @@ JWT_AUTH = {
     'JWT_ALGORITHM': 'HS256',
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
 }
+
