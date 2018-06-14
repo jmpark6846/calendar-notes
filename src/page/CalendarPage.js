@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Calendar } from "../calendar";
 import { Note } from '../note';
 import Page from './Page';

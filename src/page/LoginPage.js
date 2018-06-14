@@ -4,7 +4,6 @@ import { withRouter } from 'react-router'
 import PropTypes from "prop-types";
 import Page from './Page';
 import { doUserLogin } from '../user/actions'
-import store from '../store'
 import './LoginPage.css'
 class LoginPage extends Component {
   static propTypes = {

@@ -2,8 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect } from "react-router-dom";
 import PropTypes from 'prop-types'
-import store from '../store';
-
 
 const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest}) => 
   <Route 

@@ -4,7 +4,6 @@ import { withRouter } from 'react-router'
 import PropTypes from 'prop-types'
 import Page from './Page';
 import { PASSWORD_MIN_LENGTH } from '../constants'
-import store from '../store';
 import { doUserRegister } from '../user/actions';
 import './RegisterPage.css'
 

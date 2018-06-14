@@ -7,7 +7,7 @@ import 'draft-js/dist/Draft.css';
 import _ from 'lodash'
 import { dateToString } from '../../utils/date';
 import { htmlToDraftEditorState } from '../../utils/note';
-import { doNoteSave, doNoteDelete, doNoteSaveOnServer, doNoteFetch, doNoteSet } from '../actions';
+import { doNoteSave, doNoteDelete, doNoteFetch, doNoteSet } from '../actions';
 import './Note.css'
 
 class Note extends React.Component{

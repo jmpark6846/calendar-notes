@@ -1,4 +1,3 @@
-import { takeEvery } from "redux-saga";
 import { put, call } from "redux-saga/effects";
 import { API_URL } from "../constants";
 import { postData, fetchData, getNoteRequestUrl, updateData } from "../utils/fetch";

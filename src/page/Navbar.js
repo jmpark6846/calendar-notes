@@ -24,7 +24,7 @@ const Navbar = ({username, isAuthenticated, logout, history}) =>
               <NavLink to="/calendar" className="nav-link" activeStyle={activePage}>{username}</NavLink>
             </li>
             <li className="nav-item">
-              <a href='#' className="nav-link logout" onClick={()=>logout(history)} >Logout</a>
+              <span className="nav-link logout" onClick={()=>logout(history)} >Logout</span>
             </li>
           </React.Fragment>
           :

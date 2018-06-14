@@ -1,12 +1,12 @@
-import { put, call, take } from "redux-saga/effects";
+import { put, call } from "redux-saga/effects";
 import { doLoginFail, doLoginSuccess, doRegisterFail, doRegisterSuccess, doNotAuthenticated, doLogoutSuccess } from "./actions";
-import { API_URL, LOGIN_SUCCESS } from "../constants";
+import { API_URL } from "../constants";
 import { postData, fetchData } from "../utils/fetch";
 
 export function* login(action){
   const url = API_URL + '/token/'
   const {username, password} = action.payload
-  const {data, error} = yield call(postData, url, { username, password })
+  const { error} = yield call(postData, url, { username, password })
 
   if(error){
     yield put(doLoginFail(error))
@@ -28,7 +28,7 @@ export function* logout(action){
 export function* register(action){
   const url = API_URL + '/users/create/'
   const {username, password} = action.payload
-  const {data, error} = yield call(postData, url, { username, password, notes: [] })
+  const {error} = yield call(postData, url, { username, password, notes: [] })
 
   if(error){
     yield put(doRegisterFail(error))

@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG")
 
-ALLOWED_HOSTS = ['localhost','calendar-note.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','localhost:3000','calendar-note.herokuapp.com']
 
 
 # Application definition
@@ -132,13 +132,12 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000'
+    'localhost:3000',
     'calendar-note.herokuapp.com',
 )
 
 CORS_ALLOW_HEADERS = default_headers + (
     'X-XSRF-TOKEN',
-    # 'X-CSRFToken',
 )
 
 REST_FRAMEWORK = {

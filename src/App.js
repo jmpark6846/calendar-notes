@@ -5,8 +5,6 @@ import PropTypes from 'prop-types'
 import routes from './route/routes'
 import ProtectedRoute from './route/ProtectedRoute';
 import { CHECK_AUTH } from './constants';
-import store from './store';
-
 
 class App extends Component {
   static propTypes = {

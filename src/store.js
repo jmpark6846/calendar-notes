@@ -1,11 +1,9 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import createSagaMiddleware from "redux-saga";
 
-import { createLogger } from 'redux-logger'
-
 import { calendarReducer } from "./calendar/reducers";
 import { noteReducer } from './note/reducers';
-import { noteSagas, fetchNote, save } from './note/sagas';
+import { fetchNote, save } from './note/sagas';
 import { all, takeEvery } from 'redux-saga/effects';
 import { NOTE_SAVE, NOTE_FETCH, NOTE_MONTH_FETCH, USER_LOGIN, USER_REGISTER, CHECK_AUTH, USER_LOGOUT } from './constants';
 import { fetchNoteMonth } from './calendar/sagas';
@@ -20,8 +18,6 @@ const root = combineReducers({
 })
 
 const saga = createSagaMiddleware()
-
-const logger = createLogger()
 const store = createStore(root, undefined, applyMiddleware(saga))
 
 function* rootSaga(){
