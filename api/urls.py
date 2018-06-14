@@ -18,8 +18,6 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 from . import views
 
 urlpatterns = [
-    # root api
-    path('', views.api_root, name='api'),
 
     # rest api
     path('notes/create/', views.NoteCreate.as_view()),

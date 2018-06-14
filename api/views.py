@@ -17,14 +17,6 @@ from .permissions import IsOwnerOrReadOnly
 from .models import Note
 # Create your views here.
 
-@api_view(['GET'])
-def api_root(request, format=None):
-  return Response({
-    'users' : reverse('user-list', request=request, format=format),
-    'notes': reverse('note-list', request=request, format=format)
-  })
-
-
 class NoteList(ListAPIView):
   serializer_class = NoteSerializer
   permission_classes = (permissions.IsAuthenticated, )
