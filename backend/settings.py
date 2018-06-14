@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'v(ay(8cc+5xw@ixq=fmckg)x)bl!6kyby-fetqn!w4pv+a!)#d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['calendar-note.herokuapp.com']
 
