@@ -49,5 +49,5 @@ export function* fetchNote(action){
 }
 
 function noteDoesNotExist(note){
-  return !Object.keys(note).includes('id')
+  return !('id' in note)
 }

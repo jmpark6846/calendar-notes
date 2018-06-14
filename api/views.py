@@ -82,10 +82,10 @@ class NoteDetailByDate(RetrieveUpdateDestroyAPIView):
 
     try:
       obj = notes.get(date=date)
+      self.check_object_permissions(self.request, obj)
     except Note.DoesNotExist:
       obj = None
 
-    self.check_object_permissions(self.request, obj)
     return obj
 
 
