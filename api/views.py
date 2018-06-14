@@ -70,7 +70,7 @@ class NoteDetail(RetrieveUpdateDestroyAPIView):
 class NoteDetailByDate(RetrieveUpdateDestroyAPIView):
   
   serializer_class = NoteSerializer
-  permission_classes = (permissions.IsAuthenticated, IsOwnerOrReadOnly)
+  permission_classes = (permissions.IsAuthenticated,)
   
   def get_queryset(self):
     user = self.request.user

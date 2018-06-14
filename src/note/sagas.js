@@ -49,5 +49,5 @@ export function* fetchNote(action){
 }
 
 function noteDoesNotExist(note){
-  return !('id' in note) || note === undefined
+  return note === undefined || !('id' in note) 
 }
