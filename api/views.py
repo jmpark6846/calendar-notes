@@ -1,11 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
+from django.views.generic import View
+
 from rest_framework import serializers, permissions, status
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+import os
 
 import datetime
 import pytz
@@ -17,8 +20,26 @@ from .permissions import IsOwnerOrReadOnly
 from .models import Note
 # Create your views here.
 
-def index(request):
-  return render(request, 'index.html')
+class FrontendAppView(View):
+    """
+    Serves the compiled frontend entry point (only works if you have run `yarn
+    run build`).
+    """
+
+    def get(self, request):
+        try:
+            with open(os.path.join(settings.BASE_DIR, 'build', 'index.html')) as f:
+                return HttpResponse(f.read())
+        except FileNotFoundError:
+            logging.exception('Production build of app not found')
+            return HttpResponse(
+                """
+                This URL is only used when you have built the production
+                version of the app. Visit http://localhost:3000/ instead, or
+                run `yarn run build` to test the production version.
+                """,
+                status=501,
+            )
 
 class NoteList(ListAPIView):
   serializer_class = NoteSerializer
