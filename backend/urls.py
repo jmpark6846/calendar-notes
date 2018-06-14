@@ -19,10 +19,9 @@ from api import views
 
 urlpatterns = [
     path('', views.FrontendAppView.as_view() ),
-    re_path('(?:.*)/?', views.FrontendAppView.as_view() ),
-    
+
     path('admin/', admin.site.urls),
     path('rest-api/', include('rest_framework.urls')),
     path('api/', include('api.urls')),
-
+    re_path('(?:.*)/?', views.FrontendAppView.as_view() ),
 ]
