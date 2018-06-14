@@ -17,6 +17,9 @@ from .permissions import IsOwnerOrReadOnly
 from .models import Note
 # Create your views here.
 
+def index(request):
+  return render(request, 'index.html')
+
 class NoteList(ListAPIView):
   serializer_class = NoteSerializer
   permission_classes = (permissions.IsAuthenticated, )
