@@ -4,7 +4,7 @@ import sys
 from dotenv import load_dotenv, find_dotenv
 
 if __name__ == "__main__":
-    load_dotenv(find_dotenv())
+    load_dotenv()
     
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
     try:
