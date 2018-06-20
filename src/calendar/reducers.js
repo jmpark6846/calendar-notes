@@ -2,7 +2,6 @@ import {
   MONTH_DOWN,
   MONTH_UP,
   DATE_SELECT,
-  NOTE_MONTH_REQUEST_SUCCESS,
   USER_LOGOUT
 } from '../constants/actionTypes'
 
@@ -35,6 +34,7 @@ export const calendarReducer = (state=INITIAL_STATE, action) => {
         ...state,
         selectedDate: action.selectedDate
       }
+      
     case USER_LOGOUT:
       return INITIAL_STATE
     default: return state

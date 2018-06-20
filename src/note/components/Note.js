@@ -58,7 +58,6 @@ class Note extends React.Component{
       this.setState({ editorState: htmlToDraftEditorState(this.props.notes[date].content) })
     }else{
       this.setState({ editorState: EditorState.createEmpty() })
-      this.props.fetch(dateToString(this.props.selectedDate)) 
     }
   }
 
@@ -105,8 +104,6 @@ const mapStateToProps = ({calendar, notes}) => ({
 const mapDispatchToProps = (dispatch) => ({
   save: _.debounce((date, content, method) => dispatch(doNoteSave(date, content, method)), 2000),
   delete: _.debounce((date) => dispatch(doNoteDelete(date)), 2500),
-  fetch: (date) => dispatch(doNoteFetch(date)),
-  setNote: () => dispatch(doNoteSet()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Note)

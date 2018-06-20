@@ -1,4 +1,4 @@
-import { NOTE_SAVE_SUCCESS, NOTE_DELETE, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL, NOTE_SAVE_FAIL, NOTE_SAVE_REQUEST, NOTE_SET, USER_LOGOUT } from "../constants";
+import { NOTE_SAVE_SUCCESS, NOTE_DELETE, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL, NOTE_SAVE_FAIL, NOTE_SAVE_REQUEST, NOTE_SET, USER_LOGOUT, NOTE_MONTH_REQUEST_SUCCESS, NOTE_MONTH_REQUEST, NOTE_MONTH_REQUEST_FAIL } from "../constants";
 
 const initialState = {
   loading: false,
@@ -13,63 +13,60 @@ export const noteReducer = (state=initialState, action) => {
     case NOTE_SAVE_REQUEST:
       return{
         ...state,
-        saving:true,
-        error:false,
+        saving: true,
+        error: false,
       }
+
     case NOTE_SAVE_SUCCESS:
       return {
         ...state,
-        saving:false,
-        error:false,
+        saving: false,
+        error: false,
         notes: { 
           ...state.notes, 
           [action.date] : { content: action.content } 
         }
       }
+
     case NOTE_SAVE_FAIL:
       return {
         ...state,
-        saving:false,
-        error:true,
+        saving: false,
+        error: true,
       }
+
     case NOTE_DELETE:
       const { [action.date]: value, ...rest} = state.notes
       return { ...state, notes: {...rest } }
-    
-    case NOTE_REQUEST:
-      return {
-        ...state,
-        loading:true,
-      }
-    case NOTE_REQUEST_SUCCESS:
       
-      return {
-        ...state,
-        loading:false,
-        error:false,
-        updated:true,
-        notes: { 
-          ...state.notes, 
-          [action.date] : { content: action.content } 
-        }
-      }
-    case NOTE_REQUEST_FAIL:
-      return {
-        ...state,
-        loading:false,
-        error:true,
-      }
     case NOTE_SET:
       return {
         ...state,
-        updated:false
+        updated: false
       }
+
+    case NOTE_MONTH_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      }
+
+    case NOTE_MONTH_REQUEST_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      }
+
     case NOTE_MONTH_REQUEST_SUCCESS:
       return {
         ...state,
-        notes:{ ...state.notes, ...action.notes },
-        updated:true,
+        notes: { ...state.notes, ...action.notes },
+        loading: false,
+        error: false,
+        updated: true,
       }
+
     case USER_LOGOUT:
       return initialState
     default: return state
