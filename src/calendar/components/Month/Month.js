@@ -26,7 +26,6 @@ const Month = ({year, month, firstDay, notes, isSundayFirst}) =>
   </div>
 
 Month.propTypes = {
-  // year, month, firstDay, notes, isSundayFirst
   year: PropTypes.number,
   month: PropTypes.number,
   firstDay: PropTypes.number,

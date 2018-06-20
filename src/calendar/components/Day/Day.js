@@ -16,7 +16,6 @@ const Day = ({date, hasNote, selectedDate, today, handleClick}) => {
   )
 }
   
-
 Day.propTypes = {
   date: PropTypes.object,
   hasNote: PropTypes.bool,
