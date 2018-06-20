@@ -20,7 +20,6 @@ const Month = ({year, month, firstDay, notes, isSundayFirst}) =>
           key={idx} 
           date={new Date(year,month,idx+1)} 
           hasNote={ notes.includes(idx+1) }
-           
         />)}
       
     </div>

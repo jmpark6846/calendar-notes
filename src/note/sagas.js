@@ -39,7 +39,6 @@ export function* save({ date, content, method }){
   if(error)
     yield put(doNoteSaveFail(error))
   else{
-    console.log(data)
     yield put(doNoteSaveSuccess(data))
   }
 } 

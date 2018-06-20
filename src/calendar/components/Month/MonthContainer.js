@@ -53,7 +53,7 @@ const mapStateToProps = ({calendar, notes}) => ({
   year: calendar.year,
   month: calendar.month,
   isSundayFirst: calendar.isSundayFirst,
-  notes: Object.keys(notes.notes).map(d => d.split('-')[2])
+  notes: Object.keys(notes.notes).map(d => parseInt(d.split('-')[2]))
 })
 
 const mapDispatchToProps = (dispatch) => ({
