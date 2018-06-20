@@ -1,13 +1,15 @@
 import { put, call } from "redux-saga/effects";
 import { API_URL } from "../constants";
-import { postData, fetchData, getNoteRequestUrl, updateData } from "../utils/fetch";
-import { doNoteRequest, doNoteRequestFail, doNoteRequestSuccess, doNoteSaveRequest, doNoteSaveSuccess, doNoteSaveFail } from "./actions";
+import { postData, fetchData, parseNoteUrl, updateData, api } from "../utils/fetch";
+import { doNoteRequest, doNoteRequestFail, doNoteRequestSuccess, doNoteSaveRequest, doNoteSaveSuccess, doNoteSaveFail, doNoteDeleteRequest, doNoteDeleteFail, doNoteDeleteSuccess } from "./actions";
 import { dateToString } from "../utils/date";
 
 // export function* noteSagas(action){
 //   console.log(action)
 //   takeEvery(NOTE_SAVE_ON_SERVER, saveNoteOnServer)
 // }
+
+
 export function* save(action){
   let url = ''
   let api = null
@@ -16,7 +18,7 @@ export function* save(action){
   yield put(doNoteSaveRequest())
   
   if(action.payload.method === 'update'){
-    url = getNoteRequestUrl(action.payload.date)
+    url = parseNoteUrl(action.payload.date)
     api = updateData
   }
   else{
@@ -34,9 +36,26 @@ export function* save(action){
   }
 } 
 
+export function* deleteNote(action){
+  yield put(doNoteDeleteRequest())
+  const params = {
+    url: parseNoteUrl(action.payload.date),
+    method: 'DELETE',
+  }
+  const { error } = yield call(api, params)
+
+  if(error){
+    console.log(error)
+    yield put(doNoteDeleteFail(error))
+  }else{
+    yield put(doNoteDeleteSuccess())
+  }
+
+}
+
 export function* fetchNote(action){
   yield put(doNoteRequest())
-  const url = getNoteRequestUrl(action.payload.date)
+  const url = parseNoteUrl(action.payload.date)
   const {data, error} = yield call(fetchData, url)
   
   if(error){
