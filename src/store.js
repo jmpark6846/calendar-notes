@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import createSagaMiddleware from "redux-saga";
-// import { createLogger } from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import { calendarReducer } from "./calendar/reducers";
 import { noteReducer } from './note/reducers';
 import { fetchNote, save } from './note/sagas';
@@ -16,10 +16,10 @@ const root = combineReducers({
   user: userReducer,
 })
 
-// const logger = createLogger()
+const logger = createLogger()
 const saga = createSagaMiddleware()
-// const store = createStore(root, undefined, applyMiddleware(saga, logger))
-const store = createStore(root, undefined, applyMiddleware(saga))
+const store = createStore(root, undefined, applyMiddleware(saga, logger))
+// const store = createStore(root, undefined, applyMiddleware(saga))
 
 function* rootSaga(){
   yield all([

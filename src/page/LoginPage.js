@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import Page from './Page';
 import { doUserLogin } from '../user/actions'
 import './LoginPage.css'
+
 class LoginPage extends Component {
   static propTypes = {
     login: PropTypes.func.isRequired,
@@ -29,7 +30,7 @@ class LoginPage extends Component {
   onChange(e){
     const { name, value } = e.target
     this.setState({ [name] : value })
-  }
+  } 
 
   onSubmit(e){
     e.preventDefault()
