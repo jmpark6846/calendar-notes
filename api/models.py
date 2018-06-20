@@ -10,5 +10,5 @@ class Note(models.Model):
   updated_date = models.DateTimeField(blank=True, null=True)
 
   def __str__(self):
-    return self.content[:100] 
+    return self.date.strftime('%Y/%m/%d') + ' :  ' + self.content[:100] 
 
