@@ -1,5 +1,5 @@
 import { put, call } from "redux-saga/effects";
-import { doLoginFail, doLoginSuccess, doRegisterFail, doRegisterSuccess, doNotAuthenticated, doLogoutSuccess } from "./actions";
+import { doLoginFail, doLoginSuccess, doRegisterFail, doRegisterSuccess, doNotAuthenticated, doLogoutSuccess, doRefreshToken, doRefreshTokenFail } from "./actions";
 import { API_URL } from "../constants";
 import { api } from "../utils/fetch";
 
@@ -22,7 +22,7 @@ export function* login({ username, password, history }){
 
 export function* logout({history}){
   const url = API_URL + '/logout/'
-  yield call(api, { url }) 
+  yield call(api, { url, method:'GET' }) 
   yield put(doLogoutSuccess())
   yield history.push('/')
 }
@@ -47,10 +47,20 @@ export function* register({ username, password, history }){
 
 export function* checkAuth(action){
   const url = API_URL + '/me/'
-  const { data } = yield call(api, { url, method: 'GET', })
+  const { data } = yield call(api, { url, method: 'GET' })
   
-  if(data && data.isAuthenticated){
-    yield put(doLoginSuccess(data.username))
+  if(data && data.authenticated){
+    if(data.refresh){
+      yield put(doRefreshToken())
+      const result = yield call(api, { url: API_URL+'/token/refresh/', method:'POST', data:{ token: data.token } })
+      if(result){
+        yield put(doLoginSuccess(data.username))
+      }else{
+        yield put(doRefreshTokenFail())
+      }
+    }
+    else
+      yield put(doLoginSuccess(data.username))
   }else{
     yield put(doNotAuthenticated())
   }

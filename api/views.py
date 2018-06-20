@@ -114,25 +114,23 @@ def me(request):
   if 'token' in request.COOKIES:
     token = request.COOKIES['token']
     payload = jwt_decode(token)
-    return JsonResponse({'isAuthenticated':True, 'username':payload['username']})
-  else:
-    return JsonResponse({'isAuthenticated':False})
-
-
-def check_exp(request):
-  if 'token' in request.COOKIES:
-    token = request.COOKIES['token']
-
-    payload = jwt_decode(token)
-    exp = datetime.utcfromtimestamp(payload['exp']) 
-    now = datetime.utcnow()
-
-    if exp - now < settings.TOKEN_REFRESH_DELTA :
-      return JsonResponse({'isAuthenticated':True, 'username':payload['username'], 'msg':'need to refresh', 'token':token})
+    
+    if(need_to_refresh(payload['exp'])):
+      return JsonResponse({'authenticated':True, 'username':payload['username'], 'refresh': True, 'token':token })
     else:
-      return JsonResponse({'isAuthenticated':True, 'username':payload['username'], 'msg':'not expired'})
+      return JsonResponse({'authenticated':True, 'username':payload['username'], 'refresh': False})
   else:
-    return JsonResponse({'isAuthenticated':False, 'msg':'not authenticated; token expired'})
+    return JsonResponse({'authenticated':False})
+
+
+def need_to_refresh(exp_timestamp):
+  exp = datetime.datetime.utcfromtimestamp(exp_timestamp)
+  now = datetime.datetime.utcnow()
+
+  if exp - now < settings.TOKEN_REFRESH_DELTA[0] :
+    return True
+  else:
+    return False
 
 
 def jwt_decode(token):

@@ -163,9 +163,10 @@ JWT_AUTH = {
     'JWT_AUTH_COOKIE': 'token',
     'JWT_SECRET_KEY': SECRET_KEY,
     'JWT_ALGORITHM': 'HS256',
+    'JWT_ALLOW_REFRESH':True,
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
 }
 
-
+TOKEN_REFRESH_DELTA = datetime.timedelta(minutes=59, seconds=50),
 
 django_heroku.settings(locals())

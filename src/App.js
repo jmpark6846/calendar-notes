@@ -20,9 +20,9 @@ class App extends Component {
       <div className='App'>
         <BrowserRouter>
           <Switch>
-            { routes.map((route,i)=> {
-            return route.protected ? <ProtectedRoute {...route} key={i}/> : <Route {...route} key={i} />}
-          ) }
+          { routes.map((route,i)=> {
+            return route.protected ? <ProtectedRoute {...route} key={i}/> : <Route {...route} key={i} />
+          })}
           </Switch>
         </BrowserRouter>
       </div>
