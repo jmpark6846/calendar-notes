@@ -53,7 +53,8 @@ export function* checkAuth(action){
     if(data.refresh){
       yield put(doRefreshToken())
       const result = yield call(api, { url: API_URL+'/token/refresh/', method:'POST', data:{ token: data.token } })
-      if(result){
+      
+      if(result.request.status === 200){
         yield put(doLoginSuccess(data.username))
       }else{
         yield put(doRefreshTokenFail())
