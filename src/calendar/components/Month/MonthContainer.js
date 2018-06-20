@@ -49,12 +49,11 @@ class MonthContainer extends React.Component{
   }
 }
 
-const mapStateToProps = ({calendar}) => ({
+const mapStateToProps = ({calendar, notes}) => ({
   year: calendar.year,
   month: calendar.month,
   isSundayFirst: calendar.isSundayFirst,
-  updated: calendar.updated,
-  notes: calendar.notes
+  notes: Object.keys(notes.notes).map(d => d.split('-')[2])
 })
 
 const mapDispatchToProps = (dispatch) => ({

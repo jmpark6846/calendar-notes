@@ -1,13 +1,27 @@
 import { put, call } from "redux-saga/effects";
 import { API_URL } from "../constants";
 import { parseNoteUrl, api } from "../utils/fetch";
-import { doNoteRequest, doNoteRequestFail, doNoteRequestSuccess, doNoteSaveRequest, doNoteSaveSuccess, doNoteSaveFail, doNoteDeleteRequest, doNoteDeleteFail, doNoteDeleteSuccess } from "./actions";
+import { doNoteMonthRequest, doNoteMonthRequestSuccess, doNoteMonthRequestFail, doNoteRequest, doNoteRequestFail, doNoteRequestSuccess, doNoteSaveRequest, doNoteSaveSuccess, doNoteSaveFail, doNoteDeleteRequest, doNoteDeleteFail, doNoteDeleteSuccess } from "./actions";
 import { dateToString } from "../utils/date";
 
 // export function* noteSagas(action){
 //   console.log(action)
 //   takeEvery(NOTE_SAVE_ON_SERVER, saveNoteOnServer)
 // }
+
+export function* fetchByMonth(action){
+  const { year, month } = action
+  const url = `${API_URL}/notes/${year}/${month}/`
+
+  yield put(doNoteMonthRequest())
+  const { data, error } = yield call(api, { url, method: 'GET' })
+  
+  if(error){
+    yield put(doNoteMonthRequestFail(error))
+  }else{
+    yield put(doNoteMonthRequestSuccess(data))
+  }
+}
 
 
 export function* save({ date, content, method }){

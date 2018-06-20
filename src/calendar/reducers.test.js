@@ -28,7 +28,6 @@ describe('calendar reducer', ()=>{
     .toEqual({
       ...INITIAL_STATE,
       notes: [1,2,3],
-      updated: true,
     })
   })
 })

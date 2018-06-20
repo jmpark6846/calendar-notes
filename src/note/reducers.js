@@ -64,6 +64,12 @@ export const noteReducer = (state=initialState, action) => {
         ...state,
         updated:false
       }
+    case NOTE_MONTH_REQUEST_SUCCESS:
+      return {
+        ...state,
+        notes:{ ...state.notes, ...action.notes },
+        updated:true,
+      }
     case USER_LOGOUT:
       return initialState
     default: return state

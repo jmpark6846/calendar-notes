@@ -19,8 +19,6 @@ export const INITIAL_STATE = {
   today,
   isSundayFirst:false,
   selectedDate: today,
-  updated:false,
-  notes:[]
 }
 
 export const calendarReducer = (state=INITIAL_STATE, action) => {
@@ -31,18 +29,11 @@ export const calendarReducer = (state=INITIAL_STATE, action) => {
         ...state,
         month: action.month,
         year: action.year,
-        notes:[]
       }
     case DATE_SELECT:
       return {
         ...state,
         selectedDate: action.selectedDate
-      }
-    case NOTE_MONTH_REQUEST_SUCCESS:
-      return {
-        ...state,
-        notes:action.notes,
-        updated:true,
       }
     case USER_LOGOUT:
       return INITIAL_STATE

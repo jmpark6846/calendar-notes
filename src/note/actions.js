@@ -1,4 +1,4 @@
-import { NOTE_SAVE, NOTE_DELETE, NOTE_FETCH, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL, NOTE_SAVE_FAIL, NOTE_SAVE_SUCCESS, NOTE_SAVE_REQUEST, NOTE_SET, NOTE_DELETE_REQUEST, NOTE_DELETE_FAIL, NOTE_DELETE_SUCCESS } from "../constants";
+import { NOTE_MONTH_FETCH, NOTE_MONTH_REQUEST, NOTE_MONTH_REQUEST_SUCCESS,NOTE_SAVE, NOTE_DELETE, NOTE_FETCH, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL, NOTE_SAVE_FAIL, NOTE_SAVE_SUCCESS, NOTE_SAVE_REQUEST, NOTE_SET, NOTE_DELETE_REQUEST, NOTE_DELETE_FAIL, NOTE_DELETE_SUCCESS } from "../constants";
 
 export const doNoteSave = (date, content, method) => ({
   type: NOTE_SAVE,
@@ -64,4 +64,25 @@ export const doNoteRequestFail = () => ({
 
 export const doNoteSet = () => ({
   type: NOTE_SET,
+})
+
+
+export const  doNoteMonthFetch = (year, month) => ({
+  type:NOTE_MONTH_FETCH,
+  year, 
+  month
+})
+
+export const doNoteMonthRequest = () => ({
+  type:NOTE_MONTH_REQUEST,
+})
+
+export const doNoteMonthRequestSuccess = (notes) => ({
+  type:NOTE_MONTH_REQUEST_SUCCESS,
+  notes
+})
+
+export const doNoteMonthRequestFail = (error) => ({
+  type:NOTE_MONTH_REQUEST,
+  error
 })
