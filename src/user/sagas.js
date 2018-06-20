@@ -1,5 +1,5 @@
 import { put, call } from "redux-saga/effects";
-import { doLoginFail, doLoginSuccess, doRegisterFail, doRegisterSuccess, doNotAuthenticated, doLogoutSuccess, doRefreshToken, doRefreshTokenFail } from "./actions";
+import { doLoginFail, doLoginSuccess, doRegisterFail, doRegisterSuccess, doNotAuthenticated, doLogoutSuccess, doRefreshToken, doRefreshTokenFail, doRefreshTokenSuccess } from "./actions";
 import { API_URL } from "../constants";
 import { api } from "../utils/fetch";
 
@@ -44,25 +44,30 @@ export function* register({ username, password, history }){
   }
 }
 
-
 export function* checkAuth(action){
-  const url = API_URL + '/me/'
-  const { data } = yield call(api, { url, method: 'GET' })
+  const { data } = yield call(api, { url: API_URL + '/me/', method: 'GET' })
   
   if(data && data.authenticated){
-    if(data.refresh){
-      yield put(doRefreshToken())
-      const result = yield call(api, { url: API_URL+'/token/refresh/', method:'POST', data:{ token: data.token } })
-      
-      if(result.request.status === 200){
-        yield put(doLoginSuccess(data.username))
-      }else{
-        yield put(doRefreshTokenFail())
-      }
-    }
-    else
-      yield put(doLoginSuccess(data.username))
+    yield put(doLoginSuccess(data.username))
   }else{
+    yield put(doNotAuthenticated())
+  }
+}
+
+export function* checkExp(action){
+  const { data } = yield call(api, { url: API_URL + '/check_exp/', method: 'GET' })
+  
+  if(data && data.refresh){
+    yield put(doRefreshToken())
+    const result = yield call(api, { url: API_URL+'/token/refresh/', method:'POST', data:{ token: data.token } })
+    
+    if(result.request.status === 200){
+      yield put(doRefreshTokenSuccess())
+    }else{
+      yield put(doRefreshTokenFail())
+    }
+   
+  }else if(data.unauthenticated){
     yield put(doNotAuthenticated())
   }
 }

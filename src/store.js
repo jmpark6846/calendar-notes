@@ -5,9 +5,9 @@ import { calendarReducer } from "./calendar/reducers";
 import { noteReducer } from './note/reducers';
 import { fetchNote, save, deleteNote } from './note/sagas';
 import { all, takeEvery, takeLatest } from 'redux-saga/effects';
-import { NOTE_SAVE, NOTE_FETCH, NOTE_MONTH_FETCH, USER_LOGIN, USER_REGISTER, CHECK_AUTH, USER_LOGOUT, NOTE_DELETE } from './constants';
+import { NOTE_SAVE, NOTE_FETCH, NOTE_MONTH_FETCH, USER_LOGIN, USER_REGISTER, CHECK_AUTH, USER_LOGOUT, NOTE_DELETE, CHECK_TOKEN_EXPIRATION } from './constants';
 import { fetchNoteMonth } from './calendar/sagas';
-import { login, register, checkAuth, logout } from './user/sagas';
+import { login, register, checkAuth, logout, checkExp } from './user/sagas';
 import { userReducer } from './user/reducers';
 
 const root = combineReducers({
@@ -31,7 +31,8 @@ function* rootSaga(){
     takeEvery(USER_LOGIN, login),
     takeEvery(USER_LOGOUT, logout),
     takeEvery(USER_REGISTER, register),
-    takeEvery(CHECK_AUTH, checkAuth)
+    takeEvery(CHECK_AUTH, checkAuth),
+    takeEvery(CHECK_TOKEN_EXPIRATION, checkExp),
 
   ])
 }

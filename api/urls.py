@@ -33,6 +33,7 @@ urlpatterns = [
     path('token/refresh/', refresh_jwt_token, name='refresh_jwt_token'),
 
     path('me/', views.me),
+    path('check_exp/', views.check_exp),
     path('logout/', views.logout)
     
 ]

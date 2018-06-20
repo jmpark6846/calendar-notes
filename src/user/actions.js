@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_LOGOUT, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_FAIL, REGISTER_SUCCESS, USER_REGISTER, NOT_AUTHENTICATED, LOGOUT_SUCCESS, REFRESH_TOKEN, REFRESH_TOKEN_FAIL } from "../constants";
+import { USER_LOGIN, USER_LOGOUT, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_FAIL, REGISTER_SUCCESS, USER_REGISTER, NOT_AUTHENTICATED, LOGOUT_SUCCESS, REFRESH_TOKEN, REFRESH_TOKEN_FAIL, REFRESH_TOKEN_SUCCESS } from "../constants";
 
 export const doUserLogin = (username, password, history) => ({
   type: USER_LOGIN,
@@ -49,6 +49,10 @@ export const doNotAuthenticated= () => ({
 
 export const doRefreshToken = () => ({
   type: REFRESH_TOKEN,
+})
+
+export const doRefreshTokenSuccess = () => ({
+  type: REFRESH_TOKEN_SUCCESS,
 })
 
 export const doRefreshTokenFail = () => ({

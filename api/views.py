@@ -114,13 +114,22 @@ def me(request):
   if 'token' in request.COOKIES:
     token = request.COOKIES['token']
     payload = jwt_decode(token)
-    
-    if(need_to_refresh(payload['exp'])):
-      return JsonResponse({'authenticated':True, 'username':payload['username'], 'refresh': True, 'token':token })
-    else:
-      return JsonResponse({'authenticated':True, 'username':payload['username'], 'refresh': False})
+    return JsonResponse({'authenticated':True, 'username':payload['username'] })
   else:
     return JsonResponse({'authenticated':False})
+
+
+def check_exp(request):
+  if 'token' in request.COOKIES:
+    token = request.COOKIES['token']
+    payload = jwt_decode(token)
+
+    if(need_to_refresh(payload['exp'])):
+      return JsonResponse({'refresh': True, 'token':token })
+    else:
+      return JsonResponse({'refresh': False})
+  else:
+    return JsonResponse({'unauthenticated':True})
 
 
 def need_to_refresh(exp_timestamp):

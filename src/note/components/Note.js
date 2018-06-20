@@ -43,7 +43,7 @@ class Note extends React.Component{
   componentDidUpdate = (prevProps, prevState) => {
     if(+prevProps.selectedDate !== +this.props.selectedDate){
       this.loadContent(this.props.selectedDate)
-    }
+    } 
 
     if(this.props.updated){
       this.loadContent(this.props.selectedDate)
