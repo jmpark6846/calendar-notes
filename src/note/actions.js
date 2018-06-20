@@ -2,11 +2,10 @@ import { NOTE_SAVE, NOTE_DELETE, NOTE_FETCH, NOTE_REQUEST, NOTE_REQUEST_SUCCESS,
 
 export const doNoteSave = (date, content, method) => ({
   type: NOTE_SAVE,
-  payload: {
-    date,
-    content,
-    method
-  }
+  date,
+  content,
+  method
+  
 })
 
 export const doNoteSaveRequest = (date, content) => ({
@@ -15,24 +14,18 @@ export const doNoteSaveRequest = (date, content) => ({
 
 export const doNoteSaveSuccess = (date, content) => ({
   type: NOTE_SAVE_SUCCESS,
-  payload: {
-    date,
-    content,
-  }
+  date,
+  content,
 })
 
 export const doNoteSaveFail = (error) => ({
   type: NOTE_SAVE_FAIL,
-  payload: {
-    error
-  }
+  error
 })
 
 export const doNoteDelete = (date) => ({
   type: NOTE_DELETE,
-  payload: {
-    date,
-  }
+  date,
 })
 
 export const doNoteDeleteRequest = () => ({
@@ -51,9 +44,7 @@ export const doNoteDeleteSuccess = () => ({
 
 export const doNoteFetch = (date) => ({
   type: NOTE_FETCH,
-  payload:{
-    date
-  }
+  date
 })
 
 export const doNoteRequest = () => ({
@@ -62,10 +53,8 @@ export const doNoteRequest = () => ({
 
 export const doNoteRequestSuccess = (date, content) => ({
   type: NOTE_REQUEST_SUCCESS,
-  payload: {
-    date,
-    content,
-  }
+  date,
+  content,
 })
 
 export const doNoteRequestFail = () => ({

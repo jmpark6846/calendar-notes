@@ -10,8 +10,7 @@ import { dateToString } from "../utils/date";
 // }
 
 
-export function* save({payload}){
-  const { date, content, method } = payload
+export function* save({ date, content, method }){
   let params = { 
     data: { date, content },
     url: method === 'PUT' ? parseNoteUrl(date) : API_URL+'/notes/create/',
@@ -28,14 +27,13 @@ export function* save({payload}){
     yield put(doNoteSaveSuccess(dateToString(date), data.content))
 } 
 
-export function* deleteNote(action){
-  yield put(doNoteDeleteRequest())
-
+export function* deleteNote({date}){
   const params = {
-    url: parseNoteUrl(action.payload.date),
+    url: parseNoteUrl(date),
     method: 'DELETE',
   }
 
+  yield put(doNoteDeleteRequest())
   const { error } = yield call(api, params)
 
   if(error)    
@@ -44,12 +42,12 @@ export function* deleteNote(action){
     yield put(doNoteDeleteSuccess())
 }
 
-export function* fetchNote({ payload }){
+export function* fetchNote({ date }){
   const params = {
-    url: parseNoteUrl(payload.date),
+    url: parseNoteUrl(date),
     method: 'GET',
   }
-  const {data, error} = yield call(api, params)
+  const { data, error } = yield call(api, params)
   
   yield put(doNoteRequest())
 
@@ -58,7 +56,7 @@ export function* fetchNote({ payload }){
   else if(noteDoesNotExist(data))
     yield put(doNoteRequestFail('노트가 존재하지 않습니다.'))
   else
-    yield put(doNoteRequestSuccess(dateToString(payload.date), data.content))
+    yield put(doNoteRequestSuccess(dateToString(date), data.content))
 }
 
 function noteDoesNotExist(note){
