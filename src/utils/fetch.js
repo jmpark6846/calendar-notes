@@ -14,17 +14,6 @@ export function api({method, url, data, headers}){
   }).then(response=>response, error=>error)
 }
 
-export function postData(url, data){
-  return axios({
-    method:'post',
-    url, 
-    data,
-    headers: { 'content-type': 'application/json' },
-    withCredentials: true,
-  })
-  .then(response=>response, error=>({ error: error.response.data }))
-}
-
 export const fetchData = (url) => {
   return axios({
     method:'get',
@@ -32,16 +21,6 @@ export const fetchData = (url) => {
     withCredentials: true,
   })
   .then(response=>response, error=>error)
-}
-
-export const updateData = (url, data) => {
-  return axios({
-    method:'put',
-    url,
-    data,
-    withCredentials: true,
-  })
-  .then(response=>response, error=>({ error: error.response.data }))
 }
 
 export const parseNoteUrl = (date) => {

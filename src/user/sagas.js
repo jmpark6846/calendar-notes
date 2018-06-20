@@ -1,49 +1,54 @@
 import { put, call } from "redux-saga/effects";
 import { doLoginFail, doLoginSuccess, doRegisterFail, doRegisterSuccess, doNotAuthenticated, doLogoutSuccess } from "./actions";
 import { API_URL } from "../constants";
-import { postData, fetchData } from "../utils/fetch";
+import { api } from "../utils/fetch";
 
-export function* login(action){
-  const url = API_URL + '/token/'
-  const {username, password} = action.payload
-  const { error} = yield call(postData, url, { username, password })
+export function* login({ username, password, history }){
+  const params = {
+    url: API_URL + '/token/',
+    method: 'POST',
+    data: { username, password }
+  }
+  const { error } = yield call(api, params)
 
   if(error){
     yield put(doLoginFail(error))
   }else{
-    yield put(doLoginSuccess(action.payload.username))
-    yield action.payload.history.push('/calendar')
+    yield put(doLoginSuccess(username))
+    yield history.push('/calendar')
   }
 }
 
 
-export function* logout(action){
+export function* logout({history}){
   const url = API_URL + '/logout/'
-  yield call(fetchData, url) 
+  yield call(api, { url }) 
   yield put(doLogoutSuccess())
-  yield action.payload.history.push('/')
+  yield history.push('/')
 }
 
 
-export function* register(action){
-  const url = API_URL + '/users/create/'
-  const {username, password} = action.payload
-  const {error} = yield call(postData, url, { username, password, notes: [] })
+export function* register({ username, password, history }){
+  const params = {
+    url: API_URL + '/users/create/',
+    data: { username, password }
+  }
+
+  const { error } = yield call(api, params)
 
   if(error){
     yield put(doRegisterFail(error))
   }else{
-    yield put(doRegisterSuccess(action.payload.username))
-    yield action.payload.history.push('/login')
+    yield put(doRegisterSuccess(username))
+    yield history.push('/login')
   }
 }
 
 
 export function* checkAuth(action){
   const url = API_URL + '/me/'
-  const { data } = yield call(fetchData, url)
+  const { data } = yield call(api, { url })
   
-
   if(data && data.isAuthenticated){
     yield put(doLoginSuccess(data.username))
   }else{

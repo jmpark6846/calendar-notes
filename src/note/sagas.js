@@ -1,6 +1,6 @@
 import { put, call } from "redux-saga/effects";
 import { API_URL } from "../constants";
-import { postData, fetchData, parseNoteUrl, updateData, api } from "../utils/fetch";
+import { parseNoteUrl, api } from "../utils/fetch";
 import { doNoteRequest, doNoteRequestFail, doNoteRequestSuccess, doNoteSaveRequest, doNoteSaveSuccess, doNoteSaveFail, doNoteDeleteRequest, doNoteDeleteFail, doNoteDeleteSuccess } from "./actions";
 import { dateToString } from "../utils/date";
 
@@ -10,61 +10,55 @@ import { dateToString } from "../utils/date";
 // }
 
 
-export function* save(action){
-  let url = ''
-  let api = null
-  const date = dateToString(action.payload.date)
+export function* save({payload}){
+  const { date, content, method } = payload
+  let params = { 
+    data: { date, content },
+    url: method === 'PUT' ? parseNoteUrl(date) : API_URL+'/notes/create/',
+    method,
+   } 
   
   yield put(doNoteSaveRequest())
   
-  if(action.payload.method === 'update'){
-    url = parseNoteUrl(action.payload.date)
-    api = updateData
-  }
-  else{
-    url = API_URL+'/notes/create/'
-    api = postData
-  }
-  
-  const { data, error } = yield call(api, url, action.payload)
+  const { data, error } = yield call(api, params)
 
-  if(!error){
-    yield put(doNoteSaveSuccess(date, data.content))
-  }else{
-    console.log(error)
+  if(error)
     yield put(doNoteSaveFail(error))
-  }
+  else
+    yield put(doNoteSaveSuccess(dateToString(date), data.content))
 } 
 
 export function* deleteNote(action){
   yield put(doNoteDeleteRequest())
+
   const params = {
     url: parseNoteUrl(action.payload.date),
     method: 'DELETE',
   }
+
   const { error } = yield call(api, params)
 
-  if(error){
-    console.log(error)
+  if(error)    
     yield put(doNoteDeleteFail(error))
-  }else{
+  else
     yield put(doNoteDeleteSuccess())
-  }
-
 }
 
-export function* fetchNote(action){
-  yield put(doNoteRequest())
-  const url = parseNoteUrl(action.payload.date)
-  const {data, error} = yield call(fetchData, url)
-  
-  if(error){
-    yield put(doNoteRequestFail(error))
-  }else if(noteDoesNotExist(data)){
-    yield put(doNoteRequestFail('노트가 존재하지 않습니다.'))
-  }else{
-    yield put(doNoteRequestSuccess(dateToString(action.payload.date), data.content))
+export function* fetchNote({ payload }){
+  const params = {
+    url: parseNoteUrl(payload.date),
+    method: 'GET',
   }
+  const {data, error} = yield call(api, params)
+  
+  yield put(doNoteRequest())
+
+  if(error)
+    yield put(doNoteRequestFail(error))
+  else if(noteDoesNotExist(data))
+    yield put(doNoteRequestFail('노트가 존재하지 않습니다.'))
+  else
+    yield put(doNoteRequestSuccess(dateToString(payload.date), data.content))
 }
 
 function noteDoesNotExist(note){

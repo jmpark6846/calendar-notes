@@ -65,7 +65,7 @@ class Note extends React.Component{
   onChange(editorState){
     const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
     const date = dateToString(this.props.selectedDate)
-    const method = (date in this.props.notes) ? 'update' : 'post'
+    const method = (date in this.props.notes) ? 'PUT' : 'POST'
 
     this.setState({editorState});  
 

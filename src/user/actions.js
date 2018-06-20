@@ -5,7 +5,6 @@ export const doUserLogin = (username, password, history) => ({
   username,
   password,
   history
-
 })
 
 export const doLoginSuccess = (username) => ({
