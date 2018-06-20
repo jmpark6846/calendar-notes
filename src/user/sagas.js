@@ -47,7 +47,7 @@ export function* register({ username, password, history }){
 
 export function* checkAuth(action){
   const url = API_URL + '/me/'
-  const { data } = yield call(api, { url })
+  const { data } = yield call(api, { url, method: 'GET', })
   
   if(data && data.isAuthenticated){
     yield put(doLoginSuccess(data.username))

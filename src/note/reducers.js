@@ -23,7 +23,7 @@ export const noteReducer = (state=initialState, action) => {
         error:false,
         notes: { 
           ...state.notes, 
-          [action.payload.date] : { content: action.payload.content } 
+          [action.date] : { content: action.content } 
         }
       }
     case NOTE_SAVE_FAIL:
@@ -33,7 +33,7 @@ export const noteReducer = (state=initialState, action) => {
         error:true,
       }
     case NOTE_DELETE:
-      const { [action.payload.date]: value, ...rest} = state.notes
+      const { [action.date]: value, ...rest} = state.notes
       return { ...state, notes: {...rest } }
     
     case NOTE_REQUEST:
@@ -50,7 +50,7 @@ export const noteReducer = (state=initialState, action) => {
         updated:true,
         notes: { 
           ...state.notes, 
-          [action.payload.date] : { content: action.payload.content } 
+          [action.date] : { content: action.content } 
         }
       }
     case NOTE_REQUEST_FAIL:

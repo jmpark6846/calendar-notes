@@ -15,7 +15,7 @@ export const userReducer = (state=INITIAL_STATE, action) => {
       }
     case LOGIN_SUCCESS:
       return {
-        username: action.payload.username,
+        username: action.username,
         isAuthenticated:true,
         error:undefined,
       }
@@ -23,7 +23,7 @@ export const userReducer = (state=INITIAL_STATE, action) => {
       return {
         username:'',
         isAuthenticated: false,
-        error:action.payload.error
+        error:action.error
       }
     case LOGOUT_SUCCESS:
       return INITIAL_STATE
@@ -35,7 +35,7 @@ export const userReducer = (state=INITIAL_STATE, action) => {
     case REGISTER_FAIL:
       return {
         ...state,
-        error:action.payload.error
+        error:action.error
       }
     case REGISTER_SUCCESS:
       return {
