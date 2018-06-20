@@ -104,7 +104,7 @@ const mapStateToProps = ({calendar, notes}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   save: _.debounce((date, content, method) => dispatch(doNoteSave(date, content, method)), 2000),
-  delete: (date) => dispatch(doNoteDelete(date)),
+  delete: _.debounce((date) => dispatch(doNoteDelete(date)), 2500),
   fetch: (date) => dispatch(doNoteFetch(date)),
   setNote: () => dispatch(doNoteSet()),
 })
