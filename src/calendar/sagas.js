@@ -3,19 +3,17 @@ import { doNoteMonthRequest, doNoteMonthRequestSuccess, doNoteMonthRequestFail }
 import { API_URL } from "../constants";
 import { fetchData } from "../utils/fetch";
 
-export function* fetchNoteMonth(action){
-  const { year, month } = action.payload
+export function* fetchNoteByMonth(action){
+  const { year, month } = action
   const url = `${API_URL}/notes/${year}/${month}/`
-  yield put(doNoteMonthRequest())
 
-  const {data, error} = yield call(fetchData, url)
+  yield put(doNoteMonthRequest())
+  const { data, error } = yield call(api, { url, method: 'GET' })
   
-  if(!error){
-    const notes = data.map(n => new Date(n.date).getDate())
-    
-    yield put(doNoteMonthRequestSuccess(notes))
-  }else{
+  if(error){
     yield put(doNoteMonthRequestFail(error))
+  }else{
+    yield put(doNoteMonthRequestSuccess(data))
   }
 }
 

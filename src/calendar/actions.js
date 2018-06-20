@@ -6,34 +6,22 @@ import {
   NOTE_MONTH_REQUEST_SUCCESS,
 } from '../constants'
 
-export const doMonthDown = (year, month) => {
-  const payload = {
-    month: month <= 0 ? 11 : month-1,
-    year: month <= 0 ? year-1 : year,
-  }
-  return {
-    type: MONTH_DOWN,
-    payload
-  }
-}
+export const doMonthDown = (year, month) => ({
+  type: MONTH_DOWN,
+  month: month <= 0 ? 11 : month-1,
+  year: month <= 0 ? year-1 : year,
+})
 
-export const doMonthUp = (year, month) => {
-  const payload = {
-    month: month >= 11 ? 0 : month+1,
-    year: month >= 11 ? year+1 : year
-  }
-  return {
-    type:MONTH_UP,
-    payload
-  }
-}
+export const doMonthUp = (year, month) => ({
+  type:MONTH_UP,
+  month: month >= 11 ? 0 : month+1,
+  year: month >= 11 ? year+1 : year
+})
 
 export const  doNoteMonthFetch = (year, month) => ({
   type:NOTE_MONTH_FETCH,
-  payload:{
-    year, 
-    month
-  }
+  year, 
+  month
 })
 
 
@@ -43,14 +31,10 @@ export const doNoteMonthRequest = () => ({
 
 export const doNoteMonthRequestSuccess = (notes) => ({
   type:NOTE_MONTH_REQUEST_SUCCESS,
-  payload:{
-    notes
-  }
+  notes
 })
 
 export const doNoteMonthRequestFail = (error) => ({
   type:NOTE_MONTH_REQUEST,
-  payload:{
-    error
-  }
+  error
 })

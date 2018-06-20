@@ -29,18 +29,19 @@ export const calendarReducer = (state=INITIAL_STATE, action) => {
     case MONTH_DOWN:
       return {
         ...state,
-        ...action.payload,
+        month: action.month,
+        year: action.year,
         notes:[]
       }
     case DATE_SELECT:
       return {
         ...state,
-        ...action.payload
+        selectedDate: action.selectedDate
       }
     case NOTE_MONTH_REQUEST_SUCCESS:
       return {
         ...state,
-        notes:action.payload.notes,
+        notes:action.notes,
         updated:true,
       }
     case USER_LOGOUT:

@@ -6,7 +6,7 @@ describe('calendar reducer', ()=>{
     expect(
       calendarReducer(
         INITIAL_STATE, 
-        { type: types.MONTH_DOWN, payload: { year:2018, month: 6 } }
+        { type: types.MONTH_DOWN, year:2018, month: 6 }
       )
     )
     .toEqual(
@@ -22,7 +22,7 @@ describe('calendar reducer', ()=>{
     expect(
       calendarReducer(
         INITIAL_STATE,
-        { type: types.NOTE_MONTH_REQUEST_SUCCESS, payload: { notes: [1,2,3] }}
+        { type: types.NOTE_MONTH_REQUEST_SUCCESS, notes: [1,2,3] }
       )
     )
     .toEqual({
