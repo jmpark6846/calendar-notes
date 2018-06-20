@@ -12,14 +12,15 @@ import { dateToString } from "../utils/date";
 export function* fetchByMonth(action){
   const { year, month } = action
   const url = `${API_URL}/notes/${year}/${month}/`
-
+  let notes = {}
   yield put(doNoteMonthRequest())
   const { data, error } = yield call(api, { url, method: 'GET' })
   
   if(error){
     yield put(doNoteMonthRequestFail(error))
   }else{
-    yield put(doNoteMonthRequestSuccess(data))
+    data.forEach(e=>{ notes[e.date] = e })
+    yield put(doNoteMonthRequestSuccess(notes))
   }
 }
 
@@ -37,8 +38,10 @@ export function* save({ date, content, method }){
 
   if(error)
     yield put(doNoteSaveFail(error))
-  else
-    yield put(doNoteSaveSuccess(dateToString(date), data.content))
+  else{
+    console.log(data)
+    yield put(doNoteSaveSuccess(data))
+  }
 } 
 
 export function* deleteNote({date}){

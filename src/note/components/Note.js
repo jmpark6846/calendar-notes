@@ -7,7 +7,7 @@ import 'draft-js/dist/Draft.css';
 import _ from 'lodash'
 import { dateToString } from '../../utils/date';
 import { htmlToDraftEditorState } from '../../utils/note';
-import { doNoteSave, doNoteDelete, doNoteFetch, doNoteSet } from '../actions';
+import { doNoteSave, doNoteDelete } from '../actions';
 import './Note.css'
 
 class Note extends React.Component{
@@ -44,11 +44,6 @@ class Note extends React.Component{
     if(+prevProps.selectedDate !== +this.props.selectedDate){
       this.loadContent(this.props.selectedDate)
     } 
-
-    if(this.props.updated){
-      this.loadContent(this.props.selectedDate)
-      this.props.setNote()
-    }
   }
 
   loadContent(selectedDate){
@@ -91,7 +86,6 @@ class Note extends React.Component{
         <Editor placeholder='오늘 하루를 적어볼까요?' editorState={this.state.editorState} onChange={this.onChange} />
         { this.props.loading && <div>loading..</div>}
       </div>
-      
     )
   }
 } 

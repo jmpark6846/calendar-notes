@@ -12,10 +12,9 @@ export const doNoteSaveRequest = (date, content) => ({
   type: NOTE_SAVE_REQUEST,
 })
 
-export const doNoteSaveSuccess = (date, content) => ({
+export const doNoteSaveSuccess = (note) => ({
   type: NOTE_SAVE_SUCCESS,
-  date,
-  content,
+  note
 })
 
 export const doNoteSaveFail = (error) => ({
@@ -61,11 +60,9 @@ export const doNoteRequestFail = () => ({
   type: NOTE_REQUEST_FAIL,
 })
 
-
 export const doNoteSet = () => ({
   type: NOTE_SET,
 })
-
 
 export const  doNoteMonthFetch = (year, month) => ({
   type:NOTE_MONTH_FETCH,

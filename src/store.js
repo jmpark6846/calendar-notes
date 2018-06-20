@@ -6,7 +6,7 @@ import { noteReducer } from './note/reducers';
 import { fetchNote, save, deleteNote } from './note/sagas';
 import { all, takeEvery, takeLatest } from 'redux-saga/effects';
 import { NOTE_SAVE, NOTE_FETCH, NOTE_MONTH_FETCH, USER_LOGIN, USER_REGISTER, CHECK_AUTH, USER_LOGOUT, NOTE_DELETE, CHECK_TOKEN_EXPIRATION } from './constants';
-import { fetchByMonth } from './calendar/sagas';
+import { fetchByMonth } from './note/sagas';
 import { login, register, checkAuth, logout, checkExp } from './user/sagas';
 import { userReducer } from './user/reducers';
 

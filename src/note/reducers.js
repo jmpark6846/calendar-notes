@@ -1,4 +1,4 @@
-import { NOTE_SAVE_SUCCESS, NOTE_DELETE, NOTE_REQUEST, NOTE_REQUEST_SUCCESS, NOTE_REQUEST_FAIL, NOTE_SAVE_FAIL, NOTE_SAVE_REQUEST, NOTE_SET, USER_LOGOUT, NOTE_MONTH_REQUEST_SUCCESS, NOTE_MONTH_REQUEST, NOTE_MONTH_REQUEST_FAIL } from "../constants";
+import { NOTE_SAVE_SUCCESS, NOTE_DELETE, NOTE_SAVE_FAIL, NOTE_SAVE_REQUEST, NOTE_SET, USER_LOGOUT, NOTE_MONTH_REQUEST_SUCCESS, NOTE_MONTH_REQUEST, NOTE_MONTH_REQUEST_FAIL } from "../constants";
 
 const initialState = {
   loading: false,
@@ -24,7 +24,7 @@ export const noteReducer = (state=initialState, action) => {
         error: false,
         notes: { 
           ...state.notes, 
-          [action.date] : { content: action.content } 
+          [action.note.date] : action.note
         }
       }
 
@@ -37,7 +37,7 @@ export const noteReducer = (state=initialState, action) => {
 
     case NOTE_DELETE:
       const { [action.date]: value, ...rest} = state.notes
-      return { ...state, notes: {...rest } }
+      return { ...state, notes: { ...rest } }
       
     case NOTE_SET:
       return {
@@ -69,6 +69,7 @@ export const noteReducer = (state=initialState, action) => {
 
     case USER_LOGOUT:
       return initialState
+      
     default: return state
   }
 }

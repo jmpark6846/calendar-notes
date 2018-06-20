@@ -29,6 +29,7 @@ export const calendarReducer = (state=INITIAL_STATE, action) => {
         month: action.month,
         year: action.year,
       }
+      
     case DATE_SELECT:
       return {
         ...state,

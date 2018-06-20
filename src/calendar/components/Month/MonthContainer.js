@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import Month from './Month';
-import { doNoteMonthFetch } from '../../actions';
+import { doNoteMonthFetch } from '../../../note/actions';
 
 class MonthContainer extends React.Component{
   static propTypes = {
@@ -11,7 +11,7 @@ class MonthContainer extends React.Component{
     month: PropTypes.number.isRequired,
     notes: PropTypes.array,
     isSundayFirst: PropTypes.bool,
-    fetchMonth: PropTypes.func.isRequired
+    fetchNoteByMonth: PropTypes.func.isRequired
   }
 
   constructor(props){
@@ -22,12 +22,12 @@ class MonthContainer extends React.Component{
   }
 
   componentDidMount = () => {
-    this.props.fetchMonth(this.props.year, this.props.month)
+    this.props.fetchNoteByMonth(this.props.year, this.props.month)
   }
   
   componentDidUpdate = (prevProps, prevState) => {
     if(prevProps.year !== this.props.year || prevProps.month !== this.props.month){
-      this.props.fetchMonth(this.props.year, this.props.month)
+      this.props.fetchNoteByMonth(this.props.year, this.props.month)
     }
   }
   
@@ -57,7 +57,7 @@ const mapStateToProps = ({calendar, notes}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchMonth: _.debounce((year, month) => dispatch(doNoteMonthFetch(year, month)), 500)
+  fetchNoteByMonth: _.debounce((year, month) => dispatch(doNoteMonthFetch(year, month)), 500)
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(MonthContainer)
