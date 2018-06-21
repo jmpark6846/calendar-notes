@@ -1,15 +1,15 @@
-import { fetchNoteMonth } from "./sagas";
+import { fetchByMonth } from "./sagas";
 import { NOTE_MONTH_FETCH, NOTE_MONTH_REQUEST } from "../constants";
 import { put, call } from 'redux-saga/effects'
 import { doNoteMonthRequestSuccess } from "./actions";
 
 describe('calendar saga', () => {
-  it('fetchNoteMonth 호출', () => {
+  it('fetchByMonth 호출', () => {
     const action = { 
       type: NOTE_MONTH_FETCH,
       payload: { year: 2018, month:5 }
     }
-    const iterator = fetchNoteMonth(action)
+    const iterator = fetchByMonth(action)
     
     const url = `http://localhost:3000/api/notes/2018/5/`
     const data = [

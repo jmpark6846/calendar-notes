@@ -31,9 +31,9 @@ class Note extends React.Component{
     };
 
     this.onChange = this.onChange.bind(this)  
+    this.process = _.debounce(this.process.bind(this), 2000)
     this.loadContent = this.loadContent.bind(this)
     this.isEmpty = this.isEmpty.bind(this)
-    this.isDeletedAndEmpty = this.isDeletedAndEmpty.bind(this)
   }
 
   componentDidMount = () => {
@@ -62,29 +62,29 @@ class Note extends React.Component{
   }
 
   onChange(editorState){
-    const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
-    const date = dateToString(this.props.selectedDate)
-    const method = (date in this.props.notes) ? 'PUT' : 'POST'
-
     this.setState({editorState});  
 
     if(!this.isEmpty(editorState)){
-      this.props.save(date, html, method)
+      this.process(editorState)
     }
-  
-    if(this.isDeletedAndEmpty(editorState)){
+  }
+
+  process(editorState){
+    const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    const date = dateToString(this.props.selectedDate)
+    const method = (date in this.props.notes) ? 'PUT' : 'POST' 
+
+    if(!this.isEmpty(editorState)){
+      this.props.save(date, html, method)
+    }else{
       this.props.delete(dateToString(this.props.selectedDate))
     }
   }
-  
+
   isEmpty(editorState){
     return editorState.getCurrentContent().getPlainText() === ''
   }
   
-  isDeletedAndEmpty(editorState){
-    return this.isEmpty(editorState) && !this.isEmpty(this.state.editorState)
-  }
-
   render(){
     return (
       <div className='note'>
@@ -101,8 +101,8 @@ const mapStateToProps = ({calendar, notes}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  save: _.debounce((date, content, method) => dispatch(doNoteSave(date, content, method)), 2000),
-  delete: _.debounce((date) => dispatch(doNoteDelete(date)), 2500),
+  save: (date, content, method) => dispatch(doNoteSave(date, content, method)),
+  delete: (date) => dispatch(doNoteDelete(date)),
   setUpdated: () => dispatch(doNoteSet())
 })
 

@@ -5,41 +5,34 @@ import { withRouter } from 'react-router'
 import PropTypes from "prop-types";
 import { doUserLogout } from '../../user/actions';
 import './Navbar.css'
+import NavItem from './NavItem';
 
 const activePage = {}
 
 const Navbar = ({username, isAuthenticated, logout, history}) =>
   <header>
     <nav className="navbar navbar-expand-lg container-fluid">
-      <NavLink to="/" className="navbar-brand" activeStyle={activePage}>
+      <NavLink to="/" className="navbar-brand">
         CalendarNote
       </NavLink>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-menu" aria-controls="navbar-collapse-menu" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
       
-      <div className="collapse navbar-collapse" id="navbar-collapse-menu">
+      <div className="collapse navbar-collapse" id="navbar-collapse-menu">     
+        { isAuthenticated ? 
         <ul className="navbar-nav ml-auto">
-          { isAuthenticated ? 
-          <React.Fragment>
-            <li className="nav-item">
-              <NavLink to="/calendar" className="nav-link" activeStyle={activePage}>{username}</NavLink>
-            </li>
-            <li className="nav-item">
-              <span className="nav-link logout" onClick={()=>logout(history)} >Logout</span>
-            </li>
-          </React.Fragment>
-          :
-          <React.Fragment>
-            <li className="nav-item">
-              <NavLink to="/register" className="nav-link" activeStyle={activePage}>Register</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/login" className="nav-link" activeStyle={activePage}>Login</NavLink>
-            </li>
-          </React.Fragment>
-          }
+          <NavItem value={username} route='calendar' />
+          <NavItem>
+            <span className="nav-link logout" onClick={()=>logout(history)} >Logout</span>
+          </NavItem>
         </ul>
+        :
+        <ul className="navbar-nav ml-auto">
+          <NavItem value='register' />
+          <NavItem value='login' />
+        </ul>
+        }
       </div>
     </nav>  
   </header>
