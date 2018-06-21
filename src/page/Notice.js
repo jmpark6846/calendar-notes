@@ -5,13 +5,13 @@ import classNames from 'classnames'
 const Notice = ({msg, type}) => {
   const classes = classNames('alert',{
     [`alert-${type}`] : type,
-  }, 'alert-dismissible', 'fade show')
+  }, 'fade show') // 'alert-dismissible'
   return (
     <div className={classes} role='alert'>
       {msg}
-      <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+      {/* <button type="button" className="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
-      </button>
+      </button> */}
     </div>
   )
 }

@@ -6,13 +6,14 @@ import Page from './Page';
 import { PASSWORD_MIN_LENGTH } from '../constants'
 import { doUserRegister } from '../user/actions';
 import './RegisterPage.css'
+import Notice from './Notice';
 
 class RegisterPage extends Component {
   static propTypes = {
     register: PropTypes.func.isRequired,
     username: PropTypes.string,
     isAuthenticated: PropTypes.bool,
-    error: PropTypes.string,
+    errorMsg: PropTypes.array,
   }
   constructor(props){
     super(props)
@@ -42,6 +43,7 @@ class RegisterPage extends Component {
   onSubmit(e){
     e.preventDefault()
     const { username, password, password2 } = this.state
+    this.setState({error: false, errorMsg:''})
 
     if(password !== password2){
       this.setState({error:true, errorMsg:'비밀번호가 일치하지 않습니다.'})
@@ -81,7 +83,7 @@ class RegisterPage extends Component {
               <input name="password2" value={password2} onChange={this.onChange} autoComplete="current-password" type="password" className="form-control" placeholder="비밀번호 확인"/>
             </div>
             { error && <div className="error">{errorMsg}</div> }
-            { this.props.error && Object.values(this.props.error).map((v,i)=><div key={i} className="error">{v}</div>)}
+            { this.props.errorMsg && this.props.errorMsg.map((v)=><Notice key={v} type='danger' msg={v}/>)}
             <div className='button-div'>
               <button className="btn btn-primary" type="submit">가입</button>
             </div>

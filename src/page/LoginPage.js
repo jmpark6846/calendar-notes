@@ -5,13 +5,14 @@ import PropTypes from "prop-types";
 import Page from './Page';
 import { doUserLogin } from '../user/actions'
 import './LoginPage.css'
+import Notice from './Notice';
 
 class LoginPage extends Component {
   static propTypes = {
     login: PropTypes.func.isRequired,
     username: PropTypes.string,
     isAuthenticated: PropTypes.bool,
-    error: PropTypes.string,
+    errorMsg: PropTypes.array,
   }
   constructor(props){
     super(props)
@@ -20,7 +21,6 @@ class LoginPage extends Component {
       username:'',
       password:'',
       error:false,
-      errorMsg:'',
     }
 
     this.onSubmit = this.onSubmit.bind(this)
@@ -34,13 +34,7 @@ class LoginPage extends Component {
 
   onSubmit(e){
     e.preventDefault()
-
     const { username, password } = this.state
-    
-    if( !username || !password ){
-      this.setState({ error: true, errorMsg: 'ID 혹은 비밀번호가 올바르지 않습니다.' }) 
-      return null
-    }
     this.props.login(username, password, this.props.history)
   }
 
@@ -61,7 +55,7 @@ class LoginPage extends Component {
               <input name="password" value={password} onChange={this.onChange} autoComplete="current-password" type="password" className="form-control" placeholder="비밀번호"/>
             </div>
             { error && <div className="error">{errorMsg}</div> }
-            { this.props.error && <div className="error">로그인에 실패하였습니다. 아이디와 비밀번호를 확인해주세요.</div> }
+            { this.props.errorMsg && this.props.errorMsg.map((v)=><Notice key={v} type='danger' msg={v}/>)}
             <div className="button-div">
               <button className="btn btn-primary" type="submit">로그인</button>
             </div>

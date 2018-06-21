@@ -4,7 +4,7 @@ const routes = [
   {
     path:'/',
     exact:true,
-    component: IndexPage
+    component: LoginPage
   },
   {
     path:'/calendar',

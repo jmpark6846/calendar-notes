@@ -9,10 +9,11 @@ export function* login({ username, password, history }){
     method: 'POST',
     data: { username, password }
   }
-  const { error } = yield call(api, params)
+  const { request, response } = yield call(api, params)
 
-  if(error){
-    yield put(doLoginFail(error))
+  if(request.status === 400){
+    
+    yield put(doLoginFail(Object.values(response.data).map(a=>a[0])))
   }else{
     yield put(doLoginSuccess(username))
     yield history.push('/calendar')
@@ -32,13 +33,13 @@ export function* register({ username, password, history }){
   const params = {
     method: 'POST',
     url: API_URL + '/users/create/',
-    data: { username, password }
+    data: { username, password, notes:[] }
   }
 
-  const { error } = yield call(api, params)
-
-  if(error){
-    yield put(doRegisterFail(error))
+  const { request, response } = yield call(api, params)
+  
+  if(request.status === 400){
+    yield put(doRegisterFail(Object.values(response.data).map(a=>a[0])))
   }else{
     yield put(doRegisterSuccess(username))
     yield history.push('/login')

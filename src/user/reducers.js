@@ -1,9 +1,9 @@
-import { LOGIN_REQUEST, LOGIN_FAIL, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS, USER_REGISTER, NOT_AUTHENTICATED, LOGOUT_SUCCESS } from "../constants";
+import { LOGIN_REQUEST, LOGIN_FAIL, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS, USER_REGISTER, NOT_AUTHENTICATED, LOGOUT_SUCCESS, INIT_ERROR_MSG } from "../constants";
 
 const INITIAL_STATE = {
   username:'',
   isAuthenticated:undefined,
-  error:undefined,
+  errorMsg:[],
 }
 
 export const userReducer = (state=INITIAL_STATE, action) => {
@@ -11,31 +11,31 @@ export const userReducer = (state=INITIAL_STATE, action) => {
     case LOGIN_REQUEST:
       return {
         ...state,
-        error:undefined,
+        errorMsg:[],
       }
     case LOGIN_SUCCESS:
       return {
         username: action.username,
         isAuthenticated:true,
-        error:undefined,
+        errorMsg:[],
       }
     case LOGIN_FAIL:
       return {
         username:'',
         isAuthenticated: false,
-        error:action.error
+        errorMsg:action.error
       }
     case LOGOUT_SUCCESS:
       return INITIAL_STATE
     case USER_REGISTER:
       return {
         ...state,
-        error: undefined,
+        errorMsg: [],
       }
     case REGISTER_FAIL:
       return {
         ...state,
-        error:action.error
+        errorMsg:action.error
       }
     case REGISTER_SUCCESS:
       return {
@@ -45,6 +45,11 @@ export const userReducer = (state=INITIAL_STATE, action) => {
       return {
         ...state,
         isAuthenticated: false,
+      }
+    case INIT_ERROR_MSG:
+      return {
+        ...state,
+        errorMsg:[]
       }
     default: return state
   }
