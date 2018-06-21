@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   saving: false,
   error: false,
+  error_msg: '',
   updated: false,
   notes: {}
 }

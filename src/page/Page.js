@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
+import { CHECK_TOKEN_EXPIRATION } from '../constants';
 import Navbar from './Navbar/Navbar'
-import { CHECK_AUTH, CHECK_TOKEN_EXPIRATION } from '../constants';
+import Notice from './Notice'
 
 export class Page extends Component {
   static propTypes = {
+    errorMsg: PropTypes.string,
     checkTokenExpiration: PropTypes.func.isRequired,
   }
 
@@ -19,6 +20,8 @@ export class Page extends Component {
       <div className="page-default">
         <Navbar />
         <div className="container">
+          { this.props.errorMsg && <Notice type='danger' msg='ddd' /> }
+          
           {this.props.children}
         </div>
       </div>
@@ -26,8 +29,12 @@ export class Page extends Component {
   }
 }
 
+const mapStates = ({notes}) => ({
+  errorMsg: notes.errorMsg
+})
+
 const mapDispatch = (dispatch) => ({
   checkTokenExpiration: () => dispatch({ type: CHECK_TOKEN_EXPIRATION }),
 })
 
-export default connect(undefined, mapDispatch)(Page);
+export default connect(mapStates, mapDispatch)(Page);

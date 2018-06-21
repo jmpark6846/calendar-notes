@@ -30,6 +30,7 @@ export function* logout({history}){
 
 export function* register({ username, password, history }){
   const params = {
+    method: 'POST',
     url: API_URL + '/users/create/',
     data: { username, password }
   }

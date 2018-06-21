@@ -11,7 +11,6 @@ const activePage = {}
 const Navbar = ({username, isAuthenticated, logout, history}) =>
   <header>
     <nav className="navbar navbar-expand-lg container-fluid">
-      { console.log(process.env)}
       <NavLink to="/" className="navbar-brand" activeStyle={activePage}>
         CalendarNote
       </NavLink>
