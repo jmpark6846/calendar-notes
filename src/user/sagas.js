@@ -29,11 +29,11 @@ export function* logout({history}){
 }
 
 
-export function* register({ username, password, history }){
+export function* register({ username, password, password2, history }){
   const params = {
     method: 'POST',
     url: API_URL + '/users/create/',
-    data: { username, password, notes:[] }
+    data: { username, password, password2, notes:[] }
   }
 
   const { request, response } = yield call(api, params)
