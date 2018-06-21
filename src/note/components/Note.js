@@ -13,6 +13,7 @@ import { htmlToDraftEditorState } from '../../utils/note';
 import { doNoteSave, doNoteDelete, doNoteSet } from '../actions';
 import './Note.css'
 import { PLACEHOLDER_TEXT, MAX_LIST_DEPTH } from '../../constants';
+import Status from '../../ui/Status';
 
 
 class Note extends React.Component{
@@ -161,7 +162,7 @@ class Note extends React.Component{
     }
     return (
       <div className='note'>
-        <div className="RichEditor-control-panel pl-2 pr-2 pt-2 pb-2 mb-1 bg-white sticky-top">
+        <div className="RichEditor-control-panel flex pl-2 pr-2 pt-2 pb-2 mb-1 bg-white sticky-top">
 	        <BlockStyleControls
 	          editorState={editorState}
 	          onToggle={this.toggleBlockType}
@@ -169,7 +170,8 @@ class Note extends React.Component{
 	        <InlineStyleControls
 	          editorState={editorState}
 	          onToggle={this.toggleInlineStyle}
-        	/>
+        	/>  
+          <Status condition={this.props.saving} text='Saving...' justify='right' />
         </div>
         <div className={className} onClick={this.focus}>
           <Editor 
@@ -183,8 +185,7 @@ class Note extends React.Component{
             spellCheck={true}
             />
           </div>
-        { this.props.loading && <div>loading...</div>}
-        { this.props.saving && <div>saving...</div>}
+        
       </div>
     )
   }

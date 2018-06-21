@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import './MonthPicker.css'
 
 const MonthPicker = ({year, month, onMonthDown, onMonthUp}) => 
-  <div className="month-picker">
+  <div className="month-picker mt-2">
     <button className='btn btn-light' onClick={()=>onMonthDown(year, month)}>
       〈
     </button>
