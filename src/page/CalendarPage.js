@@ -2,17 +2,19 @@ import React from 'react'
 import { Calendar } from "../calendar";
 import { Note } from '../note';
 import Page from './Page';
+import Row from '../ui/Grid/Row';
+import Column from '../ui/Grid/Column';
 
 const CalendarPage = () =>
   <Page>    
-    <div className="row">
-      <div className="col-lg-4 col-md-4">
+    <Row>
+      <Column lg={4} md={4}>
         <Calendar />
-      </div>
-      <div className="col-lg-8 col-md-8">
+      </Column>
+      <Column lg={8} md={8}>
         <Note />
-      </div>
-    </div>
+      </Column>
+    </Row>
   </Page>
     
 export default CalendarPage

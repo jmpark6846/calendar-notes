@@ -1,4 +1,4 @@
-import { CalendarPage, LoginPage, RegisterPage, IndexPage } from '../page';
+import { CalendarPage, LoginPage, RegisterPage } from '../page';
 
 const routes = [
   {

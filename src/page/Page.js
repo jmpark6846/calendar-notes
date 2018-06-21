@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { CHECK_TOKEN_EXPIRATION, INIT_ERROR_MSG } from '../constants';
 import Navbar from '../ui/Navbar/Navbar'
+import Container from '../ui/Grid/Container';
 
 export class Page extends Component {
   static propTypes = {
@@ -18,9 +19,9 @@ export class Page extends Component {
     return (
       <div className="page-default">
         <Navbar />
-        <div className="container">          
+        <Container>
           {this.props.children}
-        </div>
+        </Container>
       </div>
     )
   }

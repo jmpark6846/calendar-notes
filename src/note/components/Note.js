@@ -161,7 +161,7 @@ class Note extends React.Component{
     }
     return (
       <div className='note'>
-        <div className="RichEditor-control-panel">
+        <div className="RichEditor-control-panel pl-2 pr-2 pt-2 pb-2 mb-1 bg-white sticky-top">
 	        <BlockStyleControls
 	          editorState={editorState}
 	          onToggle={this.toggleBlockType}
@@ -183,7 +183,8 @@ class Note extends React.Component{
             spellCheck={true}
             />
           </div>
-        { this.props.loading && <div>loading..</div>}
+        { this.props.loading && <div>loading...</div>}
+        { this.props.saving && <div>saving...</div>}
       </div>
     )
   }
