@@ -34,8 +34,9 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "react-addons-test-utils": "^15.6.2"
   },
-  "engines": {
+  "engines": { 
     "node": "8.11.1",
     "npm": "4.0.5"
-  }
+  },
+  "homepage": "https://calendar-notes.herokuapp.com"
 }

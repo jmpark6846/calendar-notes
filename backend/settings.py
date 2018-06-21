@@ -167,6 +167,6 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
 }
 
-TOKEN_REFRESH_DELTA = datetime.timedelta(minutes=59, seconds=50),
+TOKEN_REFRESH_DELTA = datetime.timedelta(minutes=5),
 
 django_heroku.settings(locals())

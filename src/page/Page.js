@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import Navbar from './Navbar'
+import Navbar from './Navbar/Navbar'
 import { CHECK_AUTH, CHECK_TOKEN_EXPIRATION } from '../constants';
 
 export class Page extends Component {

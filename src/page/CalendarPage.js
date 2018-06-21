@@ -6,10 +6,10 @@ import Page from './Page';
 const CalendarPage = () =>
   <Page>    
     <div className="row">
-      <div className="col-xl-4 col-lg-4 col-md-4">
+      <div className="col-lg-4 col-md-4">
         <Calendar />
       </div>
-      <div className="col-xl-8 col-lg-4 col-md-4">
+      <div className="col-lg-8 col-md-4">
         <Note />
       </div>
     </div>

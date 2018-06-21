@@ -3,15 +3,18 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import PropTypes from "prop-types";
-import { doUserLogout } from '../user/actions';
+import { doUserLogout } from '../../user/actions';
 import './Navbar.css'
+
 const activePage = {}
 
 const Navbar = ({username, isAuthenticated, logout, history}) =>
   <header>
-    <nav className="navbar navbar-expand-lg container">
-      
-      <NavLink to="/" className="navbar-brand" activeStyle={activePage}>CalendarNote</NavLink>
+    <nav className="navbar navbar-expand-lg container-fluid">
+      { console.log(process.env)}
+      <NavLink to="/" className="navbar-brand" activeStyle={activePage}>
+        CalendarNote
+      </NavLink>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-menu" aria-controls="navbar-collapse-menu" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
