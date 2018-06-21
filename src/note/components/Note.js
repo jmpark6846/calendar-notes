@@ -174,7 +174,7 @@ class Note extends React.Component{
 	        <InlineStyleControls
 	          editorState={editorState}
 	          onToggle={this.toggleInlineStyle}
-        	/>  
+        	/>
           <Status condition={this.props.saving} text='Saving...' justify='right' />
         </div>
         <div className={className} onClick={this.focus}>
