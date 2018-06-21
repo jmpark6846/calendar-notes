@@ -36,9 +36,10 @@ class Note extends React.Component{
     };
 
     this.onChange = this.onChange.bind(this)  
-    this.process = _.debounce(this.process.bind(this), 2000)
+    this.process = _.debounce(this.process.bind(this), 1000)
     this.loadContent = this.loadContent.bind(this)
     this.isEmpty = this.isEmpty.bind(this)
+    this.hasChanged = this.hasChanged.bind(this)
 
     this.focus = () => this.refs.editor.focus();
     this.onTab = this.onTab.bind(this);
@@ -77,9 +78,13 @@ class Note extends React.Component{
   onChange(editorState){
     this.setState({editorState});  
 
-    if(!this.isEmpty(editorState)){
+    if(this.hasChanged(editorState)){
       this.process(editorState)
     }
+  }
+
+  hasChanged(editorState){
+    return editorState.getCurrentContent().getPlainText() !== this.state.editorState.getCurrentContent().getPlainText() ? true : false
   }
 
   process(editorState){

@@ -25,15 +25,14 @@ function* rootSaga(){
   yield all([
     // ...noteSagas
     takeLatest(NOTE_SAVE, save),
-    takeEvery(NOTE_DELETE, deleteNote),
-    takeEvery(NOTE_FETCH, fetchNote),
-    takeEvery(NOTE_MONTH_FETCH, fetchByMonth),
+    takeLatest(NOTE_DELETE, deleteNote),
+    takeLatest(NOTE_FETCH, fetchNote),
+    takeLatest(NOTE_MONTH_FETCH, fetchByMonth),
     takeEvery(USER_LOGIN, login),
     takeEvery(USER_LOGOUT, logout),
     takeEvery(USER_REGISTER, register),
     takeEvery(CHECK_AUTH, checkAuth),
     takeEvery(CHECK_TOKEN_EXPIRATION, checkExp),
-
   ])
 }
 
