@@ -19,6 +19,7 @@ class MonthContainer extends React.Component{
     
     this.getWeekDayInMondayFirst = this.getWeekDayInMondayFirst.bind(this)
     this.getFirstDayOfMonth = this.getFirstDayOfMonth.bind(this)
+    this.getDaysWithNote = this.getDaysWithNote.bind(this)
   }
 
   componentDidMount = () => {
@@ -30,7 +31,16 @@ class MonthContainer extends React.Component{
       this.props.fetchNoteByMonth(this.props.year, this.props.month)
     }
   }
-  
+
+  getDaysWithNote(notes){
+    return Object.keys(notes)
+    .filter(d=>{
+      const [year, month, day] = d.split('-')
+      return Number(year) === this.props.year && Number(month) === this.props.month+1 ? true : false
+    })
+    .map(d => parseInt(d.split('-')[2]))
+  }
+
   getFirstDayOfMonth(){
     const { year, month, isSundayFirst } = this.props 
     const day = new Date(year, month, 1).getDay()
@@ -42,9 +52,12 @@ class MonthContainer extends React.Component{
   }
 
   render(){
+    const { year, month, isSundayFirst } = this.props
     const firstDay = this.getFirstDayOfMonth()
+    const notes = this.getDaysWithNote(this.props.notes) 
+    console.log(notes)
     return(
-      <Month firstDay={firstDay} {...this.props}/>
+      <Month firstDay={firstDay} year={year} month={month} isSundayFirst={isSundayFirst} notes={notes} />
     )
   }
 }
@@ -53,7 +66,7 @@ const mapStateToProps = ({calendar, notes}) => ({
   year: calendar.year,
   month: calendar.month,
   isSundayFirst: calendar.isSundayFirst,
-  notes: Object.keys(notes.notes).map(d => parseInt(d.split('-')[2]))
+  notes: notes.notes
 })
 
 const mapDispatchToProps = (dispatch) => ({
