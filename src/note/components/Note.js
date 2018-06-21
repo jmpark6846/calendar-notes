@@ -1,14 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from "prop-types";
-import {Editor, EditorState, convertToRaw} from 'draft-js';
+import { Editor, EditorState, convertToRaw, RichUtils, getDefaultKeyBinding } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import 'draft-js/dist/Draft.css';
 import _ from 'lodash'
+import BlockStyleControls from './BlockStyleControls';
+import InlineStyleControls from './InlineStyleControls';
+
 import { dateToString } from '../../utils/date';
 import { htmlToDraftEditorState } from '../../utils/note';
 import { doNoteSave, doNoteDelete, doNoteSet } from '../actions';
 import './Note.css'
+import { PLACEHOLDER_TEXT, MAX_LIST_DEPTH } from '../../constants';
+
 
 class Note extends React.Component{
   static propTypes = {
@@ -34,6 +39,14 @@ class Note extends React.Component{
     this.process = _.debounce(this.process.bind(this), 2000)
     this.loadContent = this.loadContent.bind(this)
     this.isEmpty = this.isEmpty.bind(this)
+
+    this.focus = () => this.refs.editor.focus();
+    this.onTab = this.onTab.bind(this);
+    this.handleKeyCommand = this._handleKeyCommand.bind(this);
+    this.mapKeyToEditorCommand = this._mapKeyToEditorCommand.bind(this);
+    this.toggleBlockType = this._toggleBlockType.bind(this);
+    this.toggleInlineStyle = this._toggleInlineStyle.bind(this);
+
   }
 
   componentDidMount = () => {
@@ -85,10 +98,86 @@ class Note extends React.Component{
     return editorState.getCurrentContent().getPlainText() === ''
   }
   
+  onTab(e){
+  	this.onChange(RichUtils.onTab(e, this.state.editorState, MAX_LIST_DEPTH));
+  }
+
+  _handleKeyCommand(command, editorState) {
+    const newState = RichUtils.handleKeyCommand(editorState, command);
+    if (newState) {
+      this.onChange(newState);
+      return true;
+    }
+    return false;
+  }
+
+  _mapKeyToEditorCommand(e) {
+    if (e.keyCode === 9 /* TAB */) {
+      const newEditorState = RichUtils.onTab(
+        e,
+        this.state.editorState,
+        MAX_LIST_DEPTH, /* maxDepth */
+      );
+      if (newEditorState !== this.state.editorState) {
+        this.onChange(newEditorState);
+      }
+      return;
+    }
+    return getDefaultKeyBinding(e);
+  }
+
+  _toggleBlockType(blockType) {
+    this.onChange(
+      RichUtils.toggleBlockType(
+        this.state.editorState,
+        blockType
+      )
+    );
+  }
+
+  _toggleInlineStyle(inlineStyle) {
+    this.onChange(
+      RichUtils.toggleInlineStyle(
+        this.state.editorState,
+        inlineStyle
+      )
+    );
+  }
+
   render(){
+    const {editorState} = this.state;
+    let className = 'RichEditor-editor';
+
+    var contentState = editorState.getCurrentContent();
+    if (!contentState.hasText()) {
+      if (contentState.getBlockMap().first().getType() !== 'unstyled') {
+        className += ' RichEditor-hidePlaceholder';
+      }
+    }
     return (
       <div className='note'>
-        <Editor placeholder='오늘 하루를 적어볼까요?' editorState={this.state.editorState} onChange={this.onChange} />
+        <div className="RichEditor-control-panel">
+	        <BlockStyleControls
+	          editorState={editorState}
+	          onToggle={this.toggleBlockType}
+	        />
+	        <InlineStyleControls
+	          editorState={editorState}
+	          onToggle={this.toggleInlineStyle}
+        	/>
+        </div>
+        <div className={className} onClick={this.focus}>
+          <Editor 
+            editorState={editorState}
+            handleKeyCommand={this.handleKeyCommand}
+            keyBindingFn={this.mapKeyToEditorCommand}
+            onChange={this.onChange}
+            onTab={this.onTab}
+            placeholder={PLACEHOLDER_TEXT}
+            ref="editor"
+            spellCheck={true}
+            />
+          </div>
         { this.props.loading && <div>loading..</div>}
       </div>
     )

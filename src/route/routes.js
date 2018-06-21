@@ -3,8 +3,9 @@ import { CalendarPage, LoginPage, RegisterPage, IndexPage } from '../page';
 const routes = [
   {
     path:'/',
+    protected:true,
     exact:true,
-    component: LoginPage
+    component: CalendarPage
   },
   {
     path:'/calendar',

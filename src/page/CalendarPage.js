@@ -9,7 +9,7 @@ const CalendarPage = () =>
       <div className="col-lg-4 col-md-4">
         <Calendar />
       </div>
-      <div className="col-lg-8 col-md-4">
+      <div className="col-lg-8 col-md-8">
         <Note />
       </div>
     </div>

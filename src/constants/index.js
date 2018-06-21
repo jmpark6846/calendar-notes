@@ -8,4 +8,6 @@ export const API_URL = 'http://localhost:8000/api'
 
 export const PASSWORD_MIN_LENGTH = 4
 
+export const MAX_LIST_DEPTH = 4
+export const PLACEHOLDER_TEXT = '하루를 적어볼까요?'
 export * from './actionTypes'

@@ -26,7 +26,10 @@ export const userReducer = (state=INITIAL_STATE, action) => {
         errorMsg:action.error
       }
     case LOGOUT_SUCCESS:
-      return INITIAL_STATE
+      return {
+        ...INITIAL_STATE,
+        isAuthenticated: false,
+      }
     case USER_REGISTER:
       return {
         ...state,
