@@ -1,4 +1,5 @@
 import React from 'react'
+import Icon from '../../page/Icon';
 
 class StyleButton extends React.Component {
   constructor() {
@@ -15,7 +16,7 @@ class StyleButton extends React.Component {
     }
     return (
       <span className={className} onMouseDown={this.onToggle}>
-        {this.props.label}
+        <Icon icon={this.props.label}/>
       </span>
     );
   }

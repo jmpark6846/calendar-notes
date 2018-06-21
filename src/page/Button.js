@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Icon from './Icon';
 
 const Button = ({ icon, children, ...rest}) => {
   return (
     <button className='btn btn-default' type='button' {...rest}>
-      { icon && <i className={`fas fa-${icon}`}></i> }
+      { icon && <Icon icon={icon} />}
       { children }
     </button>
   )

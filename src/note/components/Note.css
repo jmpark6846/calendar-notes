@@ -25,7 +25,7 @@
 .RichEditor-editor {
   border-top: 1px solid #ddd;
   cursor: text;
-  font-size: 16px;
+  font-size: 14px!important;
   margin-top: 10px;
 }
 

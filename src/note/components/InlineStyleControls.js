@@ -2,9 +2,9 @@ import React from 'react'
 import StyleButton from './StyleButton';
 
 var INLINE_STYLES = [
-  {label: 'Bold', style: 'BOLD'},
-  {label: 'Italic', style: 'ITALIC'},
-  {label: 'Underline', style: 'UNDERLINE'},
+  {label: 'bold', style: 'BOLD'},
+  {label: 'italic', style: 'ITALIC'},
+  {label: 'underline', style: 'UNDERLINE'},
 ];
 
 const InlineStyleControls = (props) => {

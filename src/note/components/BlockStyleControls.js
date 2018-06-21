@@ -2,9 +2,9 @@ import React from 'react'
 import StyleButton from './StyleButton';
 
 const BLOCK_TYPES = [
-  {label: 'H', style: 'header-two'},
-  {label: 'UL', style: 'unordered-list-item'},
-  {label: 'OL', style: 'ordered-list-item'},
+  {label: 'heading', style: 'header-five'},
+  {label: 'list-ul', style: 'unordered-list-item'},
+  {label: 'list-ol', style: 'ordered-list-item'},
   // {label: 'Code Block', style: 'code-block'},
 ];
 
