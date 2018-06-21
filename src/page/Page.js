@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { CHECK_TOKEN_EXPIRATION, INIT_ERROR_MSG } from '../constants';
-import Navbar from './Navbar/Navbar'
+import Navbar from '../ui/Navbar/Navbar'
 
 export class Page extends Component {
   static propTypes = {

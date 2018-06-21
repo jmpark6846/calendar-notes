@@ -6,7 +6,7 @@ import Page from './Page';
 import { PASSWORD_MIN_LENGTH } from '../constants'
 import { doUserRegister } from '../user/actions';
 import './RegisterPage.css'
-import Notice from './Notice';
+import Notice from '../ui/Notice';
 
 class RegisterPage extends Component {
   static propTypes = {

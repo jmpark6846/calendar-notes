@@ -1,5 +1,5 @@
 import React from 'react'
-import Icon from '../../page/Icon';
+import Icon from '../../ui/Icon';
 
 class StyleButton extends React.Component {
   constructor() {

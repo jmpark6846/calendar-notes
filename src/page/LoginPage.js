@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import Page from './Page';
 import { doUserLogin } from '../user/actions'
 import './LoginPage.css'
-import Notice from './Notice';
+import Notice from '../ui/Notice';
 
 class LoginPage extends Component {
   static propTypes = {
