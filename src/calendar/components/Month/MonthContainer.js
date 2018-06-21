@@ -9,7 +9,7 @@ class MonthContainer extends React.Component{
   static propTypes = {
     year: PropTypes.number.isRequired,
     month: PropTypes.number.isRequired,
-    notes: PropTypes.array,
+    notes: PropTypes.object,
     isSundayFirst: PropTypes.bool,
     fetchNoteByMonth: PropTypes.func.isRequired
   }
@@ -55,7 +55,6 @@ class MonthContainer extends React.Component{
     const { year, month, isSundayFirst } = this.props
     const firstDay = this.getFirstDayOfMonth()
     const notes = this.getDaysWithNote(this.props.notes) 
-    console.log(notes)
     return(
       <Month firstDay={firstDay} year={year} month={month} isSundayFirst={isSundayFirst} notes={notes} />
     )

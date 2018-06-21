@@ -56,11 +56,15 @@ class Note extends React.Component{
   }
   
   componentDidUpdate = (prevProps, prevState) => {
+    if(prevProps.month !== +this.props.month){
+      this.setState({editorState:EditorState.createEmpty()})
+    }
+
     if(+prevProps.selectedDate !== +this.props.selectedDate){
       this.loadContent(this.props.selectedDate)
     }
 
-    if(!prevProps.updated && this.props.updated){
+    if(this.props.updated && this.props.selectedDate.getMonth() === this.props.month){
       this.loadContent(this.props.selectedDate)
       this.props.setUpdated()
     }
@@ -192,6 +196,7 @@ class Note extends React.Component{
 } 
 
 const mapStateToProps = ({calendar, notes}) => ({
+  month:calendar.month,
   selectedDate: calendar.selectedDate,
   ...notes  
 })
