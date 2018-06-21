@@ -7,8 +7,7 @@ import { doUserLogout } from '../../user/actions';
 import './Navbar.css'
 import NavItem from './NavItem';
 import NavMenu from './NavMenu';
-
-const activePage = {}
+import Button from '../Button';
 
 const Navbar = ({username, isAuthenticated, logout, history}) =>
   <header>
@@ -16,9 +15,8 @@ const Navbar = ({username, isAuthenticated, logout, history}) =>
       <NavLink to="/" className="navbar-brand">
         CalendarNote
       </NavLink>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
+      <Button icon='bars' className="navbar-toggler" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+      </Button>
       
       { isAuthenticated ? 
       <NavMenu id='navbar-menu' justify='right' >

@@ -14,7 +14,8 @@ const NavMenu = ({id, justify, children}) => {
 }
 
 NavMenu.propTypes = {
-
+  id: PropTypes.string.isRequired,
+  justify: PropTypes.string,
 }
 
 export default NavMenu 
