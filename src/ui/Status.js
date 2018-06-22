@@ -10,7 +10,9 @@ const Status = ({condition, text, justify}) => {
 }
 
 Status.propTypes = {
-
+  condition: PropTypes.string,
+  text: PropTypes.string,
+  justify: PropTypes.string,
 }
 
 export default Status
