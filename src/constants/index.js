@@ -3,8 +3,18 @@ export const endDates = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] // 매 
 export const getDaysOfWeek = (isSundayFirst) => 
   isSundayFirst ?	['일','월','화','수','목','금','토'] : ['월','화','수','목','금','토','일']
 
-// export const API_URL = 'https://calendar-note.herokuapp.com/api'
-export const API_URL = 'http://localhost:8000/api'
+let URL =''
+if(process.env.NODE_ENV === 'development'){
+  URL = 'http://localhost:8000/api'
+}else{
+  URL = 'https://calendar-note.herokuapp.com/api'
+}
+
+export const API_URL = URL
+
+console.log(process.env.NODE_ENV)
+console.log(process.env.PUBLIC_URL)
+
 
 export const PASSWORD_MIN_LENGTH = 4
 

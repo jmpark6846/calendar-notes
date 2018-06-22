@@ -21,7 +21,7 @@ const saga = createSagaMiddleware()
 
 if(process.env.NODE_ENV === 'development'){
   store = createStore(root, undefined, applyMiddleware(saga, createLogger()))  
-}else{
+}else{  
   store = createStore(root, undefined, applyMiddleware(saga))  
 }
 
