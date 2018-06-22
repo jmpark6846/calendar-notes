@@ -52,7 +52,7 @@ class MonthContainer extends React.Component{
   }
 
   render(){
-    const { year, month, isSundayFirst } = this.props
+    const { year, month, isSundayFirst } = this.props 
     const firstDay = this.getFirstDayOfMonth()
     const notes = this.getDaysWithNote(this.props.notes) 
     return(
