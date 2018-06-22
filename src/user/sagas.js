@@ -29,16 +29,17 @@ export function* logout({history}){
 }
 
 
-export function* register({ username, password, password2, history }){
+export function* register({ username, password, history }){
   const params = {
     method: 'POST',
     url: API_URL + '/users/create/',
-    data: { username, password, password2, notes:[] }
+    data: { username, password, notes:[] }
   }
 
   const { request, response } = yield call(api, params)
   
   if(request.status === 400){
+    console.log(response)
     yield put(doRegisterFail(Object.values(response.data).map(a=>a[0])))
   }else{
     yield put(doRegisterSuccess(username))

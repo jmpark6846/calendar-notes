@@ -84,7 +84,7 @@ class Note extends React.Component{
     this.setState({editorState});  
 
     if(this.hasChanged(editorState)){
-      this.process(editorState)
+      this.process(editorState, this.props.selectedDate)
     }
   }
 
@@ -92,15 +92,15 @@ class Note extends React.Component{
     return editorState.getCurrentContent().getPlainText() !== this.state.editorState.getCurrentContent().getPlainText() ? true : false
   }
 
-  process(editorState){
+  process(editorState, selectedDate){
     const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
-    const date = dateToString(this.props.selectedDate)
+    const date = dateToString(selectedDate)
     const method = (date in this.props.notes) ? 'PUT' : 'POST' 
 
     if(!this.isEmpty(editorState)){
       this.props.save(date, html, method)
     }else{
-      this.props.delete(dateToString(this.props.selectedDate))
+      this.props.delete(date)
     }
   }
 

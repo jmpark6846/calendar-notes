@@ -60,7 +60,7 @@ class RegisterPage extends Component {
       return null
     }
     
-    this.props.register(username, password, password2, this.props.history)
+    this.props.register(username, password, this.props.history)
     
   }
   
