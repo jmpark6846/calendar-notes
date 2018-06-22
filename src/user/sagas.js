@@ -10,7 +10,7 @@ export function* login({ username, password, history }){
     data: { username, password }
   }
   const { request, response } = yield call(api, params)
-
+  
   if(request.status === 400){
     
     yield put(doLoginFail(Object.values(response.data).map(a=>a[0])))
