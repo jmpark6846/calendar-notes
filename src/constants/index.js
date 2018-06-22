@@ -12,10 +12,6 @@ if(process.env.NODE_ENV === 'development'){
 
 export const API_URL = URL
 
-console.log(process.env.NODE_ENV)
-console.log(process.env.PUBLIC_URL)
-
-
 export const PASSWORD_MIN_LENGTH = 4
 
 export const MAX_LIST_DEPTH = 4
