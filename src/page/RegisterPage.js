@@ -82,8 +82,8 @@ class RegisterPage extends Component {
             <div className="form-group">
               <input name="password2" value={password2} onChange={this.onChange} autoComplete="current-password" type="password" className="form-control" placeholder="비밀번호 확인"/>
             </div>
-            { error && <Notice type='danger' msg={errorMsg}/> }
-            { this.props.errorMsg && this.props.errorMsg.map((v)=><Notice key={v} type='danger' msg={v}/>)}
+            { error && <Notice type='danger'>{errorMsg}</Notice> }
+            { this.props.errorMsg && this.props.errorMsg.map((v)=><Notice key={v} type='danger'>{v}</Notice>)}
             <div className='button-div'>
               <button className="btn btn-primary" type="submit">가입</button>
             </div>

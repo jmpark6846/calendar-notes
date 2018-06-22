@@ -46,6 +46,7 @@ class LoginPage extends Component {
         <div className="login-page">
           <h2>Login</h2>
           <form onSubmit={this.onSubmit}>
+            <Notice type='info'>아이디/비밀번호 <b>example</b>로 로그인하시면 예시를 볼 수 있습니다.</Notice>
             <div className="form-group">
               <label>Username</label>
               <input name="username" value={username} onChange={this.onChange} autoComplete="username" type="text" className="form-control" placeholder="사용자이름을 입력하세요."/>
@@ -54,8 +55,8 @@ class LoginPage extends Component {
               <label>Password</label>
               <input name="password" value={password} onChange={this.onChange} autoComplete="current-password" type="password" className="form-control" placeholder="비밀번호"/>
             </div>
-            { error && <div className="error">{errorMsg}</div> }
-            { this.props.errorMsg && this.props.errorMsg.map((v)=><Notice key={v} type='danger' msg={v}/>)}
+            { error && <Notice type='danger'>{errorMsg}</Notice> }
+            { this.props.errorMsg && this.props.errorMsg.map((v)=><Notice key={v} type='danger'>{v}</Notice>)}
             <div className="button-div">
               <button className="btn btn-primary" type="submit">로그인</button>
             </div>

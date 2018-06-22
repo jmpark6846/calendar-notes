@@ -16,10 +16,14 @@ const root = combineReducers({
   user: userReducer,
 })
 
-const logger = createLogger()
+let store=null
 const saga = createSagaMiddleware()
-const store = createStore(root, undefined, applyMiddleware(saga, logger))
-// const store = createStore(root, undefined, applyMiddleware(saga))
+
+if(process.env.NODE_ENV === 'development'){
+  store = createStore(root, undefined, applyMiddleware(saga, createLogger()))  
+}else{
+  store = createStore(root, undefined, applyMiddleware(saga))  
+}
 
 function* rootSaga(){
   yield all([
