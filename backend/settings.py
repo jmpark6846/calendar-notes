@@ -168,5 +168,5 @@ JWT_AUTH = {
 }
 
 TOKEN_REFRESH_DELTA = datetime.timedelta(minutes=5),
-
+CORS_REPLACE_HTTPS_REFERER = True
 django_heroku.settings(locals())
