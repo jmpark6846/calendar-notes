@@ -10,7 +10,7 @@ const Status = ({condition, text, justify}) => {
 }
 
 Status.propTypes = {
-  condition: PropTypes.string,
+  condition: PropTypes.bool,
   text: PropTypes.string,
   justify: PropTypes.string,
 }

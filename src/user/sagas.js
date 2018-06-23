@@ -39,9 +39,11 @@ export function* register({ username, password, history }){
   const { request, response } = yield call(api, params)
   
   if(request.status === 400){
-    console.log(response)
+    console.log(response.data)
     yield put(doRegisterFail(Object.values(response.data).map(a=>a[0])))
   }else{
+    console.log(request)
+    console.log(response.data)
     yield put(doRegisterSuccess(username))
     yield history.push('/login')
   }

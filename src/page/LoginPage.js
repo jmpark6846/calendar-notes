@@ -47,7 +47,6 @@ class LoginPage extends Component {
           <h2>Login</h2>
           <form onSubmit={this.onSubmit}>
             <Notice type='info'>아이디/비밀번호 <b>example</b>로 로그인하시면 예시를 볼 수 있습니다.</Notice>
-            <Notice type='warning'>현재 모바일에서 접속이 되지 않습니다😥</Notice>
             <div className="form-group">
               <label>Username</label>
               <input name="username" value={username} onChange={this.onChange} autoComplete="username" type="text" className="form-control" placeholder="사용자이름을 입력하세요."/>
