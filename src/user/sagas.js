@@ -11,7 +11,7 @@ export function* login({ username, password, history }){
   }
   const { request, response } = yield call(api, params)
   
-  if(request.status === 400){
+  if(response){
     
     yield put(doLoginFail(Object.values(response.data).map(a=>a[0])))
   }else{
@@ -37,8 +37,8 @@ export function* register({ username, password, history }){
   }
 
   const { request, response } = yield call(api, params)
-  
-  if(request.status !== 200){
+
+  if(response){
     yield put(doRegisterFail(Object.values(response.data).map(a=>a[0])))
   }else{
     yield put(doRegisterSuccess(username))
