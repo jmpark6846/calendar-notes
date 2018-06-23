@@ -2,6 +2,7 @@ import { fetchByMonth } from "./sagas";
 import { NOTE_MONTH_FETCH, NOTE_MONTH_REQUEST } from "../constants";
 import { put, call } from 'redux-saga/effects'
 import { doNoteMonthRequestSuccess } from "./actions";
+import { api } from "../utils/fetch";
 
 describe('calendar saga', () => {
   it('fetchByMonth 호출', () => {

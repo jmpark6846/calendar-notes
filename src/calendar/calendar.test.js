@@ -13,7 +13,6 @@ describe('month', () => {
     year:2018,
     month:5,
     isSundayFirst:false,
-    notes:[],
   }
   it(`5월의 30일 일수에 맞게 css date 클래스를 가진 컴포넌트가 30개 생성된다.`, ()=>{
     const element = mount(

@@ -14,20 +14,18 @@ describe('calendar reducer', ()=>{
         ...INITIAL_STATE, 
         year: 2018, 
         month: 6, 
-        notes:[]
       })
   })
 
-  it('캘린더에 표시될 노트 한 달치를 불러오는데 성공하면 노트와 업데이트 플래그를 스토어에 저장', () => {
+  it('한달 치 노트를 불러오는 액션 생성 ', () => {
     expect(
       calendarReducer(
         INITIAL_STATE,
-        { type: types.NOTE_MONTH_REQUEST_SUCCESS, notes: [1,2,3] }
+        { type: types.NOTE_MONTH_REQUEST_SUCCESS, }
       )
     )
     .toEqual({
       ...INITIAL_STATE,
-      notes: [1,2,3],
     })
   })
 })
